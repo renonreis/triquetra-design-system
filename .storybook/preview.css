@@ -1,0 +1,4 @@
+/* Storybook-only: the library stylesheet, plus classes used by stories for layout. */
+@import '../src/styles/index.css';
+@source '../src/**/*.stories.tsx';
+@source '../src/**/*.mdx';

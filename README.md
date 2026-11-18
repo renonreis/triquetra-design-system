@@ -1,5 +1,37 @@
-<img src="assets/icon.svg" width="64" height="64" alt="">
+<img src="assets/icon.svg" width="64" height="64" alt="Triquetra logo">
 
-# triquetra-design-system
+# Triquetra Design System
 
-Created in [T3 Code](https://t3.codes).
+Design tokens and accessible React components, built on [Ark UI](https://ark-ui.com) and Tailwind CSS v4.
+The triquetra is three interlaced arcs: **design**, **technology** and **product**, in one continuous loop.
+
+## Install
+
+The package is published to GitHub Packages. Add this to your project's `.npmrc` (GitHub Packages requires a token with `read:packages`, even for public packages):
+
+```ini
+@renonreis:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+```
+
+```bash
+pnpm add @renonreis/triquetra
+```
+
+```tsx
+import '@renonreis/triquetra/styles.css';
+```
+
+## Development
+
+```bash
+corepack enable
+pnpm install
+pnpm dev          # Storybook on http://localhost:6006
+```
+
+See [AGENTS.md](./AGENTS.md) for conventions, commands and contribution rules.
+
+## License
+
+[MIT](./LICENSE)
