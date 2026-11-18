@@ -6,6 +6,18 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   plugins: [react()],
+  // Pre-bundle runtime deps so a cold run (CI) never re-optimizes and reloads mid-test.
+  optimizeDeps: {
+    include: [
+      '@ark-ui/react',
+      '@ark-ui/react/factory',
+      'tailwind-variants',
+      'react',
+      'react-dom',
+      'react/jsx-runtime',
+      'react/jsx-dev-runtime',
+    ],
+  },
   test: {
     passWithNoTests: true,
     projects: [
