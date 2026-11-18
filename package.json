@@ -8,7 +8,7 @@
     "type": "git",
     "url": "git+https://github.com/renonreis/triquetra-design-system.git"
   },
-  "packageManager": "pnpm@11.28.12",
+  "packageManager": "pnpm@12.21.0",
   "engines": {
     "node": ">=22.22"
   },

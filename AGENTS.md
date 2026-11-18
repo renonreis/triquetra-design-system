@@ -13,7 +13,7 @@ Triquetra is a React design system: design tokens, accessible components, and th
 - **Docs and dev environment:** Storybook (Vite builder)
 - **Tests:** Vitest + Testing Library + axe (unit/a11y); Playwright (visual regression)
 - **Releases:** Changesets
-- **Package manager:** pnpm 11, pinned in `packageManager` and run through Corepack (do not use npm or yarn, and do not commit other lockfiles). Native build scripts must be allowed in `pnpm-workspace.yaml` (`allowBuilds`).
+- **Package manager:** pnpm 12, pinned in `packageManager` and run through Corepack (do not use npm or yarn, and do not commit other lockfiles). Native build scripts must be allowed in `pnpm-workspace.yaml` (`allowBuilds`).
 - **Runtime:** Node 24 (`.nvmrc`), `>=22.22` minimum
 - **Package:** `@renonreis/triquetra`, published to GitHub Packages (`.npmrc` maps the `@renonreis` scope). Consumers import components from `@renonreis/triquetra` and styles from `@renonreis/triquetra/styles.css`.
 
