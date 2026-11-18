@@ -1,0 +1,6 @@
+dist
+storybook-static
+coverage
+pnpm-lock.yaml
+src/styles/generated
+.changeset/*.md

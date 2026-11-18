@@ -1,0 +1,8 @@
+/*
+ * Triquetra stylesheet entry.
+ * Shipped as `@renonreis/triquetra/styles.css`. Only component sources are scanned.
+ */
+@import 'tailwindcss' source(none);
+@source '../';
+@source not '../**/*.stories.tsx';
+@source not '../**/*.test.tsx';
