@@ -1,0 +1,263 @@
+{
+  "brand": {
+    "$description": "Triquetra brand: maps primitives to brand roles. Every brand must define the same token paths.",
+    "color": {
+      "$type": "color",
+      "primary": {
+        "0": {
+          "$value": "{primitive.color.blue.0}"
+        },
+        "100": {
+          "$value": "{primitive.color.blue.100}"
+        },
+        "200": {
+          "$value": "{primitive.color.blue.200}"
+        },
+        "300": {
+          "$value": "{primitive.color.blue.300}"
+        },
+        "400": {
+          "$value": "{primitive.color.blue.400}"
+        },
+        "500": {
+          "$value": "{primitive.color.blue.500}"
+        },
+        "600": {
+          "$value": "{primitive.color.blue.600}"
+        },
+        "700": {
+          "$value": "{primitive.color.blue.700}"
+        },
+        "800": {
+          "$value": "{primitive.color.blue.800}"
+        },
+        "900": {
+          "$value": "{primitive.color.blue.900}"
+        },
+        "$description": "Main brand color: actions, links, focus."
+      },
+      "neutral": {
+        "0": {
+          "$value": "{primitive.color.grey.0}"
+        },
+        "100": {
+          "$value": "{primitive.color.grey.100}"
+        },
+        "200": {
+          "$value": "{primitive.color.grey.200}"
+        },
+        "300": {
+          "$value": "{primitive.color.grey.300}"
+        },
+        "400": {
+          "$value": "{primitive.color.grey.400}"
+        },
+        "500": {
+          "$value": "{primitive.color.grey.500}"
+        },
+        "600": {
+          "$value": "{primitive.color.grey.600}"
+        },
+        "700": {
+          "$value": "{primitive.color.grey.700}"
+        },
+        "800": {
+          "$value": "{primitive.color.grey.800}"
+        },
+        "900": {
+          "$value": "{primitive.color.grey.900}"
+        },
+        "$description": "Surfaces, text and borders."
+      },
+      "success": {
+        "0": {
+          "$value": "{primitive.color.green.0}"
+        },
+        "100": {
+          "$value": "{primitive.color.green.100}"
+        },
+        "200": {
+          "$value": "{primitive.color.green.200}"
+        },
+        "300": {
+          "$value": "{primitive.color.green.300}"
+        },
+        "400": {
+          "$value": "{primitive.color.green.400}"
+        },
+        "500": {
+          "$value": "{primitive.color.green.500}"
+        },
+        "600": {
+          "$value": "{primitive.color.green.600}"
+        },
+        "700": {
+          "$value": "{primitive.color.green.700}"
+        },
+        "800": {
+          "$value": "{primitive.color.green.800}"
+        },
+        "900": {
+          "$value": "{primitive.color.green.900}"
+        },
+        "$description": "Positive feedback."
+      },
+      "warning": {
+        "0": {
+          "$value": "{primitive.color.yellow.0}"
+        },
+        "100": {
+          "$value": "{primitive.color.yellow.100}"
+        },
+        "200": {
+          "$value": "{primitive.color.yellow.200}"
+        },
+        "300": {
+          "$value": "{primitive.color.yellow.300}"
+        },
+        "400": {
+          "$value": "{primitive.color.yellow.400}"
+        },
+        "500": {
+          "$value": "{primitive.color.yellow.500}"
+        },
+        "600": {
+          "$value": "{primitive.color.yellow.600}"
+        },
+        "700": {
+          "$value": "{primitive.color.yellow.700}"
+        },
+        "800": {
+          "$value": "{primitive.color.yellow.800}"
+        },
+        "900": {
+          "$value": "{primitive.color.yellow.900}"
+        },
+        "$description": "Caution feedback."
+      },
+      "danger": {
+        "0": {
+          "$value": "{primitive.color.red.0}"
+        },
+        "100": {
+          "$value": "{primitive.color.red.100}"
+        },
+        "200": {
+          "$value": "{primitive.color.red.200}"
+        },
+        "300": {
+          "$value": "{primitive.color.red.300}"
+        },
+        "400": {
+          "$value": "{primitive.color.red.400}"
+        },
+        "500": {
+          "$value": "{primitive.color.red.500}"
+        },
+        "600": {
+          "$value": "{primitive.color.red.600}"
+        },
+        "700": {
+          "$value": "{primitive.color.red.700}"
+        },
+        "800": {
+          "$value": "{primitive.color.red.800}"
+        },
+        "900": {
+          "$value": "{primitive.color.red.900}"
+        },
+        "$description": "Destructive actions and errors."
+      },
+      "info": {
+        "0": {
+          "$value": "{primitive.color.blue.0}"
+        },
+        "100": {
+          "$value": "{primitive.color.blue.100}"
+        },
+        "200": {
+          "$value": "{primitive.color.blue.200}"
+        },
+        "300": {
+          "$value": "{primitive.color.blue.300}"
+        },
+        "400": {
+          "$value": "{primitive.color.blue.400}"
+        },
+        "500": {
+          "$value": "{primitive.color.blue.500}"
+        },
+        "600": {
+          "$value": "{primitive.color.blue.600}"
+        },
+        "700": {
+          "$value": "{primitive.color.blue.700}"
+        },
+        "800": {
+          "$value": "{primitive.color.blue.800}"
+        },
+        "900": {
+          "$value": "{primitive.color.blue.900}"
+        },
+        "$description": "Neutral informative feedback."
+      },
+      "accent": {
+        "0": {
+          "$value": "{primitive.color.orange.0}"
+        },
+        "100": {
+          "$value": "{primitive.color.orange.100}"
+        },
+        "200": {
+          "$value": "{primitive.color.orange.200}"
+        },
+        "300": {
+          "$value": "{primitive.color.orange.300}"
+        },
+        "400": {
+          "$value": "{primitive.color.orange.400}"
+        },
+        "500": {
+          "$value": "{primitive.color.orange.500}"
+        },
+        "600": {
+          "$value": "{primitive.color.orange.600}"
+        },
+        "700": {
+          "$value": "{primitive.color.orange.700}"
+        },
+        "800": {
+          "$value": "{primitive.color.orange.800}"
+        },
+        "900": {
+          "$value": "{primitive.color.orange.900}"
+        },
+        "$description": "Secondary brand accent, for highlights."
+      }
+    },
+    "font": {
+      "family": {
+        "$type": "fontFamily",
+        "sans": {
+          "$value": "{primitive.font.family.inter}"
+        },
+        "mono": {
+          "$value": "{primitive.font.family.mono}"
+        }
+      }
+    },
+    "radius": {
+      "$type": "dimension",
+      "$description": "Radius personality of the brand.",
+      "control": {
+        "$value": "{primitive.radius.md}"
+      },
+      "surface": {
+        "$value": "{primitive.radius.lg}"
+      },
+      "overlay": {
+        "$value": "{primitive.radius.xl}"
+      }
+    }
+  }
+}
