@@ -152,5 +152,26 @@
         "$value": "{primitive.easing.emphasized}"
       }
     }
+  },
+  "size": {
+    "$type": "dimension",
+    "container": {
+      "xs": {
+        "$value": "{primitive.size.container.xs}"
+      },
+      "sm": {
+        "$value": "{primitive.size.container.sm}"
+      },
+      "md": {
+        "$value": "{primitive.size.container.md}"
+      },
+      "lg": {
+        "$value": "{primitive.size.container.lg}"
+      },
+      "xl": {
+        "$value": "{primitive.size.container.xl}"
+      },
+      "$description": "Max widths for containers. Tailwind: max-w-{xs..xl}."
+    }
   }
 }

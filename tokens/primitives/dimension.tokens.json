@@ -132,6 +132,42 @@
           "unit": "px"
         }
       }
+    },
+    "size": {
+      "$type": "dimension",
+      "$description": "Large sizes for containers (dialogs, popovers, content columns).",
+      "container": {
+        "xs": {
+          "$value": {
+            "value": 20,
+            "unit": "rem"
+          }
+        },
+        "sm": {
+          "$value": {
+            "value": 24,
+            "unit": "rem"
+          }
+        },
+        "md": {
+          "$value": {
+            "value": 28,
+            "unit": "rem"
+          }
+        },
+        "lg": {
+          "$value": {
+            "value": 32,
+            "unit": "rem"
+          }
+        },
+        "xl": {
+          "$value": {
+            "value": 40,
+            "unit": "rem"
+          }
+        }
+      }
     }
   }
 }
