@@ -36,7 +36,16 @@ pnpm test               # Vitest projects: `unit` (jsdom + axe) and `storybook` 
 pnpm test:visual        # Playwright visual regression (run in Docker, see below)
 ```
 
-CI runs the same commands. A PR cannot merge unless lint, typecheck, tests, the Storybook build and the accessibility checks pass. Don't skip, disable or `.only` tests to get green, and don't lower axe rules.
+CI (`.github/workflows/ci.yml`) runs the same commands. These required checks block the merge into `main`:
+
+| Check                       | Runs                                                        |
+| --------------------------- | ----------------------------------------------------------- |
+| `Lint & typecheck`          | `pnpm lint` + `pnpm typecheck`                              |
+| `Unit & token tests`        | `pnpm vitest run --project unit` (behavior, axe, contrast)  |
+| `Accessibility (Storybook)` | `pnpm vitest run --project storybook` (a11y addon, `error`) |
+| `Build`                     | `pnpm build` + `pnpm build-storybook`                       |
+
+Don't skip, disable or `.only` tests to get green, and don't lower axe rules.
 
 ## Project structure
 
@@ -146,7 +155,8 @@ Rules:
 - Use Conventional Commits (`feat(button): add loading state`, `fix(tokens): …`, `chore: …`).
 - Any change that affects consumers (components, tokens, CSS output, public types) **requires a changeset**: run `pnpm changeset`. Docs, tests and CI-only changes don't need one.
 - Before you open a PR, run `pnpm lint && pnpm typecheck && pnpm test && pnpm build-storybook`.
-- Each PR gets a Storybook preview deploy. Link the relevant stories in the PR description.
+- Each PR from this repository gets a Storybook preview on Cloudflare Pages at `https://pr-<number>.triquetra-storybook.pages.dev`, posted as a PR comment. `main` deploys to `https://triquetra-storybook.pages.dev`. Link the relevant stories in the PR description.
+- Releases (`.github/workflows/release.yml`): when changesets are pending on `main`, Changesets opens or updates a `chore: release` PR. Merging it publishes to GitHub Packages. That PR is created by `GITHUB_TOKEN`, so CI doesn't run on it automatically. **Close and reopen it** to trigger the required checks.
 - Keep PRs scoped: one component or one token concern per PR when possible.
 
 ## Boundaries
