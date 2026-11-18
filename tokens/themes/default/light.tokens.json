@@ -1,0 +1,314 @@
+{
+  "$description": "Default theme, light mode. Every semantic color must exist in light and dark.",
+  "color": {
+    "$type": "color",
+    "bg": {
+      "canvas": {
+        "$value": "{brand.color.neutral.0}",
+        "$description": "Page background."
+      },
+      "surface": {
+        "$value": "{brand.color.neutral.0}",
+        "$description": "Cards, inputs, panels."
+      },
+      "subtle": {
+        "$value": "{brand.color.neutral.100}",
+        "$description": "Hover rows, subtle fills."
+      },
+      "muted": {
+        "$value": "{brand.color.neutral.200}",
+        "$description": "Stronger fills, pressed states."
+      },
+      "inverse": {
+        "$value": "{brand.color.neutral.900}",
+        "$description": "Inverted surfaces, such as tooltips."
+      },
+      "disabled": {
+        "$value": "{brand.color.neutral.100}",
+        "$description": "Disabled controls."
+      },
+      "overlay": {
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [0.23, 0.009, 260],
+          "alpha": 0.5
+        },
+        "$description": "Backdrop behind modal dialogs."
+      }
+    },
+    "fg": {
+      "default": {
+        "$value": "{brand.color.neutral.900}",
+        "$description": "Primary text and icons."
+      },
+      "muted": {
+        "$value": "{brand.color.neutral.600}",
+        "$description": "Secondary text, placeholders, helper text."
+      },
+      "inverse": {
+        "$value": "{brand.color.neutral.0}",
+        "$description": "Text on bg.inverse."
+      },
+      "disabled": {
+        "$value": "{brand.color.neutral.400}",
+        "$description": "Disabled text (exempt from contrast rules)."
+      },
+      "link": {
+        "$value": "{brand.color.secondary.600}",
+        "$description": "Links."
+      }
+    },
+    "border": {
+      "default": {
+        "$value": "{brand.color.neutral.200}",
+        "$description": "Decorative dividers and card borders."
+      },
+      "strong": {
+        "$value": "{brand.color.neutral.500}",
+        "$description": "Control borders (3:1 non-text contrast)."
+      },
+      "focus": {
+        "$value": "{brand.color.secondary.500}",
+        "$description": "Focus rings."
+      },
+      "negative": {
+        "$value": "{brand.color.negative.600}",
+        "$description": "Invalid control borders."
+      }
+    },
+    "action": {
+      "primary": {
+        "bg": {
+          "$value": "{brand.color.primary.900}"
+        },
+        "bg-hover": {
+          "$value": "{brand.color.primary.800}"
+        },
+        "bg-active": {
+          "$value": "{brand.color.primary.700}"
+        },
+        "fg": {
+          "$value": "{brand.color.neutral.0}"
+        }
+      },
+      "secondary": {
+        "bg": {
+          "$value": "{brand.color.secondary.600}"
+        },
+        "bg-hover": {
+          "$value": "{brand.color.secondary.700}"
+        },
+        "bg-active": {
+          "$value": "{brand.color.secondary.800}"
+        },
+        "fg": {
+          "$value": "{brand.color.neutral.0}"
+        }
+      },
+      "neutral": {
+        "bg": {
+          "$value": "{brand.color.neutral.100}"
+        },
+        "bg-hover": {
+          "$value": "{brand.color.neutral.200}"
+        },
+        "bg-active": {
+          "$value": "{brand.color.neutral.300}"
+        },
+        "fg": {
+          "$value": "{brand.color.neutral.900}"
+        }
+      },
+      "negative": {
+        "bg": {
+          "$value": "{brand.color.negative.600}"
+        },
+        "bg-hover": {
+          "$value": "{brand.color.negative.700}"
+        },
+        "bg-active": {
+          "$value": "{brand.color.negative.800}"
+        },
+        "fg": {
+          "$value": "{brand.color.neutral.0}"
+        }
+      }
+    },
+    "status": {
+      "positive": {
+        "bg": {
+          "$value": "{brand.color.positive.100}"
+        },
+        "fg": {
+          "$value": "{brand.color.positive.700}"
+        },
+        "border": {
+          "$value": "{brand.color.positive.300}"
+        }
+      },
+      "warning": {
+        "bg": {
+          "$value": "{brand.color.warning.100}"
+        },
+        "fg": {
+          "$value": "{brand.color.warning.800}"
+        },
+        "border": {
+          "$value": "{brand.color.warning.300}"
+        }
+      },
+      "negative": {
+        "bg": {
+          "$value": "{brand.color.negative.100}"
+        },
+        "fg": {
+          "$value": "{brand.color.negative.700}"
+        },
+        "border": {
+          "$value": "{brand.color.negative.300}"
+        }
+      },
+      "informative": {
+        "bg": {
+          "$value": "{brand.color.informative.100}"
+        },
+        "fg": {
+          "$value": "{brand.color.informative.700}"
+        },
+        "border": {
+          "$value": "{brand.color.informative.300}"
+        }
+      }
+    }
+  },
+  "shadow": {
+    "$type": "shadow",
+    "sm": {
+      "$value": [
+        {
+          "color": {
+            "colorSpace": "oklch",
+            "components": [0.23, 0.009, 260],
+            "alpha": 0.06
+          },
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 1,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 2,
+            "unit": "px"
+          },
+          "spread": {
+            "value": 0,
+            "unit": "px"
+          }
+        }
+      ]
+    },
+    "md": {
+      "$value": [
+        {
+          "color": {
+            "colorSpace": "oklch",
+            "components": [0.23, 0.009, 260],
+            "alpha": 0.08
+          },
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 4,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 8,
+            "unit": "px"
+          },
+          "spread": {
+            "value": -2,
+            "unit": "px"
+          }
+        },
+        {
+          "color": {
+            "colorSpace": "oklch",
+            "components": [0.23, 0.009, 260],
+            "alpha": 0.06
+          },
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 2,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 4,
+            "unit": "px"
+          },
+          "spread": {
+            "value": -2,
+            "unit": "px"
+          }
+        }
+      ]
+    },
+    "lg": {
+      "$value": [
+        {
+          "color": {
+            "colorSpace": "oklch",
+            "components": [0.23, 0.009, 260],
+            "alpha": 0.12
+          },
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 12,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 24,
+            "unit": "px"
+          },
+          "spread": {
+            "value": -4,
+            "unit": "px"
+          }
+        },
+        {
+          "color": {
+            "colorSpace": "oklch",
+            "components": [0.23, 0.009, 260],
+            "alpha": 0.06
+          },
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 4,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 8,
+            "unit": "px"
+          },
+          "spread": {
+            "value": -4,
+            "unit": "px"
+          }
+        }
+      ]
+    }
+  }
+}

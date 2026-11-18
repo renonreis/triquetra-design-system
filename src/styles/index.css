@@ -3,6 +3,18 @@
  * Shipped as `@renonreis/triquetra/styles.css`. Only component sources are scanned.
  */
 @import 'tailwindcss' source(none);
+@import './generated/tokens.css';
+@import './generated/theme.css';
+
 @source '../';
 @source not '../**/*.stories.tsx';
 @source not '../**/*.test.tsx';
+
+@layer base {
+  body {
+    background-color: var(--tq-color-bg-canvas);
+    color: var(--tq-color-fg-default);
+    font-family: var(--tq-font-family-body);
+    -webkit-font-smoothing: antialiased;
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "primitive": {
+    "duration": {
+      "100": {
+        "$value": {
+          "value": 100,
+          "unit": "ms"
+        }
+      },
+      "150": {
+        "$value": {
+          "value": 150,
+          "unit": "ms"
+        }
+      },
+      "200": {
+        "$value": {
+          "value": 200,
+          "unit": "ms"
+        }
+      },
+      "300": {
+        "$value": {
+          "value": 300,
+          "unit": "ms"
+        }
+      },
+      "$type": "duration"
+    },
+    "easing": {
+      "$type": "cubicBezier",
+      "standard": {
+        "$value": [0.2, 0, 0, 1]
+      },
+      "emphasized": {
+        "$value": [0.3, 0, 0, 1]
+      }
+    }
+  }
+}

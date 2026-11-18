@@ -1,0 +1,156 @@
+{
+  "space": {
+    "0": {
+      "$value": "{primitive.space.0}"
+    },
+    "1": {
+      "$value": "{primitive.space.1}"
+    },
+    "2": {
+      "$value": "{primitive.space.2}"
+    },
+    "3": {
+      "$value": "{primitive.space.3}"
+    },
+    "4": {
+      "$value": "{primitive.space.4}"
+    },
+    "5": {
+      "$value": "{primitive.space.5}"
+    },
+    "6": {
+      "$value": "{primitive.space.6}"
+    },
+    "8": {
+      "$value": "{primitive.space.8}"
+    },
+    "10": {
+      "$value": "{primitive.space.10}"
+    },
+    "12": {
+      "$value": "{primitive.space.12}"
+    },
+    "16": {
+      "$value": "{primitive.space.16}"
+    },
+    "20": {
+      "$value": "{primitive.space.20}"
+    },
+    "24": {
+      "$value": "{primitive.space.24}"
+    },
+    "$type": "dimension"
+  },
+  "radius": {
+    "$type": "dimension",
+    "none": {
+      "$value": "{primitive.radius.none}"
+    },
+    "control": {
+      "$value": "{brand.radius.control}",
+      "$description": "Buttons, inputs, small controls."
+    },
+    "surface": {
+      "$value": "{brand.radius.surface}",
+      "$description": "Cards and panels."
+    },
+    "overlay": {
+      "$value": "{brand.radius.overlay}",
+      "$description": "Dialogs, popovers, menus."
+    },
+    "full": {
+      "$value": "{primitive.radius.full}"
+    }
+  },
+  "font": {
+    "family": {
+      "$type": "fontFamily",
+      "body": {
+        "$value": "{brand.font.family.sans}"
+      },
+      "heading": {
+        "$value": "{brand.font.family.sans}"
+      },
+      "mono": {
+        "$value": "{brand.font.family.mono}"
+      }
+    },
+    "weight": {
+      "$type": "fontWeight",
+      "regular": {
+        "$value": "{primitive.font.weight.regular}"
+      },
+      "medium": {
+        "$value": "{primitive.font.weight.medium}"
+      },
+      "semibold": {
+        "$value": "{primitive.font.weight.semibold}"
+      },
+      "bold": {
+        "$value": "{primitive.font.weight.bold}"
+      }
+    },
+    "size": {
+      "$type": "dimension",
+      "xs": {
+        "$value": "{primitive.font.size.12}"
+      },
+      "sm": {
+        "$value": "{primitive.font.size.14}"
+      },
+      "md": {
+        "$value": "{primitive.font.size.16}"
+      },
+      "lg": {
+        "$value": "{primitive.font.size.18}"
+      },
+      "xl": {
+        "$value": "{primitive.font.size.20}"
+      },
+      "2xl": {
+        "$value": "{primitive.font.size.24}"
+      },
+      "3xl": {
+        "$value": "{primitive.font.size.30}"
+      },
+      "4xl": {
+        "$value": "{primitive.font.size.36}"
+      }
+    },
+    "line-height": {
+      "$type": "number",
+      "tight": {
+        "$value": "{primitive.font.line-height.tight}"
+      },
+      "snug": {
+        "$value": "{primitive.font.line-height.snug}"
+      },
+      "normal": {
+        "$value": "{primitive.font.line-height.normal}"
+      }
+    }
+  },
+  "motion": {
+    "duration": {
+      "$type": "duration",
+      "fast": {
+        "$value": "{primitive.duration.100}"
+      },
+      "normal": {
+        "$value": "{primitive.duration.200}"
+      },
+      "slow": {
+        "$value": "{primitive.duration.300}"
+      }
+    },
+    "easing": {
+      "$type": "cubicBezier",
+      "standard": {
+        "$value": "{primitive.easing.standard}"
+      },
+      "emphasized": {
+        "$value": "{primitive.easing.emphasized}"
+      }
+    }
+  }
+}

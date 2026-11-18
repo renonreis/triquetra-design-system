@@ -42,12 +42,14 @@ CI runs the same commands. A PR cannot merge unless lint, typecheck, tests, the 
 
 ```
 tokens/                     # source of truth, DTCG JSON (*.tokens.json)
-  primitives/               # raw values with no meaning (palette, scales)
-  brands/<brand>/           # brand decisions: maps primitives to brand roles
-  themes/<theme>/           # semantic tokens per theme
-  modes/{light,dark}/       # mode overrides of semantic tokens
-  triquetra.resolver.json   # DTCG resolver: brand × theme × mode permutations
-scripts/                    # token build and other tooling
+  primitives/               # `primitive.*`: raw values (palettes 0–900, scales)
+  brands/<brand>.tokens.json  # `brand.*`: roles mapped to primitives (same paths in every brand)
+  themes/<theme>/
+    base.tokens.json        # mode-agnostic semantics (space, radius, font, motion)
+    light.tokens.json       # semantic colors + shadows, light mode
+    dark.tokens.json        # semantic colors + shadows, dark mode (same paths as light)
+  contrast.test.ts          # WCAG contrast checks on semantic pairs
+scripts/build-tokens.ts     # Style Dictionary build + validation (Brand × Theme × Mode)
 src/
   components/<name>/
     <name>.tsx              # component (wraps Ark UI when a primitive exists)
@@ -56,8 +58,9 @@ src/
     <name>.test.tsx         # behavior + axe tests
     index.ts
   styles/
-    generated/              # build output of tokens. NEVER edit by hand
-    index.css               # Tailwind entry: imports generated tokens + @theme
+    generated/              # tokens.css, theme.css (Tailwind @theme), tokens.json. NEVER edit by hand
+    index.css               # Tailwind entry: imports generated tokens + theme
+  foundations/              # token documentation stories
   index.ts                  # public API, explicit named exports only
 tests/visual/               # Playwright specs + committed snapshots
 .storybook/
@@ -68,19 +71,51 @@ tests/visual/               # Playwright specs + committed snapshots
 
 Hierarchy: **Brand → Theme → Mode (light/dark)**.
 
-1. **Primitive** (`tokens/primitives`): raw values, such as `color.blue.500`. Components never reference these.
-2. **Brand** (`tokens/brands/*`): brand roles, such as `brand.primary`, typography families and radius personality.
-3. **Semantic** (`tokens/themes/*` and `tokens/modes/*`): intent-based, such as `color.bg.surface`, `color.fg.muted`, `color.border.focus` and `color.action.primary.bg`. Modes only override semantic tokens.
+1. **Primitive** (`tokens/primitives`, root group `primitive`): raw values, such as `primitive.color.blue.500`. Never emitted as CSS variables. Only brands reference them.
+2. **Brand** (`tokens/brands/<brand>.tokens.json`, root group `brand`): roles such as `brand.color.primary.900`, `brand.color.secondary.600`, `brand.color.neutral.*`, `brand.font.family.sans` and `brand.radius.control`. Emitted as `--tq-brand-*` and scoped by `[data-brand]`. Every brand must define exactly the same paths as the default brand.
+3. **Semantic** (`tokens/themes/<theme>/`): intent-based, such as `color.bg.surface`, `color.fg.muted`, `color.border.focus`, `color.action.primary.bg`, `radius.control` and `shadow.md`. Semantic tokens reference brand roles, so they are emitted as `var(--tq-brand-…)` and work with any brand. `base` holds mode-agnostic tokens. `light` and `dark` hold colors and shadows.
 4. **Component** (optional, sparing): such as `button.radius`. Add one only when a component must diverge from semantics.
+
+Themes: `default` is complete and mandatory. Another theme (for example `black-friday`) contains **only overrides** on top of `default`. If it overrides a token in one mode, it must also override it in the other.
 
 Rules:
 
-- Follow DTCG 2025.10: `$value`, `$type`, `$description`, `$extensions`; aliases with `{group.token}`; structured `color` values (`colorSpace` + `components`) and `dimension` values (`{ value, unit }`). Use `.tokens.json` files.
-- Naming: lowercase, dot-separated groups in JSON, which become `--tq-<path>` CSS variables (for example `--tq-color-bg-surface`).
-- Every semantic color token must exist in **both** light and dark modes. The build fails on a missing pair.
-- Text and background semantic pairs must meet WCAG 2.2 AA contrast. Tests check the defined pairs.
-- Runtime selection uses attributes on an ancestor: `data-brand`, `data-theme` and `data-mode="light|dark"`. With no attribute set, the defaults are the default brand, the default theme and `prefers-color-scheme`.
-- After editing tokens, run `pnpm tokens:build` and commit the source JSON. Generated files are build output; follow `.gitignore`.
+- Follow DTCG 2025.10:
+  - `$value`, `$type`, `$description` and `$extensions`
+  - aliases written as `{group.token}`
+  - structured `color` values in OKLCH (`colorSpace` + `components`, plus a `hex` fallback on primitives)
+  - `dimension` and `duration` values as `{ value, unit }`
+  - files named `*.tokens.json`
+- Naming: lowercase, dot-separated groups in JSON. They become `--tq-<path>` CSS variables, for example `--tq-color-bg-surface`.
+- The build (`pnpm tokens:build`) **fails** when:
+  - light and dark don't define the same token paths
+  - a brand is missing a role or defines an extra one
+  - a semantic color points straight to a `primitive.*` instead of a brand role
+- `tokens/contrast.test.ts` checks WCAG 2.2 AA for every brand × theme × mode: 4.5:1 for text pairs and 3:1 for control borders and focus. When you add a semantic fg/bg pair, add it there. Fix the token, never the threshold.
+- Runtime selection uses `data-brand`, `data-theme` and `data-mode="light|dark"`, usually all on `<html>`. With no attribute set, the defaults are the default brand, the default theme and `prefers-color-scheme`. `data-mode` can be nested to switch a subtree. `data-brand` and `data-theme` must sit on the same element as `data-mode` or on an ancestor of it.
+- Tailwind utilities map 1:1 to semantic tokens (`src/styles/generated/theme.css`). The default Tailwind theme is disabled (`--*: initial`), so palette classes such as `bg-blue-500` don't exist:
+
+  | Token                     | Utility                |
+  | ------------------------- | ---------------------- |
+  | `color.bg.surface`        | `bg-bg-surface`        |
+  | `color.fg.muted`          | `text-fg-muted`        |
+  | `color.border.strong`     | `border-border-strong` |
+  | `color.action.primary.bg` | `bg-action-primary-bg` |
+  | `color.border.focus`      | `ring-border-focus`    |
+  | `radius.control`          | `rounded-control`      |
+  | `shadow.md`               | `shadow-md`            |
+  | `space.4`                 | `p-4`, `gap-4`… (1rem) |
+  | `font.size.sm`            | `text-sm`              |
+  | `font.weight.medium`      | `font-medium`          |
+  | `font.family.mono`        | `font-mono`            |
+  | `font.line-height.tight`  | `leading-tight`        |
+
+- After editing tokens, run `pnpm tokens:build` (`dev`, `test`, `build` and `prepare` already run it). Commit only the source JSON. Generated files are git-ignored.
+- Published entry points:
+  - `styles.css`: everything compiled
+  - `tokens.css`: CSS variables only
+  - `theme.css`: the Tailwind v4 `@theme`, for apps that use Tailwind themselves
+  - `tokens.json`: resolved values
 
 ## Component conventions
 
