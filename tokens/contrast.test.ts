@@ -27,6 +27,9 @@ const pairs: [fg: string, bg: string, min: number][] = [
     `status.${s}.bg`,
     TEXT,
   ]),
+  // Field error text sits directly on page and card backgrounds.
+  ['status.negative.fg', 'bg.canvas', TEXT],
+  ['status.negative.fg', 'bg.surface', TEXT],
   ['border.strong', 'bg.surface', UI],
   ['border.strong', 'bg.canvas', UI],
   ['border.focus', 'bg.canvas', UI],
