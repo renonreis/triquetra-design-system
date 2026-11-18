@@ -8,11 +8,20 @@ Design tokens and accessible React components, built on [Ark UI](https://ark-ui.
 
 The triquetra is three interlaced arcs: **design**, **technology** and **product**, in one continuous loop.
 
+## Theming
+
+Set `data-mode="light"` or `data-mode="dark"` on `<html>` (or on any subtree). Without it, the mode follows the system preference. `data-brand` and `data-theme` select the brand (default `triquetra`) and the theme (default `default`).
+
+```html
+<html data-brand="triquetra" data-theme="default" data-mode="dark"></html>
+```
+
 ## Install
 
-```bash
-# .npmrc
+```ini
+# .npmrc (GitHub Packages requires a token with read:packages)
 @renonreis:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
 ```
 
 ```bash
