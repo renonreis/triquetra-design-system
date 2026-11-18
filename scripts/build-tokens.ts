@@ -286,6 +286,8 @@ function tailwindTheme(tokens: TransformedToken[]): string {
     else if (group === 'shadow') lines.push(`  --shadow-${key}: ${v(t)};`);
     else if (group === 'radius') lines.push(`  --radius-${key}: ${v(t)};`);
     else if (group === 'space') lines.push(`  --spacing-${key}: ${v(t)};`);
+    else if (group === 'size' && rest[0] === 'container')
+      lines.push(`  --container-${rest.slice(1).join('-')}: ${v(t)};`);
     else if (group === 'font') {
       const [kind, ...name] = rest;
       const n = name.join('-');

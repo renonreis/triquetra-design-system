@@ -115,10 +115,12 @@ Rules:
   | `radius.control`          | `rounded-control`      |
   | `shadow.md`               | `shadow-md`            |
   | `space.4`                 | `p-4`, `gap-4`… (1rem) |
-  | `font.size.sm`            | `text-sm`              |
-  | `font.weight.medium`      | `font-medium`          |
-  | `font.family.mono`        | `font-mono`            |
-  | `font.line-height.tight`  | `leading-tight`        |
+
+| `size.container.md` | `max-w-md` (28rem) |
+| `font.size.sm` | `text-sm` |
+| `font.weight.medium` | `font-medium` |
+| `font.family.mono` | `font-mono` |
+| `font.line-height.tight` | `leading-tight` |
 
 - After editing tokens, run `pnpm tokens:build` (`dev`, `test`, `build` and `prepare` already run it). Commit only the source JSON. Generated files are git-ignored.
 - Published entry points:
