@@ -22,6 +22,15 @@ for (const story of stories) {
     test(`${story.title} › ${story.name} (${mode})`, async ({ page }) => {
       await page.goto(`/iframe.html?id=${story.id}&viewMode=story&globals=mode:${mode}`);
       await page.locator('#storybook-root > *').first().waitFor();
+      // Wait for the story to finish, including its play function, so interactions never race
+      // the screenshot. Fail fast (instead of hanging) if Storybook reports another state.
+      await page.waitForFunction(
+        () =>
+          (window as { __STORYBOOK_PREVIEW__?: { currentRender?: { phase?: string } } })
+            .__STORYBOOK_PREVIEW__?.currentRender?.phase === 'finished',
+        undefined,
+        { timeout: 10_000 },
+      );
       await page.evaluate(() => document.fonts.ready);
       await expect(page).toHaveScreenshot(`${story.id}--${mode}.png`, { fullPage: true });
     });
