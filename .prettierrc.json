@@ -2,6 +2,6 @@
   "singleQuote": true,
   "printWidth": 100,
   "plugins": ["prettier-plugin-tailwindcss"],
-  "tailwindStylesheet": "./src/styles/index.css",
+  "tailwindStylesheet": "./packages/react/src/styles/index.css",
   "tailwindFunctions": ["tv"]
 }

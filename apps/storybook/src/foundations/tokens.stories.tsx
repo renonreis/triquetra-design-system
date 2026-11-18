@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import brand from '../../tokens/brands/triquetra.tokens.json' with { type: 'json' };
-import resolved from '../styles/generated/tokens.json' with { type: 'json' };
+import brand from '../../../../packages/react/tokens/brands/triquetra.tokens.json' with { type: 'json' };
+import resolved from '../../../../packages/react/src/styles/generated/tokens.json' with { type: 'json' };
 
 type Resolved = Record<
   string,

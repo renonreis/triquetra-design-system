@@ -13,8 +13,6 @@
     "isolatedModules": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "noEmit": true,
-    "types": ["node", "vite/client", "@testing-library/jest-dom/vitest"]
-  },
-  "include": ["src", "tokens", "tests", ".storybook/**/*", "scripts", "*.ts"]
+    "noEmit": true
+  }
 }

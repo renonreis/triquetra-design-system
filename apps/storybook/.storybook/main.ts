@@ -2,7 +2,12 @@ import tailwindcss from '@tailwindcss/vite';
 import type { StorybookConfig } from '@storybook/react-vite';
 
 const config: StorybookConfig = {
-  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(ts|tsx)'],
+  stories: [
+    '../src/**/*.mdx',
+    '../src/**/*.stories.@(ts|tsx)',
+    // Component stories live next to their components in packages/react.
+    '../../../packages/react/src/**/*.stories.@(ts|tsx)',
+  ],
   addons: [
     '@storybook/addon-docs',
     '@storybook/addon-a11y',
