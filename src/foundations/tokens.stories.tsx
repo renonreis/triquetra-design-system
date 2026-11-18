@@ -146,7 +146,7 @@ export const Typography: Story = {
           .filter(([p]) => p.startsWith('font.size.'))
           .map(([path, token]) => (
             <li key={path} className="flex items-baseline gap-4">
-              <code className="w-28 font-mono text-xs text-fg-muted">{path}</code>
+              <code className="w-24 font-mono text-xs text-fg-muted">{path}</code>
               <span style={{ fontSize: cssVar(path) }}>Triquetra design system</span>
               <code className="font-mono text-xs text-fg-muted">{String(token.value)}</code>
             </li>

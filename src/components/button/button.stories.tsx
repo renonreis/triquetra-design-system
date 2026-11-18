@@ -81,7 +81,7 @@ export const FullWidth: Story = {
   args: { fullWidth: true },
   decorators: [
     (Story) => (
-      <div className="max-w-96 w-full">
+      <div style={{ width: '24rem' }}>
         <Story />
       </div>
     ),
