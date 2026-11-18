@@ -111,7 +111,7 @@ jobs:
             --commit-hash="${{ github.event.pull_request.head.sha || github.sha }}" \
             --commit-dirty=true | tee deploy.log
           if [ "$BRANCH" = "main" ]; then
-            url="https://triquetra-storybook.pages.dev"
+            url="https://triquetra.renon.dev"
           else
             url="https://${BRANCH}.triquetra-storybook.pages.dev"
           fi
