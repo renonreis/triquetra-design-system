@@ -72,7 +72,7 @@ tests/visual/               # Playwright specs + committed snapshots
 Hierarchy: **Brand → Theme → Mode (light/dark)**.
 
 1. **Primitive** (`tokens/primitives`, root group `primitive`): raw values, such as `primitive.color.blue.500`. Never emitted as CSS variables. Only brands reference them.
-2. **Brand** (`tokens/brands/<brand>.tokens.json`, root group `brand`): roles such as `brand.color.primary.600`, `brand.color.neutral.*`, `brand.font.family.sans` and `brand.radius.control`. Emitted as `--tq-brand-*` and scoped by `[data-brand]`. Every brand must define exactly the same paths as the default brand.
+2. **Brand** (`tokens/brands/<brand>.tokens.json`, root group `brand`): roles such as `brand.color.primary.900`, `brand.color.secondary.600`, `brand.color.neutral.*`, `brand.font.family.sans` and `brand.radius.control`. Emitted as `--tq-brand-*` and scoped by `[data-brand]`. Every brand must define exactly the same paths as the default brand.
 3. **Semantic** (`tokens/themes/<theme>/`): intent-based, such as `color.bg.surface`, `color.fg.muted`, `color.border.focus`, `color.action.primary.bg`, `radius.control` and `shadow.md`. Semantic tokens reference brand roles, so they are emitted as `var(--tq-brand-…)` and work with any brand. `base` holds mode-agnostic tokens. `light` and `dark` hold colors and shadows.
 4. **Component** (optional, sparing): such as `button.radius`. Add one only when a component must diverge from semantics.
 

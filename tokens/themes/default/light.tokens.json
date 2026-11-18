@@ -54,7 +54,7 @@
         "$description": "Disabled text (exempt from contrast rules)."
       },
       "link": {
-        "$value": "{brand.color.primary.600}",
+        "$value": "{brand.color.secondary.600}",
         "$description": "Links."
       }
     },
@@ -68,30 +68,44 @@
         "$description": "Control borders (3:1 non-text contrast)."
       },
       "focus": {
-        "$value": "{brand.color.primary.500}",
+        "$value": "{brand.color.secondary.500}",
         "$description": "Focus rings."
       },
-      "danger": {
-        "$value": "{brand.color.danger.600}",
+      "negative": {
+        "$value": "{brand.color.negative.600}",
         "$description": "Invalid control borders."
       }
     },
     "action": {
       "primary": {
         "bg": {
-          "$value": "{brand.color.primary.600}"
+          "$value": "{brand.color.primary.900}"
         },
         "bg-hover": {
-          "$value": "{brand.color.primary.700}"
+          "$value": "{brand.color.primary.800}"
         },
         "bg-active": {
-          "$value": "{brand.color.primary.800}"
+          "$value": "{brand.color.primary.700}"
         },
         "fg": {
           "$value": "{brand.color.neutral.0}"
         }
       },
       "secondary": {
+        "bg": {
+          "$value": "{brand.color.secondary.600}"
+        },
+        "bg-hover": {
+          "$value": "{brand.color.secondary.700}"
+        },
+        "bg-active": {
+          "$value": "{brand.color.secondary.800}"
+        },
+        "fg": {
+          "$value": "{brand.color.neutral.0}"
+        }
+      },
+      "neutral": {
         "bg": {
           "$value": "{brand.color.neutral.100}"
         },
@@ -105,15 +119,15 @@
           "$value": "{brand.color.neutral.900}"
         }
       },
-      "danger": {
+      "negative": {
         "bg": {
-          "$value": "{brand.color.danger.600}"
+          "$value": "{brand.color.negative.600}"
         },
         "bg-hover": {
-          "$value": "{brand.color.danger.700}"
+          "$value": "{brand.color.negative.700}"
         },
         "bg-active": {
-          "$value": "{brand.color.danger.800}"
+          "$value": "{brand.color.negative.800}"
         },
         "fg": {
           "$value": "{brand.color.neutral.0}"
@@ -121,15 +135,15 @@
       }
     },
     "status": {
-      "success": {
+      "positive": {
         "bg": {
-          "$value": "{brand.color.success.100}"
+          "$value": "{brand.color.positive.100}"
         },
         "fg": {
-          "$value": "{brand.color.success.700}"
+          "$value": "{brand.color.positive.700}"
         },
         "border": {
-          "$value": "{brand.color.success.300}"
+          "$value": "{brand.color.positive.300}"
         }
       },
       "warning": {
@@ -143,26 +157,26 @@
           "$value": "{brand.color.warning.300}"
         }
       },
-      "danger": {
+      "negative": {
         "bg": {
-          "$value": "{brand.color.danger.100}"
+          "$value": "{brand.color.negative.100}"
         },
         "fg": {
-          "$value": "{brand.color.danger.700}"
+          "$value": "{brand.color.negative.700}"
         },
         "border": {
-          "$value": "{brand.color.danger.300}"
+          "$value": "{brand.color.negative.300}"
         }
       },
-      "info": {
+      "informative": {
         "bg": {
-          "$value": "{brand.color.info.100}"
+          "$value": "{brand.color.informative.100}"
         },
         "fg": {
-          "$value": "{brand.color.info.700}"
+          "$value": "{brand.color.informative.700}"
         },
         "border": {
-          "$value": "{brand.color.info.300}"
+          "$value": "{brand.color.informative.300}"
         }
       }
     }

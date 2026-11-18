@@ -15,14 +15,14 @@ const pairs: [fg: string, bg: string, min: number][] = [
   ['fg.link', 'bg.canvas', TEXT],
   ['fg.link', 'bg.surface', TEXT],
   ['fg.inverse', 'bg.inverse', TEXT],
-  ...['primary', 'secondary', 'danger'].flatMap((a) =>
+  ...['primary', 'secondary', 'neutral', 'negative'].flatMap((a) =>
     ['bg', 'bg-hover', 'bg-active'].map((bg): [string, string, number] => [
       `action.${a}.fg`,
       `action.${a}.${bg}`,
       TEXT,
     ]),
   ),
-  ...['success', 'warning', 'danger', 'info'].map((s): [string, string, number] => [
+  ...['positive', 'warning', 'negative', 'informative'].map((s): [string, string, number] => [
     `status.${s}.fg`,
     `status.${s}.bg`,
     TEXT,
@@ -31,7 +31,7 @@ const pairs: [fg: string, bg: string, min: number][] = [
   ['border.strong', 'bg.canvas', UI],
   ['border.focus', 'bg.canvas', UI],
   ['border.focus', 'bg.surface', UI],
-  ['border.danger', 'bg.surface', UI],
+  ['border.negative', 'bg.surface', UI],
 ];
 
 const permutations = Object.entries(resolved as Record<string, Entry>);

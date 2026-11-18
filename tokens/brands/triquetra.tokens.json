@@ -5,6 +5,39 @@
       "$type": "color",
       "primary": {
         "0": {
+          "$value": "{primitive.color.grey.0}"
+        },
+        "100": {
+          "$value": "{primitive.color.grey.100}"
+        },
+        "200": {
+          "$value": "{primitive.color.grey.200}"
+        },
+        "300": {
+          "$value": "{primitive.color.grey.300}"
+        },
+        "400": {
+          "$value": "{primitive.color.grey.400}"
+        },
+        "500": {
+          "$value": "{primitive.color.grey.500}"
+        },
+        "600": {
+          "$value": "{primitive.color.grey.600}"
+        },
+        "700": {
+          "$value": "{primitive.color.grey.700}"
+        },
+        "800": {
+          "$value": "{primitive.color.grey.800}"
+        },
+        "900": {
+          "$value": "{primitive.color.grey.900}"
+        },
+        "$description": "Main brand color: primary actions."
+      },
+      "secondary": {
+        "0": {
           "$value": "{primitive.color.blue.0}"
         },
         "100": {
@@ -34,7 +67,7 @@
         "900": {
           "$value": "{primitive.color.blue.900}"
         },
-        "$description": "Main brand color: actions, links, focus."
+        "$description": "Secondary brand color: secondary actions, links and focus."
       },
       "neutral": {
         "0": {
@@ -69,7 +102,7 @@
         },
         "$description": "Surfaces, text and borders."
       },
-      "success": {
+      "positive": {
         "0": {
           "$value": "{primitive.color.green.0}"
         },
@@ -100,7 +133,7 @@
         "900": {
           "$value": "{primitive.color.green.900}"
         },
-        "$description": "Positive feedback."
+        "$description": "Positive feedback and success."
       },
       "warning": {
         "0": {
@@ -135,7 +168,7 @@
         },
         "$description": "Caution feedback."
       },
-      "danger": {
+      "negative": {
         "0": {
           "$value": "{primitive.color.red.0}"
         },
@@ -166,9 +199,9 @@
         "900": {
           "$value": "{primitive.color.red.900}"
         },
-        "$description": "Destructive actions and errors."
+        "$description": "Errors and destructive actions."
       },
-      "info": {
+      "informative": {
         "0": {
           "$value": "{primitive.color.blue.0}"
         },
@@ -200,39 +233,6 @@
           "$value": "{primitive.color.blue.900}"
         },
         "$description": "Neutral informative feedback."
-      },
-      "accent": {
-        "0": {
-          "$value": "{primitive.color.orange.0}"
-        },
-        "100": {
-          "$value": "{primitive.color.orange.100}"
-        },
-        "200": {
-          "$value": "{primitive.color.orange.200}"
-        },
-        "300": {
-          "$value": "{primitive.color.orange.300}"
-        },
-        "400": {
-          "$value": "{primitive.color.orange.400}"
-        },
-        "500": {
-          "$value": "{primitive.color.orange.500}"
-        },
-        "600": {
-          "$value": "{primitive.color.orange.600}"
-        },
-        "700": {
-          "$value": "{primitive.color.orange.700}"
-        },
-        "800": {
-          "$value": "{primitive.color.orange.800}"
-        },
-        "900": {
-          "$value": "{primitive.color.orange.900}"
-        },
-        "$description": "Secondary brand accent, for highlights."
       }
     },
     "font": {
