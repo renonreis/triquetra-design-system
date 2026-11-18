@@ -18,19 +18,21 @@ export default defineConfig({
           setupFiles: ['./src/test/setup.ts'],
         },
       },
-      {
-        extends: true,
+      // Every story is tested in both color modes (a11y addon in `error` mode, incl. contrast).
+      ...(['light', 'dark'] as const).map((mode) => ({
+        extends: true as const,
         plugins: [tailwindcss(), storybookTest({ configDir: '.storybook' })],
+        define: { 'import.meta.env.STORYBOOK_TEST_MODE': JSON.stringify(mode) },
         test: {
-          name: 'storybook',
+          name: `storybook:${mode}`,
           browser: {
             enabled: true,
             headless: true,
             provider: playwright(),
-            instances: [{ browser: 'chromium' }],
+            instances: [{ browser: 'chromium' as const }],
           },
         },
-      },
+      })),
     ],
   },
 });

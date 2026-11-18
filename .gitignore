@@ -11,3 +11,7 @@ src/styles/generated/
 .env
 .env.*
 !.env.example
+
+# Playwright
+/tests/visual/__screenshots__/**/*-actual.png
+/tests/visual/__screenshots__/**/*-diff.png

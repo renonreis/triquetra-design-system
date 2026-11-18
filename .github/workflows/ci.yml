@@ -54,8 +54,36 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm tokens:build
-      # Every story runs in Chromium with the a11y addon in `error` mode.
-      - run: pnpm vitest run --project storybook
+      # Every story runs in Chromium, in light and dark, with the a11y addon in `error` mode.
+      - run: pnpm vitest run --project 'storybook:*'
+
+  visual:
+    name: Visual regression
+    runs-on: ubuntu-latest
+    # Keep in sync with the @playwright/test version in package.json.
+    container:
+      image: mcr.microsoft.com/playwright:v1.65.1-noble
+      options: --ipc=host
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build-storybook --quiet
+        env:
+          STORYBOOK_DISABLE_TELEMETRY: '1'
+      - run: pnpm exec playwright test
+      - uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          name: visual-report
+          path: |
+            playwright-report
+            test-results
+          retention-days: 7
 
   build:
     name: Build

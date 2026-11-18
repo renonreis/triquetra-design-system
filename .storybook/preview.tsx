@@ -37,7 +37,12 @@ const preview: Preview = {
       },
     },
   },
-  initialGlobals: { brand: 'triquetra', theme: 'default', mode: 'light' },
+  initialGlobals: {
+    brand: 'triquetra',
+    theme: 'default',
+    // Story tests run once per mode (see vitest.config.ts).
+    mode: import.meta.env.STORYBOOK_TEST_MODE ?? 'light',
+  },
   decorators: [withTokens],
   parameters: {
     controls: { matchers: { color: /(background|color)$/i, date: /Date$/i } },

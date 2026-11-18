@@ -32,18 +32,19 @@ pnpm build-storybook    # static Storybook → storybook-static/
 ```bash
 pnpm lint               # ESLint (incl. jsx-a11y and storybook plugins) + Prettier check
 pnpm typecheck          # tsc --noEmit
-pnpm test               # Vitest projects: `unit` (jsdom + axe) and `storybook` (stories in Chromium)
-pnpm test:visual        # Playwright visual regression (run in Docker, see below)
+pnpm test               # Vitest projects: `unit` (jsdom + axe) and `storybook:light` / `storybook:dark` (stories in Chromium)
+pnpm test:visual:docker # Playwright visual regression in the Playwright Docker image (same as CI)
 ```
 
 CI (`.github/workflows/ci.yml`) runs the same commands. These required checks block the merge into `main`:
 
-| Check                       | Runs                                                        |
-| --------------------------- | ----------------------------------------------------------- |
-| `Lint & typecheck`          | `pnpm lint` + `pnpm typecheck`                              |
-| `Unit & token tests`        | `pnpm vitest run --project unit` (behavior, axe, contrast)  |
-| `Accessibility (Storybook)` | `pnpm vitest run --project storybook` (a11y addon, `error`) |
-| `Build`                     | `pnpm build` + `pnpm build-storybook`                       |
+| Check                       | Runs                                                                                             |
+| --------------------------- | ------------------------------------------------------------------------------------------------ |
+| `Lint & typecheck`          | `pnpm lint` + `pnpm typecheck`                                                                   |
+| `Unit & token tests`        | `pnpm vitest run --project unit` (behavior, axe, contrast)                                       |
+| `Accessibility (Storybook)` | `pnpm vitest run --project 'storybook:*'` (every story in light and dark, a11y addon in `error`) |
+| `Visual regression`         | `playwright test` in `mcr.microsoft.com/playwright` (stories tagged `visual`, light and dark)    |
+| `Build`                     | `pnpm build` + `pnpm build-storybook`                                                            |
 
 Don't skip, disable or `.only` tests to get green, and don't lower axe rules.
 
@@ -141,11 +142,16 @@ Rules:
 
 ## Testing instructions
 
+- Tag stories that should be screenshotted with `tags: ['visual']` (usually the meta, so every story of a component counts).
 - Each component needs:
   - `*.test.tsx`: behavior with Testing Library (query by role and accessible name, not by test-id or class) plus `expect(await axe(container)).toHaveNoViolations()` for every meaningful state.
   - `*.stories.tsx`: one story per variant and state (default, hover via `pseudo`, disabled, invalid, loading…), rendered in **light and dark** modes. Stories are run as tests and checked with the a11y addon in `error` mode.
   - Visual snapshots: Playwright screenshots the stories tagged `visual`.
-- Visual snapshots are OS-sensitive. Generate and update them **only in the Playwright Docker image** (`pnpm test:visual:docker`, `pnpm test:visual:update`). Never commit snapshots generated on macOS.
+- Visual snapshots are OS- and architecture-sensitive. Generate and update them **only in the Playwright Docker image** (`linux/amd64`, the same as CI):
+  - `pnpm test:visual:docker` compares against the committed baselines in `tests/visual/__screenshots__/`.
+  - `pnpm test:visual:update` rewrites them. Review every changed PNG before committing.
+  - Never commit snapshots generated on macOS. Docker (OrbStack) must be running.
+  - When you bump `@playwright/test`, also bump the image tag in `.github/workflows/ci.yml`.
 - Run one test file: `pnpm vitest run src/components/button`.
 - Add or update tests for any change in behavior, even if nobody asked.
 
