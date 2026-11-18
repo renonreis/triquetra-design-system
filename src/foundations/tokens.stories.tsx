@@ -14,7 +14,7 @@ const byType = (type: string) => Object.entries(semantic).filter(([, t]) => t.ty
 const meta = {
   title: 'Foundations/Tokens',
   parameters: { layout: 'padded' },
-  tags: ['!autodocs'],
+  tags: ['!autodocs', 'visual'],
 } satisfies Meta;
 
 export default meta;

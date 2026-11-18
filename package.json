@@ -45,6 +45,9 @@
     "typecheck": "tsc --noEmit",
     "test": "pnpm tokens:build && vitest run",
     "test:watch": "vitest",
+    "test:visual": "playwright test",
+    "test:visual:docker": "scripts/visual-docker.sh",
+    "test:visual:update": "scripts/visual-docker.sh --update-snapshots",
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "pnpm build && changeset publish"
@@ -57,6 +60,7 @@
   "devDependencies": {
     "@changesets/cli": "^3.0.3",
     "@eslint/js": "^9.39.5",
+    "@playwright/test": "1.65.1",
     "@storybook/addon-a11y": "^10.6.7",
     "@storybook/addon-docs": "^10.6.7",
     "@storybook/addon-vitest": "^10.6.7",

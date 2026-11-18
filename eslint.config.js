@@ -7,7 +7,17 @@ import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
-  { ignores: ['dist', 'storybook-static', 'coverage', 'src/styles/generated', '!.storybook'] },
+  {
+    ignores: [
+      'dist',
+      'storybook-static',
+      'coverage',
+      'src/styles/generated',
+      'playwright-report',
+      'test-results',
+      '!.storybook',
+    ],
+  },
   js.configs.recommended,
   ...tseslint.configs.strictTypeChecked,
   {
