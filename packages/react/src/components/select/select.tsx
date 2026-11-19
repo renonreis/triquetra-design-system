@@ -3,6 +3,7 @@ import {
   Portal,
   createListCollection,
   useFieldContext,
+  useSelectContext,
   type CollectionItem,
   type ListCollection,
 } from '@ark-ui/react';
@@ -19,6 +20,13 @@ import { selectVariants, type SelectVariants } from './select.variants.js';
 type SelectStyles = ReturnType<typeof selectVariants>;
 const SelectStylesContext = createContext<SelectStyles>(selectVariants());
 const useStyles = () => useContext(SelectStylesContext);
+
+// Ark's select context exposes `disabled` but not `readOnly`, which ClearTrigger needs.
+const SelectReadOnlyContext = createContext(false);
+
+// Typed as non-null, but undefined outside `Field.Root` (Ark's context is not strict).
+const useOptionalFieldContext = () =>
+  useFieldContext() as ReturnType<typeof useFieldContext> | undefined;
 
 export type { CollectionItem, ListCollection };
 /**
@@ -44,24 +52,32 @@ const Root = forwardRef(function SelectRoot(
     lazyMount = true,
     unmountOnExit = true,
     positioning,
+    readOnly,
     ...props
   }: SelectRootProps,
   ref: ForwardedRef<HTMLDivElement>,
 ) {
   const styles = selectVariants({ size });
+  // Same precedence as Ark: the root prop wins over the field's state.
+  const field = useOptionalFieldContext();
+  const isReadOnly = readOnly ?? field?.readOnly ?? false;
   return (
     <SelectStylesContext.Provider value={styles}>
-      <ArkSelect.Root
-        ref={ref}
-        lazyMount={lazyMount}
-        unmountOnExit={unmountOnExit}
-        positioning={{ sameWidth: true, fitViewport: true, ...positioning }}
-        className={styles.root({ className })}
-        {...props}
-      >
-        {children}
-        <ArkSelect.HiddenSelect />
-      </ArkSelect.Root>
+      <SelectReadOnlyContext.Provider value={isReadOnly}>
+        <ArkSelect.Root
+          ref={ref}
+          // Only when set: an explicit `undefined` would override the field's state in Ark.
+          {...(readOnly === undefined ? {} : { readOnly })}
+          lazyMount={lazyMount}
+          unmountOnExit={unmountOnExit}
+          positioning={{ sameWidth: true, fitViewport: true, ...positioning }}
+          className={styles.root({ className })}
+          {...props}
+        >
+          {children}
+          <ArkSelect.HiddenSelect />
+        </ArkSelect.Root>
+      </SelectReadOnlyContext.Provider>
     </SelectStylesContext.Provider>
   );
 }) as <T extends CollectionItem>(
@@ -92,8 +108,7 @@ const Trigger = forwardRef<HTMLButtonElement, SelectTriggerProps>(function Selec
   { className, ...props },
   ref,
 ) {
-  // Typed as non-null, but undefined outside `Field.Root` (Ark's context is not strict).
-  const field = useFieldContext() as ReturnType<typeof useFieldContext> | undefined;
+  const field = useOptionalFieldContext();
   return (
     <ArkSelect.Trigger
       ref={ref}
@@ -132,16 +147,18 @@ const Indicator = forwardRef<HTMLDivElement, SelectIndicatorProps>(function Sele
 export type SelectClearTriggerProps = ArkSelect.ClearTriggerProps;
 /**
  * Clears the value. Place it inside `Select.Control`, after the trigger. Hidden while nothing
- * is selected. Labelled "Clear value" by default (Ark `translations.clearTriggerLabel`).
+ * is selected, and not rendered while the select is disabled or read-only. Labelled
+ * "Clear value" by default (Ark `translations.clearTriggerLabel`).
  */
 const ClearTrigger = forwardRef<HTMLButtonElement, SelectClearTriggerProps>(
   function SelectClearTrigger({ className, children, ...props }, ref) {
+    const { disabled } = useSelectContext();
+    const readOnly = useContext(SelectReadOnlyContext);
+    const styles = useStyles();
+    // Ark only disables it with `disabled`, and its clear action ignores `readOnly`.
+    if (disabled || readOnly) return null;
     return (
-      <ArkSelect.ClearTrigger
-        ref={ref}
-        className={useStyles().clearTrigger({ className })}
-        {...props}
-      >
+      <ArkSelect.ClearTrigger ref={ref} className={styles.clearTrigger({ className })} {...props}>
         {children ?? <CloseIcon />}
       </ArkSelect.ClearTrigger>
     );

@@ -146,7 +146,14 @@ export const InvalidFocused: Story = {
   parameters: { pseudo: { focusVisible: true } },
 };
 export const Disabled: Story = { args: { disabled: true, defaultValue: ['react'] } };
-export const ReadOnly: Story = { args: { readOnly: true, defaultValue: ['react'] } };
+export const ReadOnly: Story = {
+  // `clearable` shows that read-only also removes the clear button.
+  args: { readOnly: true, clearable: true, defaultValue: ['react'] },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.queryByRole('button', { name: 'Clear value' })).not.toBeInTheDocument();
+  },
+};
 
 const grouped = createListCollection({
   items: [

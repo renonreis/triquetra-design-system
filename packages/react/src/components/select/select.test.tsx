@@ -152,6 +152,19 @@ describe('Select', () => {
     expect(screen.queryByRole('button', { name: 'Clear value' })).not.toBeInTheDocument();
   });
 
+  it.each<[string, Partial<SelectRootProps<Framework>>]>([
+    ['read-only', { readOnly: true }],
+    ['disabled', { disabled: true }],
+  ])('does not offer the clear button when %s', async (_state, props) => {
+    const user = userEvent.setup();
+    const onValueChange = vi.fn();
+    render(<Example clearable defaultValue={['react']} onValueChange={onValueChange} {...props} />);
+    expect(screen.queryByRole('button', { name: 'Clear value', hidden: true })).toBeNull();
+    await user.click(screen.getByRole('combobox'));
+    expect(onValueChange).not.toHaveBeenCalled();
+    expect(screen.getByRole('combobox')).toHaveTextContent('React');
+  });
+
   it('supports controlled value', () => {
     const { rerender } = render(<Example value={['react']} />);
     expect(screen.getByRole('combobox')).toHaveTextContent('React');
@@ -250,6 +263,19 @@ describe('Select', () => {
 
       rerender(<FieldExample disabled />);
       expect(trigger).toBeDisabled();
+    });
+
+    it('takes read-only from the field: no opening and no clear button', async () => {
+      const user = userEvent.setup();
+      render(
+        <Field.Root readOnly>
+          <Example clearable defaultValue={['react']} />
+        </Field.Root>,
+      );
+      expect(screen.queryByRole('button', { name: 'Clear value', hidden: true })).toBeNull();
+      await user.click(screen.getByRole('combobox', { name: 'Framework' }));
+      expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+      expect(screen.getByRole('combobox')).toHaveTextContent('React');
     });
   });
 

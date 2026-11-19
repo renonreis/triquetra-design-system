@@ -29,7 +29,6 @@ export const selectVariants = tv({
       'absolute inset-y-0 my-auto inline-flex size-6 items-center justify-center rounded-control text-fg-muted',
       'transition-colors duration-150 hover:bg-bg-subtle hover:text-fg-default',
       'focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-border-focus',
-      'disabled:hidden',
     ],
     // Ark caps the positioner at the space left in the viewport; the list scrolls inside it.
     positioner: 'z-50 flex flex-col',
