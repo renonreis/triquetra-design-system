@@ -16,9 +16,19 @@ jobs:
     name: Version or publish
     runs-on: ubuntu-latest
     steps:
+      # A GitHub App token (not GITHUB_TOKEN) opens and pushes the release PR, so the CI
+      # workflow runs on it. GITHUB_TOKEN events never trigger other workflows.
+      - uses: actions/create-github-app-token@v3
+        id: app-token
+        with:
+          client-id: ${{ vars.RELEASE_APP_CLIENT_ID }}
+          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
+          token: ${{ steps.app-token.outputs.token }}
       - uses: pnpm/action-setup@v6
       - uses: actions/setup-node@v7
         with:
@@ -36,5 +46,6 @@ jobs:
           commit-message: 'chore: release'
           pr-title: 'chore: release'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+          # Publishing to GitHub Packages stays on the workflow token (packages: write).
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
