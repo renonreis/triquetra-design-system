@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import { axe } from './axe';
+import { axe } from './axe.js';
 
 describe('axe matcher', () => {
   it('passes for accessible markup', async () => {

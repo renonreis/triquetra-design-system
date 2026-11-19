@@ -1,6 +1,6 @@
 import { Field } from '@ark-ui/react';
 import { forwardRef } from 'react';
-import { inputVariants, type InputVariants } from './input.variants';
+import { inputVariants, type InputVariants } from './input.variants.js';
 
 export interface InputProps extends Omit<Field.InputProps, 'size'>, InputVariants {
   /**

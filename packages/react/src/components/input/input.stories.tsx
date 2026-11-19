@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, within } from 'storybook/test';
-import { Input } from './input';
+import { Input } from './input.js';
 
 const sizes = ['sm', 'md', 'lg'] as const;
 

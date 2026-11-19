@@ -1,8 +1,8 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
-import { axe } from '../../test/axe';
-import { Field, type FieldRootProps } from './field';
+import { axe } from '../../test/axe.js';
+import { Field, type FieldRootProps } from './field.js';
 
 const Example = (props: FieldRootProps) => (
   <Field.Root {...props}>

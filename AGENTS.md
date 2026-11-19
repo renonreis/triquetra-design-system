@@ -37,6 +37,7 @@ pnpm typecheck          # turbo: tsc --noEmit in every workspace
 pnpm test               # turbo: unit + axe + contrast (packages/react) and stories in light/dark (apps/storybook)
 pnpm test:visual:docker # Playwright visual regression in the Playwright Docker image (same as CI)
 pnpm test:e2e           # builds apps/sample (Next.js) and runs its Playwright smoke tests
+pnpm test:package       # packs the package, runs publint + attw, builds clean Vite and Next.js apps on the tarball
 ```
 
 CI (`.github/workflows/ci.yml`) runs the same commands. These required checks block the merge into `main`:
@@ -49,7 +50,7 @@ CI (`.github/workflows/ci.yml`) runs the same commands. These required checks bl
 | `Visual regression`         | `playwright test` in `mcr.microsoft.com/playwright` (stories tagged `visual`, light and dark)         |
 | `Build`                     | `turbo run build build-storybook`                                                                     |
 
-CI also runs `Sample app (Next.js)`: it builds `apps/sample` against the package and runs its smoke tests (hydration, styles, behavior and axe in light and dark).
+CI also runs `Sample app (Next.js)`, which builds `apps/sample` against the package and runs its smoke tests (hydration, styles, behavior and axe in light and dark), and `Package (packed tarball)`, which runs `pnpm test:package`.
 
 Don't skip, disable or `.only` tests to get green, and don't lower axe rules.
 
@@ -89,6 +90,7 @@ apps/
   sample/                         # Next.js App Router app consuming the package (private)
     src/app/                      # Server Component page + 'use client' islands
     tests/                        # Playwright smoke tests (run on `next start`)
+tests/package/                    # standalone Vite and Next.js fixtures for `pnpm test:package`
 .changeset/                       # Changesets (repo-wide)
 turbo.json, pnpm-workspace.yaml, tsconfig.base.json, eslint.config.js (shared)
 ```
@@ -152,6 +154,7 @@ Rules:
 - Style Ark state with its data attributes (`data-[disabled]:`, `data-[invalid]:`, `data-[state=open]:`), not with JS-computed class names.
 - Merge user classes through `tv`'s built-in `class`/`className` handling (tailwind-merge). Don't concatenate strings.
 - Composed components use the **compound pattern** (`Card.Root`, `Card.Header`…) and keep each part's API close to Ark's.
+- Relative imports in `packages/react/src` use explicit `.js` extensions (`./button.js`, `../input/index.js`). The type build uses `NodeNext` and fails without them, so the published `.d.ts` files work under every `moduleResolution`.
 - The bundle starts with `'use client'` (Vite `banner`), so it can be imported from React Server Components. Server code can't access compound parts with a dot, so consumers use them inside their own client components. When a change affects SSR or RSC, check it with `pnpm test:e2e`.
 - Forward refs, spread remaining props onto the root element, and export prop types (`ButtonProps`).
 - Visible focus is mandatory (`focus-visible:` ring using `color.border.focus`).

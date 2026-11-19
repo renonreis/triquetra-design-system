@@ -1,0 +1,5 @@
+/* The Tailwind consumer setup documented in the package README. */
+@import 'tailwindcss';
+@import '@renonreis/triquetra/tokens.css';
+@import '@renonreis/triquetra/theme.css';
+@source '../node_modules/@renonreis/triquetra/dist/*.js';
