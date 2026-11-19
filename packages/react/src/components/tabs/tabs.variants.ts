@@ -44,12 +44,12 @@ export const tabsVariants = tv({
     {
       variant: 'line',
       orientation: 'horizontal',
-      class: { list: 'border-b', trigger: '-mb-px border-b-2' },
+      class: { list: 'border-b', trigger: '-mb-px rounded-t-control border-b-2' },
     },
     {
       variant: 'line',
       orientation: 'vertical',
-      class: { list: 'border-r', trigger: '-mr-px border-r-2' },
+      class: { list: 'border-r', trigger: '-mr-px rounded-l-control border-r-2' },
     },
     {
       variant: 'enclosed',
