@@ -14,7 +14,8 @@ export const switchVariants = tv({
       'data-[state=checked]:data-hover:not-data-readonly:bg-action-primary-bg-hover',
       'data-invalid:outline-1 data-invalid:outline-offset-2 data-invalid:outline-border-negative',
       'data-focus-visible:outline-2 data-focus-visible:outline-offset-2 data-focus-visible:outline-border-focus',
-      'data-invalid:data-focus-visible:outline-border-negative',
+      // Two attributes, so focus outranks the resting 1px invalid outline (like Input).
+      'data-invalid:data-focus-visible:outline-2 data-invalid:data-focus-visible:outline-border-negative',
       // Two attributes, so they outrank the single-attribute checked fill.
       'data-disabled:bg-bg-disabled data-disabled:data-[state=checked]:bg-bg-disabled',
     ],

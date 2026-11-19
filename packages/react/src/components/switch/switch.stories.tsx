@@ -71,6 +71,13 @@ export const FocusVisible: Story = {
   },
 };
 export const Invalid: Story = { args: { invalid: true } };
+export const InvalidFocusVisible: Story = {
+  args: { invalid: true },
+  play: async ({ canvasElement }) => {
+    await userEvent.tab();
+    await expect(within(canvasElement).getByRole('switch')).toHaveFocus();
+  },
+};
 export const Disabled: Story = { args: { disabled: true } };
 export const DisabledChecked: Story = { args: { disabled: true, defaultChecked: true } };
 export const ReadOnly: Story = { args: { readOnly: true, defaultChecked: true } };
