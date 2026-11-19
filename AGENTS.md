@@ -185,7 +185,7 @@ Rules:
 - Any change that affects consumers (components, tokens, CSS output, public types) **requires a changeset**: run `pnpm changeset`. Docs, tests and CI-only changes don't need one.
 - Before you open a PR, run `pnpm lint && pnpm typecheck && pnpm test && pnpm build-storybook`.
 - Each PR from this repository gets a Storybook preview on Cloudflare Pages at `https://pr-<number>.triquetra-storybook.pages.dev`, posted as a PR comment. `main` deploys to [triquetra.renon.dev](https://triquetra.renon.dev). Link the relevant stories in the PR description.
-- Releases (`.github/workflows/release.yml`): when changesets are pending on `main`, Changesets opens or updates a `chore: release` PR. Merging it publishes to GitHub Packages. That PR is created by `GITHUB_TOKEN`, so CI doesn't run on it automatically. **Close and reopen it** to trigger the required checks.
+- Releases (`.github/workflows/release.yml`): when changesets are pending on `main`, Changesets opens or updates a `chore: release` PR. Merging it publishes to GitHub Packages. The workflow opens that PR with a GitHub App token (`RELEASE_APP_CLIENT_ID` variable + `RELEASE_APP_PRIVATE_KEY` secret), so CI runs on it like on any other PR.
 - Keep PRs scoped: one component or one token concern per PR when possible.
 
 ## Boundaries
