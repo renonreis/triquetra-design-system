@@ -1,5 +1,15 @@
 # @renonreis/triquetra
 
+## 0.3.0
+
+### Minor Changes
+
+- 7bf4d14: The brand sans font is now **Geist Sans**, shipped with the package (variable, weights 100–900, normal and italic, SIL OFL 1.1). `styles.css` includes its `@font-face` rules. Apps that use Tailwind import the new `@renonreis/triquetra/fonts.css` entry point next to `tokens.css` and `theme.css`.
+
+### Patch Changes
+
+- 9e30e14: Type declarations now use explicit `.js` extensions in relative imports, so projects with `moduleResolution: "node16"` or `"nodenext"` resolve the component types instead of getting `any`.
+
 ## 0.2.2
 
 ### Patch Changes
