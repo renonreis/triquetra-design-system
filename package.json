@@ -13,7 +13,7 @@
     "dev:sample": "turbo run dev --filter=@triquetra/sample",
     "build": "turbo run build",
     "build-storybook": "turbo run build-storybook",
-    "lint": "eslint . && prettier --check .",
+    "lint": "turbo run build --filter=./packages/* --output-logs=errors-only && eslint . && prettier --check .",
     "format": "prettier --write .",
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",

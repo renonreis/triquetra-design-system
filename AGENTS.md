@@ -43,7 +43,7 @@ CI (`.github/workflows/ci.yml`) runs the same commands. These required checks bl
 
 | Check                       | Runs                                                                                                  |
 | --------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `Lint & typecheck`          | `pnpm lint` + `pnpm typecheck`                                                                        |
+| `Lint & typecheck`          | `pnpm lint` (builds packages first, for typed lint of apps) + `pnpm typecheck`                        |
 | `Unit & token tests`        | `turbo run test --filter=@renonreis/triquetra` (behavior, axe, contrast)                              |
 | `Accessibility (Storybook)` | `turbo run test --filter=@triquetra/storybook` (every story in light and dark, a11y addon in `error`) |
 | `Visual regression`         | `playwright test` in `mcr.microsoft.com/playwright` (stories tagged `visual`, light and dark)         |
