@@ -1,5 +1,14 @@
 # @renonreis/triquetra
 
+## 0.4.0
+
+### Minor Changes
+
+- d568198: Add the `Tabs` compound component (`Tabs.Root`, `Tabs.List`, `Tabs.Trigger`, `Tabs.Content`) on top of Ark UI, with `line` and `enclosed` variants, `sm`/`md`/`lg` sizes and horizontal or vertical orientation.
+- e56058c: Add the `Checkbox` compound component (`Checkbox.Root`, `Control`, `Indicator`, `Label`, `Group`) on Ark UI: checked, unchecked and indeterminate states, three sizes, `Field.Root` integration (invalid, required, disabled, helper and error text) and groups with several values.
+- f62757e: Add the `Select` compound component (single and `multiple`) on Ark UI Select: `Select.Root` (sizes `sm`, `md`, `lg`), `Label`, `Control`, `Trigger`, `ValueText`, `Indicator`, `ClearTrigger`, `Content`, `ItemGroup`, `ItemGroupLabel`, `Item`, `ItemText` and `ItemIndicator`, plus `selectVariants` and a re-exported `createListCollection` to build its items. Inside `Field.Root`, it takes the field's label, states, and helper/error text.
+- 73d0ef0: Add the `Switch` compound component (`Switch.Root`, `Control`, `Thumb`, `Label`) on Ark UI: an on/off toggle exposed as `role="switch"`, three sizes, form submission (`name`, `value`) and `Field.Root` integration (invalid, required, disabled, read-only, helper and error text).
+
 ## 0.3.0
 
 ### Minor Changes
