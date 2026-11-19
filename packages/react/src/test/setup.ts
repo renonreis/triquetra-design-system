@@ -8,3 +8,13 @@ expect.extend({ toHaveNoViolations });
 afterEach(() => {
   cleanup();
 });
+
+// jsdom gaps that Ark UI's positioned popovers (Select, Menu…) rely on.
+class ResizeObserverStub {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+}
+globalThis.ResizeObserver = ResizeObserverStub;
+Element.prototype.scrollTo = () => {};
+Element.prototype.scrollIntoView = () => {};
