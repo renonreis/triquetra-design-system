@@ -7,7 +7,12 @@ const css = readdirSync(dir)
   .map((file) => readFileSync(`${dir}/${file}`, 'utf8'))
   .join('\n');
 
-const expected = ['--tq-color-bg-canvas', '.bg-action-secondary-bg', '.rounded-control'];
+const expected = [
+  '--tq-color-bg-canvas',
+  '.bg-action-secondary-bg',
+  '.rounded-control',
+  'font-family:Geist',
+];
 const missing = expected.filter((needle) => !css.includes(needle));
 if (missing.length > 0) {
   console.error(`Missing from the built CSS: ${missing.join(', ')}`);

@@ -17,7 +17,7 @@ echo "▶ Linting package metadata (publint, are-the-types-wrong)"
 pnpm dlx publint@0.3.25 run --strict "$work/triquetra.tgz"
 # CSS entry points are not modules, so attw cannot resolve them.
 pnpm dlx @arethetypeswrong/cli@0.18.5 "$work/triquetra.tgz" --profile esm-only \
-  --exclude-entrypoints styles.css tokens.css theme.css
+  --exclude-entrypoints styles.css tokens.css theme.css fonts.css
 
 for app in vite next; do
   echo "▶ Installing the tarball into a clean $app app"
