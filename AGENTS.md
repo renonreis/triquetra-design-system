@@ -39,13 +39,13 @@ pnpm test:visual:docker # Playwright visual regression in the Playwright Docker 
 
 CI (`.github/workflows/ci.yml`) runs the same commands. These required checks block the merge into `main`:
 
-| Check                       | Runs                                                                                          |
-| --------------------------- | --------------------------------------------------------------------------------------------- |
-| `Lint & typecheck`          | `pnpm lint` + `pnpm typecheck`                                                                |
-| `Unit & token tests`        | `turbo run test --filter=@renonreis/triquetra` (behavior, axe, contrast)                      |
-| `Accessibility (Storybook)` | `turbo run test --filter=storybook` (every story in light and dark, a11y addon in `error`)    |
-| `Visual regression`         | `playwright test` in `mcr.microsoft.com/playwright` (stories tagged `visual`, light and dark) |
-| `Build`                     | `turbo run build build-storybook`                                                             |
+| Check                       | Runs                                                                                                  |
+| --------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `Lint & typecheck`          | `pnpm lint` + `pnpm typecheck`                                                                        |
+| `Unit & token tests`        | `turbo run test --filter=@renonreis/triquetra` (behavior, axe, contrast)                              |
+| `Accessibility (Storybook)` | `turbo run test --filter=@triquetra/storybook` (every story in light and dark, a11y addon in `error`) |
+| `Visual regression`         | `playwright test` in `mcr.microsoft.com/playwright` (stories tagged `visual`, light and dark)         |
+| `Build`                     | `turbo run build build-storybook`                                                                     |
 
 Don't skip, disable or `.only` tests to get green, and don't lower axe rules.
 

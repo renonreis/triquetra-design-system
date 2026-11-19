@@ -55,9 +55,9 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm --filter storybook exec playwright install --with-deps chromium
+      - run: pnpm --filter @triquetra/storybook exec playwright install --with-deps chromium
       # Every story runs in Chromium, in light and dark, with the a11y addon in `error` mode.
-      - run: pnpm turbo run test --filter=storybook
+      - run: pnpm turbo run test --filter=@triquetra/storybook
 
   visual:
     name: Visual regression
@@ -74,7 +74,7 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm turbo run build-storybook --filter=storybook
+      - run: pnpm turbo run build-storybook --filter=@triquetra/storybook
       - run: pnpm exec playwright test
         working-directory: apps/storybook
       - uses: actions/upload-artifact@v7

@@ -21,5 +21,5 @@ docker run --rm --ipc=host --platform linux/amd64 \
   "$IMAGE" \
   bash -c "npm install -g pnpm@${PNPM_VERSION} >/dev/null 2>&1 \
     && pnpm install --frozen-lockfile \
-    && pnpm turbo run build-storybook --filter=storybook --output-logs=errors-only \
+    && pnpm turbo run build-storybook --filter=@triquetra/storybook --output-logs=errors-only \
     && cd apps/storybook && pnpm exec playwright test $*"

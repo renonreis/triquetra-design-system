@@ -9,15 +9,15 @@
     "node": ">=22.22"
   },
   "scripts": {
-    "dev": "turbo run dev --filter=storybook",
+    "dev": "turbo run dev --filter=@triquetra/storybook",
     "build": "turbo run build",
     "build-storybook": "turbo run build-storybook",
     "lint": "eslint . && prettier --check .",
     "format": "prettier --write .",
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
-    "test:visual:docker": "pnpm --filter storybook test:visual:docker",
-    "test:visual:update": "pnpm --filter storybook test:visual:update",
+    "test:visual:docker": "pnpm --filter @triquetra/storybook test:visual:docker",
+    "test:visual:update": "pnpm --filter @triquetra/storybook test:visual:update",
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "turbo run build --filter=\"./packages/*\" && changeset publish"
