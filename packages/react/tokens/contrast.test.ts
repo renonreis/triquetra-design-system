@@ -35,6 +35,9 @@ const pairs: [fg: string, bg: string, min: number][] = [
   ['border.focus', 'bg.canvas', UI],
   ['border.focus', 'bg.surface', UI],
   ['border.negative', 'bg.surface', UI],
+  // Checked checkbox: the filled box is the control boundary.
+  ['action.primary.bg', 'bg.canvas', UI],
+  ['action.primary.bg', 'bg.surface', UI],
 ];
 
 const permutations = Object.entries(resolved as Record<string, Entry>);
