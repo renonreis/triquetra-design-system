@@ -35,7 +35,8 @@ const pairs: [fg: string, bg: string, min: number][] = [
   ['border.focus', 'bg.canvas', UI],
   ['border.focus', 'bg.surface', UI],
   ['border.negative', 'bg.surface', UI],
-  // Checked checkbox: the filled box is the control boundary.
+  // Checked checkbox (the filled box is the control boundary) and the Tabs line-variant
+  // selected indicator (the only cue besides the text color).
   ['action.primary.bg', 'bg.canvas', UI],
   ['action.primary.bg', 'bg.surface', UI],
 ];
