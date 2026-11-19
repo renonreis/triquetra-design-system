@@ -68,6 +68,7 @@ packages/
         dark.tokens.json          # semantic colors + shadows, dark mode (same paths as light)
       contrast.test.ts            # WCAG contrast checks on semantic pairs
     scripts/build-tokens.ts       # Style Dictionary build + validation (Brand × Theme × Mode)
+    scripts/build-fonts.ts        # copies Geist Sans (@fontsource-variable/geist) and writes fonts.css
     src/
       components/<name>/
         <name>.tsx                # component (wraps Ark UI when a primitive exists)
@@ -76,7 +77,7 @@ packages/
         <name>.test.tsx           # behavior + axe tests
         index.ts
       styles/
-        generated/                # tokens.css, theme.css (Tailwind @theme), tokens.json. NEVER edit by hand
+        generated/                # tokens.css, theme.css (Tailwind @theme), tokens.json, fonts.css + fonts/. NEVER edit by hand
         index.css                 # Tailwind entry: imports generated tokens + theme
       test/                       # Vitest setup and the axe matcher
       index.ts                    # public API, explicit named exports only
@@ -141,7 +142,8 @@ Rules:
 
 - After editing tokens, run `pnpm --filter @renonreis/triquetra tokens:build` (`dev`, `test`, `build` and `prepare` already run it). Commit only the source JSON. Generated files are git-ignored.
 - Published entry points:
-  - `styles.css`: everything compiled
+  - `styles.css`: everything compiled (includes the font)
+  - `fonts.css`: `@font-face` for Geist Sans, the brand sans font (files in `dist/fonts/`, SIL OFL 1.1)
   - `tokens.css`: CSS variables only
   - `theme.css`: the Tailwind v4 `@theme`, for apps that use Tailwind themselves
   - `tokens.json`: resolved values

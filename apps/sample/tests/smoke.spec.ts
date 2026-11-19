@@ -27,6 +27,18 @@ test('applies Triquetra styles to components', async ({ page }) => {
   expect(radius).not.toBe('0px');
 });
 
+test('loads the Geist font shipped by the package', async ({ page }) => {
+  const loaded = await page.evaluate(async () => {
+    await document.fonts.ready;
+    return [...document.fonts].some((font) => font.family === 'Geist' && font.status === 'loaded');
+  });
+  expect(loaded).toBe(true);
+  const family = await page
+    .getByRole('heading', { name: 'Triquetra Sample' })
+    .evaluate((el) => getComputedStyle(el).fontFamily);
+  expect(family).toMatch(/^Geist\b/);
+});
+
 test('validates the email field', async ({ page }) => {
   const email = page.getByRole('textbox', { name: 'Email' });
   await page.getByRole('button', { name: 'Subscribe' }).click();

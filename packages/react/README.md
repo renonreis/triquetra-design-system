@@ -32,7 +32,8 @@ Set `data-mode="light|dark"` (and optionally `data-brand` and `data-theme`) on `
 | Entry point                        | Contents                                                                     |
 | ---------------------------------- | ---------------------------------------------------------------------------- |
 | `@renonreis/triquetra`             | Components and their prop types                                              |
-| `@renonreis/triquetra/styles.css`  | Everything compiled (tokens + component styles)                              |
+| `@renonreis/triquetra/styles.css`  | Everything compiled (Geist font + tokens + component styles)                 |
+| `@renonreis/triquetra/fonts.css`   | `@font-face` for Geist Sans (variable, SIL OFL 1.1), files in `dist/fonts/`  |
 | `@renonreis/triquetra/tokens.css`  | CSS custom properties only                                                   |
 | `@renonreis/triquetra/theme.css`   | Tailwind v4 `@theme` mapping the semantic tokens, for apps that use Tailwind |
 | `@renonreis/triquetra/tokens.json` | Resolved token values per brand, theme and mode                              |
@@ -62,10 +63,11 @@ export function ProfileCard() {
 
 ### Apps that use Tailwind CSS v4
 
-Instead of `styles.css`, import the tokens and the theme into your own Tailwind entry and scan the package, so component classes are generated with yours (one preflight, one utility layer):
+Instead of `styles.css`, import the font, the tokens and the theme into your own Tailwind entry and scan the package, so component classes are generated with yours (one preflight, one utility layer):
 
 ```css
 @import 'tailwindcss';
+@import '@renonreis/triquetra/fonts.css';
 @import '@renonreis/triquetra/tokens.css';
 @import '@renonreis/triquetra/theme.css';
 @source '../node_modules/@renonreis/triquetra/dist/*.js';

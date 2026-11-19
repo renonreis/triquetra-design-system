@@ -4,6 +4,7 @@
  * (Apps without Tailwind import `@renonreis/triquetra/styles.css` instead.)
  */
 @import 'tailwindcss' source(none);
+@import '@renonreis/triquetra/fonts.css';
 @import '@renonreis/triquetra/tokens.css';
 @import '@renonreis/triquetra/theme.css';
 
