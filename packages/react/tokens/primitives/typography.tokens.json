@@ -3,8 +3,9 @@
     "font": {
       "family": {
         "$type": "fontFamily",
-        "inter": {
-          "$value": ["Inter", "ui-sans-serif", "system-ui", "sans-serif"]
+        "geist": {
+          "$value": ["Geist", "ui-sans-serif", "system-ui", "sans-serif"],
+          "$description": "Geist Sans (variable, SIL OFL 1.1). Shipped by the package in fonts.css."
         },
         "system": {
           "$value": ["ui-sans-serif", "system-ui", "sans-serif"]

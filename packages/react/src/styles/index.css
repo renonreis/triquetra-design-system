@@ -1,8 +1,10 @@
 /*
  * Triquetra stylesheet entry.
  * Shipped as `@renonreis/triquetra/styles.css`. Only component sources are scanned.
+ * fonts.css holds the Geist @font-face rules; its ./fonts/ URLs resolve next to styles.css in dist/.
  */
 @import 'tailwindcss' source(none);
+@import './generated/fonts.css';
 @import './generated/tokens.css';
 @import './generated/theme.css';
 

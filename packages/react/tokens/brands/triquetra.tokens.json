@@ -239,7 +239,7 @@
       "family": {
         "$type": "fontFamily",
         "sans": {
-          "$value": "{primitive.font.family.inter}"
+          "$value": "{primitive.font.family.geist}"
         },
         "mono": {
           "$value": "{primitive.font.family.mono}"
