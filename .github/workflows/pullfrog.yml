@@ -34,8 +34,8 @@ jobs:
         uses: pullfrog/pullfrog@v0
         with:
           prompt: ${{ inputs.prompt }}
-          # EDITABLE: Claude Opus on Claude Code. The console's repo model setting
-          # takes precedence, so it is pinned there too.
+          # EDITABLE: Claude Opus on Claude Code. These inputs override the
+          # console's repo settings, so change the model/effort here.
           model: anthropic/claude-opus
           effort: high
           # Credential: Claude subscription token stored in Pullfrog (no repo secret).
