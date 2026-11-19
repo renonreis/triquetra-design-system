@@ -187,6 +187,8 @@ Rules:
 - Each PR from this repository gets a Storybook preview on Cloudflare Pages at `https://pr-<number>.triquetra-storybook.pages.dev`, posted as a PR comment. `main` deploys to [triquetra.renon.dev](https://triquetra.renon.dev). Link the relevant stories in the PR description.
 - Releases (`.github/workflows/release.yml`): when changesets are pending on `main`, Changesets opens or updates a `chore: release` PR. Merging it publishes to GitHub Packages. The workflow opens that PR with a GitHub App token (`RELEASE_APP_CLIENT_ID` variable + `RELEASE_APP_PRIVATE_KEY` secret), so CI runs on it like on any other PR.
 - Keep PRs scoped: one component or one token concern per PR when possible.
+- **Review gate: [Pullfrog](https://pullfrog.com) (Claude Opus).** It reviews every PR on open and on each push, and approves or requests changes; `pullfrog-approval` is a required check. Its checklist is `.github/pullfrog/review.md` (keep it in sync with this file; after editing it, run `npx pullfrog config set prompts.review --file .github/pullfrog/review.md`). Address its requested changes and resolve its threads until it approves. Mention `@pullfrog` in a PR comment to ask for a re-review. The workflow (`.github/workflows/pullfrog.yml`) is dispatched by the Pullfrog GitHub App; don't add `pull_request` triggers to it.
+- The maintainer is involved only for decisions: anything under **Ask first** below, or a Pullfrog review that starts with "Needs maintainer decision:". Don't wait for or request a human review otherwise.
 
 ## Boundaries
 
