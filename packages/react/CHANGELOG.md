@@ -1,5 +1,11 @@
 # @renonreis/triquetra
 
+## 0.2.1
+
+### Patch Changes
+
+- 963f185: The package now lives in `packages/react` of the Triquetra monorepo and ships a README. No API or styling changes.
+
 ## 0.2.0
 
 ### Minor Changes

@@ -1,6 +1,6 @@
 {
   "name": "@renonreis/triquetra",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Triquetra Design System: design tokens and accessible React components.",
   "license": "MIT",
   "type": "module",
