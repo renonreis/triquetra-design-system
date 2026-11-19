@@ -6,5 +6,5 @@ export {
   type CardHeaderProps,
   type CardRootProps,
   type CardTitleProps,
-} from './card';
-export { cardVariants, type CardVariants } from './card.variants';
+} from './card.js';
+export { cardVariants, type CardVariants } from './card.variants.js';

@@ -9,5 +9,5 @@ export {
   type DialogRootProps,
   type DialogTitleProps,
   type DialogTriggerProps,
-} from './dialog';
-export { dialogVariants, type DialogVariants } from './dialog.variants';
+} from './dialog.js';
+export { dialogVariants, type DialogVariants } from './dialog.variants.js';

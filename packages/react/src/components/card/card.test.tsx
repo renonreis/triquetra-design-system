@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { createRef } from 'react';
 import { describe, expect, it, vi } from 'vitest';
-import { axe } from '../../test/axe';
-import { Card } from './card';
+import { axe } from '../../test/axe.js';
+import { Card } from './card.js';
 
 const Example = () => (
   <Card.Root data-testid="root">

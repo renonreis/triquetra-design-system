@@ -112,6 +112,22 @@ jobs:
             apps/sample/test-results
           retention-days: 7
 
+  package:
+    name: Package (packed tarball)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      # Packs the package, lints its metadata (publint, attw) and builds clean Vite and
+      # Next.js apps that install the tarball, exactly as consumers get it.
+      - run: pnpm test:package
+
   build:
     name: Build
     runs-on: ubuntu-latest

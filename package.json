@@ -18,6 +18,7 @@
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
     "test:e2e": "turbo run build --filter=@triquetra/sample && pnpm --filter @triquetra/sample test:e2e",
+    "test:package": "tests/package/run.sh",
     "test:visual:docker": "pnpm --filter @triquetra/storybook test:visual:docker",
     "test:visual:update": "pnpm --filter @triquetra/storybook test:visual:update",
     "changeset": "changeset",

@@ -6,7 +6,9 @@
     "emitDeclarationOnly": true,
     "rootDir": "src",
     "outDir": "dist",
-    "types": ["vite/client"]
+    "types": ["vite/client"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext"
   },
   "include": ["src"],
   "exclude": ["src/**/*.test.tsx", "src/**/*.test.ts", "src/**/*.stories.tsx", "src/test"]

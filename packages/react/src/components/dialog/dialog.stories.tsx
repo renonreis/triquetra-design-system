@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
-import { Button } from '../button';
-import { Field } from '../field';
-import { Dialog, type DialogRootProps } from './dialog';
+import { Button } from '../button/index.js';
+import { Field } from '../field/index.js';
+import { Dialog, type DialogRootProps } from './dialog.js';
 
 const Example = (props: DialogRootProps) => (
   <Dialog.Root {...props}>

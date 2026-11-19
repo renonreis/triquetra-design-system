@@ -1,6 +1,6 @@
 import { ark, type HTMLArkProps } from '@ark-ui/react/factory';
 import { forwardRef, type MouseEvent } from 'react';
-import { buttonVariants, type ButtonVariants } from './button.variants';
+import { buttonVariants, type ButtonVariants } from './button.variants.js';
 
 export interface ButtonProps extends HTMLArkProps<'button'>, ButtonVariants {
   /**

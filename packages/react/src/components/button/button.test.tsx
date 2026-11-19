@@ -2,8 +2,8 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createRef } from 'react';
 import { describe, expect, it, vi } from 'vitest';
-import { axe } from '../../test/axe';
-import { Button } from './button';
+import { axe } from '../../test/axe.js';
+import { Button } from './button.js';
 
 describe('Button', () => {
   it('renders a native button with type="button" by default', () => {

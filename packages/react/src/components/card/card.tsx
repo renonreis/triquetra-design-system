@@ -1,6 +1,6 @@
 import { ark, type HTMLArkProps } from '@ark-ui/react/factory';
 import { createContext, forwardRef, useContext } from 'react';
-import { cardVariants, type CardVariants } from './card.variants';
+import { cardVariants, type CardVariants } from './card.variants.js';
 
 type CardStyles = ReturnType<typeof cardVariants>;
 const CardContext = createContext<CardStyles | null>(null);

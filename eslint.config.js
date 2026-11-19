@@ -18,6 +18,8 @@ export default tseslint.config(
       '**/.turbo',
       '**/.next',
       '**/next-env.d.ts',
+      // Standalone fixtures, installed and built outside the workspace by tests/package/run.sh.
+      'tests/package',
       '!**/.storybook',
     ],
   },

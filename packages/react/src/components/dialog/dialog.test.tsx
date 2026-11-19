@@ -1,9 +1,9 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
-import { axe } from '../../test/axe';
-import { Button } from '../button';
-import { Dialog, type DialogRootProps } from './dialog';
+import { axe } from '../../test/axe.js';
+import { Button } from '../button/index.js';
+import { Dialog, type DialogRootProps } from './dialog.js';
 
 const Example = (props: DialogRootProps) => (
   <Dialog.Root {...props}>

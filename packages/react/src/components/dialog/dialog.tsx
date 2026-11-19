@@ -1,7 +1,7 @@
 import { Dialog as ArkDialog, Portal } from '@ark-ui/react';
 import { ark, type HTMLArkProps } from '@ark-ui/react/factory';
 import { createContext, forwardRef, useContext } from 'react';
-import { dialogVariants, type DialogVariants } from './dialog.variants';
+import { dialogVariants, type DialogVariants } from './dialog.variants.js';
 
 type DialogStyles = ReturnType<typeof dialogVariants>;
 const DialogStylesContext = createContext<DialogStyles>(dialogVariants());

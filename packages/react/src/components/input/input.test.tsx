@@ -2,8 +2,8 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createRef } from 'react';
 import { describe, expect, it, vi } from 'vitest';
-import { axe } from '../../test/axe';
-import { Input } from './input';
+import { axe } from '../../test/axe.js';
+import { Input } from './input.js';
 
 describe('Input', () => {
   it('renders a textbox that accepts typing', async () => {

@@ -1,7 +1,7 @@
 import { Field as ArkField } from '@ark-ui/react';
 import { forwardRef } from 'react';
-import { Input, type InputProps } from '../input';
-import { fieldVariants } from './field.variants';
+import { Input, type InputProps } from '../input/index.js';
+import { fieldVariants } from './field.variants.js';
 
 const styles = fieldVariants();
 
