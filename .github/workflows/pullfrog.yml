@@ -1,0 +1,41 @@
+# PULLFROG ACTION — DO NOT EDIT EXCEPT WHERE INDICATED
+# Pullfrog (https://pullfrog.com) is the AI quality gate for PRs. The GitHub App
+# dispatches this workflow on PR events and @pullfrog mentions; review behavior
+# (auto-review, approve/request changes, status checks) lives in the Pullfrog
+# console. Review instructions: .github/pullfrog/review.md.
+name: Pullfrog
+run-name: ${{ inputs.name || github.workflow }}
+on:
+  workflow_dispatch:
+    inputs:
+      prompt:
+        type: string
+        description: Agent prompt
+      name:
+        type: string
+        description: Run name
+
+permissions:
+  contents: read
+
+jobs:
+  pullfrog:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Run agent
+        uses: pullfrog/pullfrog@v0
+        with:
+          prompt: ${{ inputs.prompt }}
+          # EDITABLE: Claude Opus on Claude Code. These inputs override the
+          # console's repo settings, so change the model/effort here.
+          model: anthropic/claude-opus
+          effort: high
+          # Credential: Claude subscription token stored in Pullfrog (no repo secret).
