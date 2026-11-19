@@ -9,3 +9,5 @@ pnpm-lock.yaml
 **/playwright-report
 **/test-results
 apps/storybook/tests/visual/__screenshots__
+**/.next
+**/next-env.d.ts

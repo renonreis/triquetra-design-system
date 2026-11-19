@@ -15,6 +15,7 @@ permissions:
 env:
   TURBO_TELEMETRY_DISABLED: '1'
   STORYBOOK_DISABLE_TELEMETRY: '1'
+  NEXT_TELEMETRY_DISABLED: '1'
 
 jobs:
   lint:
@@ -84,6 +85,31 @@ jobs:
           path: |
             apps/storybook/playwright-report
             apps/storybook/test-results
+          retention-days: 7
+
+  sample:
+    name: Sample app (Next.js)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @triquetra/sample exec playwright install --with-deps chromium
+      # Builds the package, then the Next.js app against it (App Router, Server Components).
+      - run: pnpm turbo run build --filter=@triquetra/sample
+      # Smoke tests on `next start`: hydration, styles, behavior and axe, in light and dark.
+      - run: pnpm --filter @triquetra/sample test:e2e
+      - uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          name: sample-report
+          path: |
+            apps/sample/playwright-report
+            apps/sample/test-results
           retention-days: 7
 
   build:

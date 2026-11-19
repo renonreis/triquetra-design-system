@@ -23,6 +23,7 @@ Triquetra is a React design system: design tokens, accessible components, and th
 ```bash
 pnpm install            # install deps (also builds the tokens via `prepare`)
 pnpm dev                # Storybook on http://localhost:6006 (main dev environment)
+pnpm dev:sample         # Next.js sample app on http://localhost:3000
 pnpm build              # every package: tokens + JS (Vite) + types (tsc) + CSS (Tailwind CLI) → packages/*/dist/
 pnpm build-storybook    # static Storybook → apps/storybook/storybook-static/
 pnpm --filter @renonreis/triquetra tokens:build   # compile tokens/ → src/styles/generated/
@@ -35,6 +36,7 @@ pnpm lint               # ESLint (incl. jsx-a11y and storybook plugins) + Pretti
 pnpm typecheck          # turbo: tsc --noEmit in every workspace
 pnpm test               # turbo: unit + axe + contrast (packages/react) and stories in light/dark (apps/storybook)
 pnpm test:visual:docker # Playwright visual regression in the Playwright Docker image (same as CI)
+pnpm test:e2e           # builds apps/sample (Next.js) and runs its Playwright smoke tests
 ```
 
 CI (`.github/workflows/ci.yml`) runs the same commands. These required checks block the merge into `main`:
@@ -46,6 +48,8 @@ CI (`.github/workflows/ci.yml`) runs the same commands. These required checks bl
 | `Accessibility (Storybook)` | `turbo run test --filter=@triquetra/storybook` (every story in light and dark, a11y addon in `error`) |
 | `Visual regression`         | `playwright test` in `mcr.microsoft.com/playwright` (stories tagged `visual`, light and dark)         |
 | `Build`                     | `turbo run build build-storybook`                                                                     |
+
+CI also runs `Sample app (Next.js)`: it builds `apps/sample` against the package and runs its smoke tests (hydration, styles, behavior and axe in light and dark).
 
 Don't skip, disable or `.only` tests to get green, and don't lower axe rules.
 
@@ -82,6 +86,9 @@ apps/
     src/introduction.mdx
     tests/visual/                 # Playwright specs + committed snapshots
     scripts/visual-docker.sh
+  sample/                         # Next.js App Router app consuming the package (private)
+    src/app/                      # Server Component page + 'use client' islands
+    tests/                        # Playwright smoke tests (run on `next start`)
 .changeset/                       # Changesets (repo-wide)
 turbo.json, pnpm-workspace.yaml, tsconfig.base.json, eslint.config.js (shared)
 ```
@@ -145,6 +152,7 @@ Rules:
 - Style Ark state with its data attributes (`data-[disabled]:`, `data-[invalid]:`, `data-[state=open]:`), not with JS-computed class names.
 - Merge user classes through `tv`'s built-in `class`/`className` handling (tailwind-merge). Don't concatenate strings.
 - Composed components use the **compound pattern** (`Card.Root`, `Card.Header`…) and keep each part's API close to Ark's.
+- The bundle starts with `'use client'` (Vite `banner`), so it can be imported from React Server Components. Server code can't access compound parts with a dot, so consumers use them inside their own client components. When a change affects SSR or RSC, check it with `pnpm test:e2e`.
 - Forward refs, spread remaining props onto the root element, and export prop types (`ButtonProps`).
 - Visible focus is mandatory (`focus-visible:` ring using `color.border.focus`).
 - Names: files `kebab-case`, components `PascalCase`, variants `camelCase`. Named exports only, no default exports (except Storybook meta).
