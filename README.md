@@ -30,6 +30,7 @@ import '@renonreis/triquetra/styles.css';
 corepack enable
 pnpm install
 pnpm dev          # Storybook on http://localhost:6006
+pnpm dev:sample   # Next.js sample app on http://localhost:3000
 ```
 
 This is a pnpm + Turborepo monorepo:
@@ -38,6 +39,7 @@ This is a pnpm + Turborepo monorepo:
 | ------------------------------------ | ---------------------------------------------------------------- |
 | [`packages/react`](./packages/react) | `@renonreis/triquetra`: components and design tokens (published) |
 | [`apps/storybook`](./apps/storybook) | Documentation, story tests and visual regression                 |
+| [`apps/sample`](./apps/sample)       | Next.js App Router app consuming the package, with smoke tests   |
 
 See [AGENTS.md](./AGENTS.md) for conventions, commands and contribution rules.
 

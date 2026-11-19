@@ -16,6 +16,8 @@ export default tseslint.config(
       '**/playwright-report',
       '**/test-results',
       '**/.turbo',
+      '**/.next',
+      '**/next-env.d.ts',
       '!**/.storybook',
     ],
   },
@@ -44,7 +46,14 @@ export default tseslint.config(
     },
   },
   {
-    files: ['**/*.stories.tsx', '**/.storybook/**', '**/*.config.ts', '**/*.config.js'],
+    // Storybook meta, tool configs and Next.js route files require default exports.
+    files: [
+      '**/*.stories.tsx',
+      '**/.storybook/**',
+      '**/*.config.ts',
+      '**/*.config.js',
+      'apps/sample/src/app/**/{page,layout,not-found,error,loading}.tsx',
+    ],
     rules: { 'no-restricted-syntax': 'off' },
   },
   prettier,

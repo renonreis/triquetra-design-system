@@ -16,6 +16,10 @@ export default defineConfig({
     },
     rolldownOptions: {
       external: (id) => externals.some((dep) => id === dep || id.startsWith(`${dep}/`)),
+      // Every component relies on React context or hooks (Ark UI), so the bundle is a client
+      // module. The directive lets React Server Components frameworks (Next.js App Router)
+      // import it from server files.
+      output: { banner: "'use client';" },
     },
     sourcemap: true,
     emptyOutDir: true,

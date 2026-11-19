@@ -1,0 +1,11 @@
+/*
+ * A consumer app that uses Tailwind itself: it imports Triquetra's tokens and @theme,
+ * and scans the package so component classes are generated alongside the app's own.
+ * (Apps without Tailwind import `@renonreis/triquetra/styles.css` instead.)
+ */
+@import 'tailwindcss' source(none);
+@import '@renonreis/triquetra/tokens.css';
+@import '@renonreis/triquetra/theme.css';
+
+@source '../';
+@source '../../node_modules/@renonreis/triquetra/dist/*.js';
