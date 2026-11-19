@@ -39,6 +39,8 @@ const pairs: [fg: string, bg: string, min: number][] = [
   // selected indicator (the only cue besides the text color).
   ['action.primary.bg', 'bg.canvas', UI],
   ['action.primary.bg', 'bg.surface', UI],
+  // Switch: the checked track uses the pairs above; the thumb sits on the border.strong track.
+  ['bg.surface', 'border.strong', UI],
 ];
 
 const permutations = Object.entries(resolved as Record<string, Entry>);

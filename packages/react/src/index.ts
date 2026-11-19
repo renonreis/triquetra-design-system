@@ -6,3 +6,4 @@ export * from './components/field/index.js';
 export * from './components/dialog/index.js';
 export * from './components/checkbox/index.js';
 export * from './components/tabs/index.js';
+export * from './components/switch/index.js';
