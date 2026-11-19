@@ -17,6 +17,7 @@ export const checkboxVariants = tv({
       'data-[state=checked]:data-hover:border-action-primary-bg-hover data-[state=checked]:data-hover:bg-action-primary-bg-hover',
       'data-[state=indeterminate]:data-hover:border-action-primary-bg-hover data-[state=indeterminate]:data-hover:bg-action-primary-bg-hover',
       'data-invalid:border-border-negative data-invalid:data-focus-visible:outline-border-negative',
+      'data-invalid:data-[state=checked]:border-border-negative data-invalid:data-[state=indeterminate]:border-border-negative',
       'data-readonly:bg-bg-subtle',
       'data-disabled:border-border-default data-disabled:bg-bg-disabled data-disabled:text-fg-disabled',
       // Two attributes, so they outrank the single-attribute checked and indeterminate fills.
