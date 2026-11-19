@@ -35,12 +35,11 @@ const pairs: [fg: string, bg: string, min: number][] = [
   ['border.focus', 'bg.canvas', UI],
   ['border.focus', 'bg.surface', UI],
   ['border.negative', 'bg.surface', UI],
-  // Checked checkbox (the filled box is the control boundary) and the Tabs line-variant
-  // selected indicator (the only cue besides the text color).
+  // Checked checkbox (the filled box is the control boundary), the Tabs line-variant selected
+  // indicator (the only cue besides the text color) and the checked switch track. The unchecked
+  // switch thumb (bg.surface) on its border.strong track is covered by border.strong on bg.surface.
   ['action.primary.bg', 'bg.canvas', UI],
   ['action.primary.bg', 'bg.surface', UI],
-  // Switch: the checked track uses the pairs above; the thumb sits on the border.strong track.
-  ['bg.surface', 'border.strong', UI],
 ];
 
 const permutations = Object.entries(resolved as Record<string, Entry>);
