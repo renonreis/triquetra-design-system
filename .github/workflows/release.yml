@@ -45,7 +45,7 @@ jobs:
           publish-script: pnpm release
           commit-message: 'chore: release'
           pr-title: 'chore: release'
+          github-token: ${{ steps.app-token.outputs.token }}
         env:
-          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
           # Publishing to GitHub Packages stays on the workflow token (packages: write).
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
