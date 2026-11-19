@@ -65,6 +65,31 @@ export const Small: Story = { args: { size: 'sm' } };
 export const Large: Story = { args: { size: 'lg' } };
 export const Vertical: Story = { args: { orientation: 'vertical' } };
 export const VerticalEnclosed: Story = { args: { orientation: 'vertical', variant: 'enclosed' } };
+
+/** A panel taller than the tab list: the enclosed track keeps its own height, the line rule stretches. */
+export const VerticalTallPanel: Story = {
+  args: { orientation: 'vertical' },
+  render: (args) => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+      {(['line', 'enclosed'] as const).map((variant) => (
+        <Tabs.Root key={variant} {...args} variant={variant} style={{ width: '32rem' }}>
+          <Tabs.List aria-label={`Settings (${variant})`}>
+            <Tabs.Trigger value="tokens">Tokens</Tabs.Trigger>
+            <Tabs.Trigger value="components">Components</Tabs.Trigger>
+          </Tabs.List>
+          <Tabs.Content value="tokens">
+            <p>Primitives hold raw values and are never emitted as CSS variables.</p>
+            <p>Brand roles map primitives to intent, scoped by data-brand.</p>
+            <p>Semantic tokens reference brand roles, so they work with any brand.</p>
+            <p>Light and dark modes define the same token paths.</p>
+            <p>Themes contain only overrides on top of the default theme.</p>
+          </Tabs.Content>
+          <Tabs.Content value="components">Components panel.</Tabs.Content>
+        </Tabs.Root>
+      ))}
+    </div>
+  ),
+};
 export const SecondSelected: Story = { args: { defaultValue: 'components' } };
 
 export const Hover: Story = {

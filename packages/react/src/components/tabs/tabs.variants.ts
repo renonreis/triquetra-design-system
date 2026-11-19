@@ -51,9 +51,9 @@ export const tabsVariants = tv({
       orientation: 'vertical',
       class: { list: 'border-r', trigger: '-mr-px rounded-l-control border-r-2' },
     },
+    // Keep the enclosed track as tall (or wide) as its tabs; the vertical line rule still stretches.
     {
       variant: 'enclosed',
-      orientation: 'horizontal',
       class: { list: 'self-start' },
     },
   ],
