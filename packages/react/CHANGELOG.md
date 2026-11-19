@@ -1,5 +1,11 @@
 # @renonreis/triquetra
 
+## 0.2.2
+
+### Patch Changes
+
+- 1c36c3d: The bundle now starts with a `'use client'` directive, so components can be imported from React Server Components (Next.js App Router) without a wrapper.
+
 ## 0.2.1
 
 ### Patch Changes
