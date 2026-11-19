@@ -9,13 +9,14 @@ import tseslint from 'typescript-eslint';
 export default tseslint.config(
   {
     ignores: [
-      'dist',
-      'storybook-static',
-      'coverage',
-      'src/styles/generated',
-      'playwright-report',
-      'test-results',
-      '!.storybook',
+      '**/dist',
+      '**/storybook-static',
+      '**/coverage',
+      '**/src/styles/generated',
+      '**/playwright-report',
+      '**/test-results',
+      '**/.turbo',
+      '!**/.storybook',
     ],
   },
   js.configs.recommended,
@@ -43,7 +44,7 @@ export default tseslint.config(
     },
   },
   {
-    files: ['**/*.stories.tsx', '.storybook/**', '*.config.ts', '*.config.js'],
+    files: ['**/*.stories.tsx', '**/.storybook/**', '**/*.config.ts', '**/*.config.js'],
     rules: { 'no-restricted-syntax': 'off' },
   },
   prettier,

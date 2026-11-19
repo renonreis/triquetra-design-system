@@ -1,6 +1,6 @@
 # AGENTS.md — Triquetra Design System
 
-Triquetra is a React design system: design tokens, accessible components, and their documentation, shipped as **one npm package** (no monorepo). The name comes from the triquetra knot: three interlaced arcs for design, technology and product in one continuous loop.
+Triquetra is a React design system: design tokens, accessible components, and their documentation. It is a **pnpm + Turborepo monorepo**: `packages/*` are published, `apps/*` are private. The name comes from the triquetra knot: three interlaced arcs for design, technology and product in one continuous loop.
 
 > Status: **pilot / bootstrapping**. Some commands below may not exist yet. If a command is missing, check `package.json` before inventing an alternative, and update this file in the same PR that adds or changes a script.
 
@@ -15,66 +15,75 @@ Triquetra is a React design system: design tokens, accessible components, and th
 - **Releases:** Changesets
 - **Package manager:** pnpm 12, pinned in `packageManager` and run through Corepack (do not use npm or yarn, and do not commit other lockfiles). Native build scripts must be allowed in `pnpm-workspace.yaml` (`allowBuilds`).
 - **Runtime:** Node 24 (`.nvmrc`), `>=22.22` minimum
-- **Package:** `@renonreis/triquetra`, published to GitHub Packages (`.npmrc` maps the `@renonreis` scope). Consumers import components from `@renonreis/triquetra` and styles from `@renonreis/triquetra/styles.css`.
+- **Monorepo:** pnpm workspaces (`pnpm-workspace.yaml`) + Turborepo (`turbo.json`). Run tasks from the root; Turborepo builds dependencies first (`^build`) and caches results.
+- **Packages:** `@renonreis/triquetra` (`packages/react`), published to GitHub Packages (`.npmrc` maps the `@renonreis` scope). Consumers import components from `@renonreis/triquetra` and styles from `@renonreis/triquetra/styles.css`.
 
 ## Setup commands
 
 ```bash
-pnpm install            # install deps
+pnpm install            # install deps (also builds the tokens via `prepare`)
 pnpm dev                # Storybook on http://localhost:6006 (main dev environment)
-pnpm tokens:build       # compile tokens/ → src/styles/generated/
-pnpm build              # tokens + JS (Vite) + types (tsc) + CSS (Tailwind CLI) → dist/
-pnpm build-storybook    # static Storybook → storybook-static/
+pnpm build              # every package: tokens + JS (Vite) + types (tsc) + CSS (Tailwind CLI) → packages/*/dist/
+pnpm build-storybook    # static Storybook → apps/storybook/storybook-static/
+pnpm --filter @renonreis/triquetra tokens:build   # compile tokens/ → src/styles/generated/
 ```
 
 ## Verification commands (run before every commit)
 
 ```bash
 pnpm lint               # ESLint (incl. jsx-a11y and storybook plugins) + Prettier check
-pnpm typecheck          # tsc --noEmit
-pnpm test               # Vitest projects: `unit` (jsdom + axe) and `storybook:light` / `storybook:dark` (stories in Chromium)
+pnpm typecheck          # turbo: tsc --noEmit in every workspace
+pnpm test               # turbo: unit + axe + contrast (packages/react) and stories in light/dark (apps/storybook)
 pnpm test:visual:docker # Playwright visual regression in the Playwright Docker image (same as CI)
 ```
 
 CI (`.github/workflows/ci.yml`) runs the same commands. These required checks block the merge into `main`:
 
-| Check                       | Runs                                                                                             |
-| --------------------------- | ------------------------------------------------------------------------------------------------ |
-| `Lint & typecheck`          | `pnpm lint` + `pnpm typecheck`                                                                   |
-| `Unit & token tests`        | `pnpm vitest run --project unit` (behavior, axe, contrast)                                       |
-| `Accessibility (Storybook)` | `pnpm vitest run --project 'storybook:*'` (every story in light and dark, a11y addon in `error`) |
-| `Visual regression`         | `playwright test` in `mcr.microsoft.com/playwright` (stories tagged `visual`, light and dark)    |
-| `Build`                     | `pnpm build` + `pnpm build-storybook`                                                            |
+| Check                       | Runs                                                                                                  |
+| --------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `Lint & typecheck`          | `pnpm lint` + `pnpm typecheck`                                                                        |
+| `Unit & token tests`        | `turbo run test --filter=@renonreis/triquetra` (behavior, axe, contrast)                              |
+| `Accessibility (Storybook)` | `turbo run test --filter=@triquetra/storybook` (every story in light and dark, a11y addon in `error`) |
+| `Visual regression`         | `playwright test` in `mcr.microsoft.com/playwright` (stories tagged `visual`, light and dark)         |
+| `Build`                     | `turbo run build build-storybook`                                                                     |
 
 Don't skip, disable or `.only` tests to get green, and don't lower axe rules.
 
 ## Project structure
 
 ```
-tokens/                     # source of truth, DTCG JSON (*.tokens.json)
-  primitives/               # `primitive.*`: raw values (palettes 0–900, scales)
-  brands/<brand>.tokens.json  # `brand.*`: roles mapped to primitives (same paths in every brand)
-  themes/<theme>/
-    base.tokens.json        # mode-agnostic semantics (space, radius, font, motion)
-    light.tokens.json       # semantic colors + shadows, light mode
-    dark.tokens.json        # semantic colors + shadows, dark mode (same paths as light)
-  contrast.test.ts          # WCAG contrast checks on semantic pairs
-scripts/build-tokens.ts     # Style Dictionary build + validation (Brand × Theme × Mode)
-src/
-  components/<name>/
-    <name>.tsx              # component (wraps Ark UI when a primitive exists)
-    <name>.variants.ts      # tv() definition, the only place for class strings
-    <name>.stories.tsx      # Storybook stories (also run as tests)
-    <name>.test.tsx         # behavior + axe tests
-    index.ts
-  styles/
-    generated/              # tokens.css, theme.css (Tailwind @theme), tokens.json. NEVER edit by hand
-    index.css               # Tailwind entry: imports generated tokens + theme
-  foundations/              # token documentation stories
-  index.ts                  # public API, explicit named exports only
-tests/visual/               # Playwright specs + committed snapshots
-.storybook/
-.changeset/
+packages/
+  react/                          # @renonreis/triquetra (published)
+    tokens/                       # source of truth, DTCG JSON (*.tokens.json)
+      primitives/                 # `primitive.*`: raw values (palettes 0–900, scales)
+      brands/<brand>.tokens.json  # `brand.*`: roles mapped to primitives (same paths in every brand)
+      themes/<theme>/
+        base.tokens.json          # mode-agnostic semantics (space, radius, size, font, motion)
+        light.tokens.json         # semantic colors + shadows, light mode
+        dark.tokens.json          # semantic colors + shadows, dark mode (same paths as light)
+      contrast.test.ts            # WCAG contrast checks on semantic pairs
+    scripts/build-tokens.ts       # Style Dictionary build + validation (Brand × Theme × Mode)
+    src/
+      components/<name>/
+        <name>.tsx                # component (wraps Ark UI when a primitive exists)
+        <name>.variants.ts        # tv() definition, the only place for class strings
+        <name>.stories.tsx        # Storybook stories (run by apps/storybook, also as tests)
+        <name>.test.tsx           # behavior + axe tests
+        index.ts
+      styles/
+        generated/                # tokens.css, theme.css (Tailwind @theme), tokens.json. NEVER edit by hand
+        index.css                 # Tailwind entry: imports generated tokens + theme
+      test/                       # Vitest setup and the axe matcher
+      index.ts                    # public API, explicit named exports only
+apps/
+  storybook/                      # docs + dev environment (private)
+    .storybook/                   # config; loads stories from packages/react/src
+    src/foundations/              # token documentation stories
+    src/introduction.mdx
+    tests/visual/                 # Playwright specs + committed snapshots
+    scripts/visual-docker.sh
+.changeset/                       # Changesets (repo-wide)
+turbo.json, pnpm-workspace.yaml, tsconfig.base.json, eslint.config.js (shared)
 ```
 
 ## Design tokens
@@ -97,13 +106,13 @@ Rules:
   - `dimension` and `duration` values as `{ value, unit }`
   - files named `*.tokens.json`
 - Naming: lowercase, dot-separated groups in JSON. They become `--tq-<path>` CSS variables, for example `--tq-color-bg-surface`.
-- The build (`pnpm tokens:build`) **fails** when:
+- The token build (`tokens:build` in `packages/react`) **fails** when:
   - light and dark don't define the same token paths
   - a brand is missing a role or defines an extra one
   - a semantic color points straight to a `primitive.*` instead of a brand role
-- `tokens/contrast.test.ts` checks WCAG 2.2 AA for every brand × theme × mode: 4.5:1 for text pairs and 3:1 for control borders and focus. When you add a semantic fg/bg pair, add it there. Fix the token, never the threshold.
+- `packages/react/tokens/contrast.test.ts` checks WCAG 2.2 AA for every brand × theme × mode: 4.5:1 for text pairs and 3:1 for control borders and focus. When you add a semantic fg/bg pair, add it there. Fix the token, never the threshold.
 - Runtime selection uses `data-brand`, `data-theme` and `data-mode="light|dark"`, usually all on `<html>`. With no attribute set, the defaults are the default brand, the default theme and `prefers-color-scheme`. `data-mode` can be nested to switch a subtree. `data-brand` and `data-theme` must sit on the same element as `data-mode` or on an ancestor of it.
-- Tailwind utilities map 1:1 to semantic tokens (`src/styles/generated/theme.css`). The default Tailwind theme is disabled (`--*: initial`), so palette classes such as `bg-blue-500` don't exist:
+- Tailwind utilities map 1:1 to semantic tokens (`packages/react/src/styles/generated/theme.css`). The default Tailwind theme is disabled (`--*: initial`), so palette classes such as `bg-blue-500` don't exist:
 
   | Token                     | Utility                |
   | ------------------------- | ---------------------- |
@@ -121,7 +130,7 @@ Rules:
   | `font.family.mono`        | `font-mono`            |
   | `font.line-height.tight`  | `leading-tight`        |
 
-- After editing tokens, run `pnpm tokens:build` (`dev`, `test`, `build` and `prepare` already run it). Commit only the source JSON. Generated files are git-ignored.
+- After editing tokens, run `pnpm --filter @renonreis/triquetra tokens:build` (`dev`, `test`, `build` and `prepare` already run it). Commit only the source JSON. Generated files are git-ignored.
 - Published entry points:
   - `styles.css`: everything compiled
   - `tokens.css`: CSS variables only
@@ -139,7 +148,7 @@ Rules:
 - Forward refs, spread remaining props onto the root element, and export prop types (`ButtonProps`).
 - Visible focus is mandatory (`focus-visible:` ring using `color.border.focus`).
 - Names: files `kebab-case`, components `PascalCase`, variants `camelCase`. Named exports only, no default exports (except Storybook meta).
-- Every public export goes through `src/index.ts`. Adding a public export is a `minor` changeset. Removing or renaming one is a `major` changeset.
+- Every public export goes through `packages/react/src/index.ts`. Adding a public export is a `minor` changeset. Removing or renaming one is a `major` changeset.
 
 ## Testing instructions
 
@@ -149,11 +158,11 @@ Rules:
   - `*.stories.tsx`: one story per variant and state (default, hover via `pseudo`, disabled, invalid, loading…), rendered in **light and dark** modes. Stories are run as tests and checked with the a11y addon in `error` mode.
   - Visual snapshots: Playwright screenshots the stories tagged `visual`.
 - Visual snapshots are OS- and architecture-sensitive. Generate and update them **only in the Playwright Docker image** (`linux/amd64`, the same as CI):
-  - `pnpm test:visual:docker` compares against the committed baselines in `tests/visual/__screenshots__/`.
+  - `pnpm test:visual:docker` compares against the committed baselines in `apps/storybook/tests/visual/__screenshots__/`.
   - `pnpm test:visual:update` rewrites them. Review every changed PNG before committing.
   - Never commit snapshots generated on macOS. Docker (OrbStack) must be running.
   - When you bump `@playwright/test`, also bump the image tag in `.github/workflows/ci.yml`.
-- Run one test file: `pnpm vitest run src/components/button`.
+- Run one test file: `pnpm --filter @renonreis/triquetra exec vitest run src/components/button`.
 - Add or update tests for any change in behavior, even if nobody asked.
 
 ## PR and commit instructions
@@ -170,4 +179,4 @@ Rules:
 
 - **Always:** use semantic tokens, add stories and tests with components, keep light and dark in parity, and run the verification commands.
 - **Ask first:** adding a runtime dependency, changing the token naming scheme or hierarchy, changing the public API of an existing component, or changing CI or release workflows.
-- **Never:** edit `src/styles/generated/` or `dist/`, commit secrets or `.env` files, publish manually (`npm publish`) outside the Changesets workflow, update visual snapshots to hide an unexplained diff, or disable a11y rules.
+- **Never:** edit `packages/react/src/styles/generated/` or any `dist/`, commit secrets or `.env` files, publish manually (`npm publish`) outside the Changesets workflow, update visual snapshots to hide an unexplained diff, or disable a11y rules.

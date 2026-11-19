@@ -32,6 +32,13 @@ pnpm install
 pnpm dev          # Storybook on http://localhost:6006
 ```
 
+This is a pnpm + Turborepo monorepo:
+
+| Workspace                            |                                                                  |
+| ------------------------------------ | ---------------------------------------------------------------- |
+| [`packages/react`](./packages/react) | `@renonreis/triquetra`: components and design tokens (published) |
+| [`apps/storybook`](./apps/storybook) | Documentation, story tests and visual regression                 |
+
 See [AGENTS.md](./AGENTS.md) for conventions, commands and contribution rules.
 
 ## License

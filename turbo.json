@@ -1,0 +1,30 @@
+{
+  "$schema": "https://turborepo.com/schema.json",
+  "ui": "stream",
+  "tasks": {
+    "tokens:build": {
+      "inputs": ["tokens/**", "scripts/build-tokens.ts"],
+      "outputs": ["src/styles/generated/**"]
+    },
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
+    },
+    "build-storybook": {
+      "dependsOn": ["^build"],
+      "outputs": ["storybook-static/**"],
+      "env": ["STORYBOOK_*"]
+    },
+    "typecheck": {
+      "dependsOn": ["^build", "tokens:build"]
+    },
+    "test": {
+      "dependsOn": ["^build", "tokens:build"]
+    },
+    "dev": {
+      "dependsOn": ["^build"],
+      "cache": false,
+      "persistent": true
+    }
+  }
+}

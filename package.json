@@ -1,108 +1,41 @@
 {
-  "name": "@renonreis/triquetra",
-  "version": "0.2.0",
-  "description": "Triquetra Design System: design tokens and accessible React components.",
+  "name": "triquetra",
+  "private": true,
+  "description": "Triquetra Design System monorepo.",
   "license": "MIT",
   "type": "module",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/renonreis/triquetra-design-system.git"
-  },
   "packageManager": "pnpm@12.21.0",
   "engines": {
     "node": ">=22.22"
   },
-  "files": [
-    "dist"
-  ],
-  "sideEffects": [
-    "**/*.css"
-  ],
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
-    },
-    "./styles.css": "./dist/styles.css",
-    "./tokens.css": "./dist/tokens.css",
-    "./theme.css": "./dist/theme.css",
-    "./tokens.json": "./dist/tokens.json",
-    "./package.json": "./package.json"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
   "scripts": {
-    "prepare": "node scripts/build-tokens.ts",
-    "dev": "pnpm tokens:build && storybook dev -p 6006",
-    "tokens:build": "node scripts/build-tokens.ts",
-    "build": "pnpm tokens:build && pnpm build:lib && pnpm build:css",
-    "build:lib": "vite build && tsc -p tsconfig.build.json",
-    "build:css": "tailwindcss -i src/styles/index.css -o dist/styles.css --minify && cp src/styles/generated/tokens.css src/styles/generated/theme.css src/styles/generated/tokens.json dist/",
-    "build-storybook": "pnpm tokens:build && storybook build",
+    "dev": "turbo run dev --filter=@triquetra/storybook",
+    "build": "turbo run build",
+    "build-storybook": "turbo run build-storybook",
     "lint": "eslint . && prettier --check .",
     "format": "prettier --write .",
-    "typecheck": "tsc --noEmit",
-    "test": "pnpm tokens:build && vitest run",
-    "test:watch": "vitest",
-    "test:visual": "playwright test",
-    "test:visual:docker": "scripts/visual-docker.sh",
-    "test:visual:update": "scripts/visual-docker.sh --update-snapshots",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "test:visual:docker": "pnpm --filter @triquetra/storybook test:visual:docker",
+    "test:visual:update": "pnpm --filter @triquetra/storybook test:visual:update",
     "changeset": "changeset",
     "version-packages": "changeset version",
-    "release": "pnpm build && changeset publish"
-  },
-  "peerDependencies": {
-    "react": "^18.3.0 || ^19.0.0",
-    "react-dom": "^18.3.0 || ^19.0.0"
-  },
-  "dependencies": {
-    "@ark-ui/react": "^5.40.0",
-    "tailwind-merge": "^3.7.0",
-    "tailwind-variants": "^4.0.2"
+    "release": "turbo run build --filter=\"./packages/*\" && changeset publish"
   },
   "devDependencies": {
     "@changesets/cli": "^3.0.3",
     "@eslint/js": "^9.39.5",
-    "@playwright/test": "1.65.1",
-    "@storybook/addon-a11y": "^10.6.7",
-    "@storybook/addon-docs": "^10.6.7",
-    "@storybook/addon-vitest": "^10.6.7",
-    "@storybook/react-vite": "^10.6.7",
-    "@tailwindcss/cli": "^4.3.5",
-    "@tailwindcss/vite": "^4.3.5",
-    "@testing-library/dom": "^10.4.2",
-    "@testing-library/jest-dom": "^7.0.1",
-    "@testing-library/react": "^16.3.3",
-    "@testing-library/user-event": "^14.6.12",
-    "@types/culori": "^4.0.1",
-    "@types/node": "^22.20.5",
-    "@types/react": "^19.3.0",
-    "@types/react-dom": "^19.3.0",
-    "@vitejs/plugin-react": "^6.3.0",
-    "@vitest/browser": "^5.1.0",
-    "@vitest/browser-playwright": "^5.1.0",
-    "axe-core": "^4.14.1",
-    "culori": "^4.0.2",
     "eslint": "^9.39.5",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-storybook": "^10.6.7",
     "globals": "^17.14.0",
-    "jsdom": "^31.0.1",
-    "playwright": "^1.65.1",
     "prettier": "^3.10.1",
     "prettier-plugin-tailwindcss": "^0.8.1",
-    "react": "^19.3.1",
-    "react-dom": "^19.3.1",
-    "storybook": "^10.6.7",
-    "storybook-addon-pseudo-states": "10.6.7",
-    "style-dictionary": "^5.8.0",
-    "tailwindcss": "^4.3.5",
     "typescript": "6.0.3",
     "typescript-eslint": "^8.73.0",
-    "vite": "^8.3.8",
-    "vitest": "^5.1.0"
+    "@types/node": "^22.20.5",
+    "turbo": "^2.11.13"
   }
 }

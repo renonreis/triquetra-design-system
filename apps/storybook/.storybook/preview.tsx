@@ -1,5 +1,5 @@
 import type { Decorator, Preview } from '@storybook/react-vite';
-import tokens from '../src/styles/generated/tokens.json' with { type: 'json' };
+import tokens from '../../../packages/react/src/styles/generated/tokens.json' with { type: 'json' };
 import './preview.css';
 
 const permutations = Object.keys(tokens).map((key) => key.split('/'));

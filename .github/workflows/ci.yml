@@ -12,6 +12,10 @@ concurrency:
 permissions:
   contents: read
 
+env:
+  TURBO_TELEMETRY_DISABLED: '1'
+  STORYBOOK_DISABLE_TELEMETRY: '1'
+
 jobs:
   lint:
     name: Lint & typecheck
@@ -38,8 +42,7 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm tokens:build
-      - run: pnpm vitest run --project unit
+      - run: pnpm turbo run test --filter=@renonreis/triquetra
 
   a11y:
     name: Accessibility (Storybook)
@@ -52,10 +55,9 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm exec playwright install --with-deps chromium
-      - run: pnpm tokens:build
+      - run: pnpm --filter @triquetra/storybook exec playwright install --with-deps chromium
       # Every story runs in Chromium, in light and dark, with the a11y addon in `error` mode.
-      - run: pnpm vitest run --project 'storybook:*'
+      - run: pnpm turbo run test --filter=@triquetra/storybook
 
   visual:
     name: Visual regression
@@ -72,17 +74,16 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm build-storybook --quiet
-        env:
-          STORYBOOK_DISABLE_TELEMETRY: '1'
+      - run: pnpm turbo run build-storybook --filter=@triquetra/storybook
       - run: pnpm exec playwright test
+        working-directory: apps/storybook
       - uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: visual-report
           path: |
-            playwright-report
-            test-results
+            apps/storybook/playwright-report
+            apps/storybook/test-results
           retention-days: 7
 
   build:
@@ -96,14 +97,11 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm build
-      - run: pnpm build-storybook
-        env:
-          STORYBOOK_DISABLE_TELEMETRY: '1'
+      - run: pnpm turbo run build build-storybook
       - uses: actions/upload-artifact@v7
         with:
           name: storybook-static
-          path: storybook-static
+          path: apps/storybook/storybook-static
           retention-days: 7
 
   preview:

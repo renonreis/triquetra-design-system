@@ -4,7 +4,8 @@ storybook-static/
 coverage/
 test-results/
 playwright-report/
-src/styles/generated/
+**/src/styles/generated/
+.turbo/
 *.tsbuildinfo
 *.log
 .DS_Store
@@ -13,5 +14,5 @@ src/styles/generated/
 !.env.example
 
 # Playwright
-/tests/visual/__screenshots__/**/*-actual.png
-/tests/visual/__screenshots__/**/*-diff.png
+/apps/storybook/tests/visual/__screenshots__/**/*-actual.png
+/apps/storybook/tests/visual/__screenshots__/**/*-diff.png
