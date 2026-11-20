@@ -37,7 +37,7 @@ Ark UI based, styled through `tv()` with semantic utilities only, each with beha
 
 ### C. Form and navigation components (Checkbox, Switch, Select, Tabs) · existing
 
-Same conventions as B, released in 0.4.0. Not yet drawn in Paper (see feature 2). code in `packages/react/src/components/`
+Same conventions as B, released in 0.4.0. Drawn in Paper, light and dark (feature 2, spec 0002). code in `packages/react/src/components/`
 
 ### D. Storybook docs and PR previews · existing
 
