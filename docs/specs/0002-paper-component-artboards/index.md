@@ -1,7 +1,7 @@
 # 0002. Paper artboards and parity for Checkbox, Switch, Select, Tabs
 
 **Date**: 2026-11-20
-**Status**: In Progress
+**Status**: Accepted
 
 ## Summary
 

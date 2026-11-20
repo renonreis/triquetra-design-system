@@ -11,19 +11,19 @@ One scope for the whole monorepo: `apps/storybook` and `apps/sample` exist only 
 
 ## At a glance
 
-| #   | Feature                                                         | Phase    | Status      |
-| --- | --------------------------------------------------------------- | -------- | ----------- |
-| A   | Token pipeline (Brand × Theme × Mode)                           | Existing | existing    |
-| B   | Base components (Button, Input, Card, Field, Dialog)            | Existing | existing    |
-| C   | Form and navigation components (Checkbox, Switch, Select, Tabs) | Existing | existing    |
-| D   | Storybook docs and PR previews                                  | Existing | existing    |
-| E   | Next.js sample app                                              | Existing | existing    |
-| F   | Quality gates (CI, a11y, contrast, visual, packed tarball)      | Existing | existing    |
-| G   | Release pipeline (Changesets, GitHub Packages)                  | Existing | existing    |
-| H   | AI review gate (Pullfrog)                                       | Existing | existing    |
-| 1   | UI foundation: token contract and Paper parity                  | Slice 1  | done        |
-| 2   | Paper artboards for Checkbox, Switch, Select, Tabs              | Slice 1  | in-progress |
-| 3   | Next components                                                 | Slice 2  | planned     |
+| #   | Feature                                                         | Phase    | Status   |
+| --- | --------------------------------------------------------------- | -------- | -------- |
+| A   | Token pipeline (Brand × Theme × Mode)                           | Existing | existing |
+| B   | Base components (Button, Input, Card, Field, Dialog)            | Existing | existing |
+| C   | Form and navigation components (Checkbox, Switch, Select, Tabs) | Existing | existing |
+| D   | Storybook docs and PR previews                                  | Existing | existing |
+| E   | Next.js sample app                                              | Existing | existing |
+| F   | Quality gates (CI, a11y, contrast, visual, packed tarball)      | Existing | existing |
+| G   | Release pipeline (Changesets, GitHub Packages)                  | Existing | existing |
+| H   | AI review gate (Pullfrog)                                       | Existing | existing |
+| 1   | UI foundation: token contract and Paper parity                  | Slice 1  | done     |
+| 2   | Paper artboards for Checkbox, Switch, Select, Tabs              | Slice 1  | done     |
+| 3   | Next components                                                 | Slice 2  | planned  |
 
 ## Already built
 
@@ -78,7 +78,7 @@ Write down that `packages/react/tokens/` is the source of truth for tokens and P
 
 Spec [0001](../specs/0001-token-contract-paper-parity/index.md) · code in `packages/react/scripts/`, `packages/react/tokens/`
 
-### 2. Paper artboards for Checkbox, Switch, Select, Tabs · in-progress
+### 2. Paper artboards for Checkbox, Switch, Select, Tabs · done
 
 Paper is the source of component design, but these four shipped without artboards. An agent draws them from the code under spec 0002 (only an approved artboard run writes to Paper); then the code is checked against them.
 **Done when:** each of the four has a Paper artboard with every variant and state its stories cover, in light and dark, and any difference from the shipped component is either fixed in code (with a changeset) or recorded as a design change.
@@ -91,7 +91,7 @@ Paper is the source of component design, but these four shipped without artboard
   - [x] Switch, Select, Tabs in light and dark, with parity tables (AC-2 to AC-6)
   - [x] Every difference resolved, then scope audit (AC-7, AC-8)
 - [x] Verify it: `/check verify Paper artboards for Checkbox, Switch, Select, Tabs`
-- [ ] Test it: `/test Paper artboards for Checkbox, Switch, Select, Tabs`
+- [x] Test it: `/test Paper artboards for Checkbox, Switch, Select, Tabs` (not applicable: docs and Paper only, no code to test; the parity tables and negative controls are the checks)
 
 Spec [0002](../specs/0002-paper-component-artboards/index.md)
 
