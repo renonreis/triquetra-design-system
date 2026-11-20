@@ -113,15 +113,15 @@ Each component below is designed in Paper first: an agent drafts its artboard wi
 A multi line text field that matches Input and works inside Field (label, helper, error).
 
 - [x] Design it (spec): `/architect Textarea`
-- [ ] Build it: `/develop Textarea`
+- [x] Build it: `/develop Textarea`
   - [x] Docs PR: design first variant of the Paper artboards rule in AGENTS.md (AC-1)
   - [x] Paper run: baseline, write plan approval, pilot light, then dark (AC-1 to AC-4)
   - [x] Design review of both artboards, scope audit, close and ledger summary (AC-5)
-  - [ ] Code PR: component, Field.Textarea, stories, tests, baselines, parity and changeset (AC-6 to AC-13)
+  - [x] Code PR: component, Field.Textarea, stories, tests, baselines, parity and changeset (AC-6 to AC-13)
 - [ ] Verify it: `/check verify Textarea`
 - [ ] Test it: `/test Textarea`
 
-Spec [0003](../specs/0003-textarea/index.md)
+Spec [0003](../specs/0003-textarea/index.md) · code in `packages/react/src/components/textarea/`
 
 ### 5. Radio Group · needs a decision
 
