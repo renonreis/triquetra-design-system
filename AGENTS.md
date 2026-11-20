@@ -25,7 +25,7 @@ Triquetra is a React design system: design tokens, accessible components, and th
 ## Design sources
 
 - **Tokens:** `packages/react/tokens/` (DTCG JSON) is the source of truth. Paper consumes them; it never defines them. A separate token manager product (not in this repo) will later distribute these tokens to Paper and to each DS or brand.
-- **Component design:** the [Paper file](https://app.paper.design/file/01M7R4TP595GEKCEE8SHQCTJMX/p-2-0) is the source for layout, anatomy and states. Read exact values with the Paper MCP (`get_computed_styles`, `get_jsx`), never from screenshots. Agents never write to the Paper file, with one exception: the token sync below (tokens only, after approval).
+- **Component design:** the [Paper file](https://app.paper.design/file/01M7R4TP595GEKCEE8SHQCTJMX/p-2-0) is the source for layout, anatomy and states. Read exact values with the Paper MCP (`get_computed_styles`, `get_jsx`), never from screenshots. Agents never write to the Paper file, with two exceptions, each after approval: the token sync below (tokens only) and the Paper artboards run below (new component artboards only).
 
 ## Workflow (Zero Dawn)
 
@@ -186,7 +186,24 @@ Paper mirrors the tokens of the default brand and theme ([spec 0001](docs/specs/
   4. Pilot batch first (an alias, a color, a font family, a line height), export again and check the diff treats them as equal.
   5. Export again; if Paper changed since approval, start over. Then apply: renames (`set_tokens` `newName`, which keeps artboard bindings), creates (`create_tokens`, payload order), updates (`set_tokens`), approved deletes last. Stop on any error.
   6. Export again: the diff must exit 0. A stopped run restarts from step 1 with a new approval.
-- **Never** call a Paper tool that edits nodes or artboards, and never replay an old plan.
+- **Never** call a Paper tool that edits nodes or artboards during a token sync (only an approved Paper artboards run, below, may), and never replay an old plan.
+
+## Paper artboards
+
+Agents may create **new** component artboards in Paper ([spec 0002](docs/specs/0002-paper-component-artboards/index.md)), drawn from the shipped code and bound to the Paper tokens, with a light artboard and a `<Component> · Dark` sibling (dark colors use the `-dark` tokens).
+
+- **Scope:** only the Components page (`p-4-0`) of file `01M7R4TP595GEKCEE8SHQCTJMX`, only for a component listed in an accepted spec, and only nodes the run itself created (the run ledger). Existing artboards, other pages and tokens stay off limits; tokens change only through the token sync.
+- **Gates, in order:** the spec is accepted, the docs that allow the run are merged, then the maintainer approves a write plan pinned to a `main` SHA and a Paper baseline. No write before all three.
+- **Tools:** only `create_artboard`, `write_html`, `update_styles`, `set_text_content`, `duplicate_nodes`, `rename_nodes`, `move_nodes`, `delete_nodes` and `finish_working_on_nodes`, each only on node IDs in the run ledger (for `create_artboard` and `write_html`, a parent in the ledger or the page `p-4-0`). Check the target against the ledger before every call.
+- **How:**
+  1. Baseline: pin `main` at a SHA, `tokens:paper:diff` on a fresh `get_tokens` export must exit 0, save `get_basic_info` and `get_jsx` of the existing artboards, and measure the code values in Storybook (computed styles, light and dark).
+  2. Show the maintainer the write plan (SHA, baseline, artboard content, state inventory, placement, expected calls) and wait for an explicit OK.
+  3. Read the baseline again before the first write; if `main` or Paper changed, start over at step 1.
+  4. Draw a pilot (one light artboard), audit its token bindings, fill its parity table, and wait for the maintainer's review. Read the baseline again before continuing.
+  5. Draw the rest, fill a parity table per component (`rationale.md` of the spec) and resolve every difference: artboard fixed, `code fix` (own PR with a `patch` changeset), or `design change` / `deviation` (maintainer approval plus a follow up).
+  6. Scope audit: inventory, `get_jsx` and positions of the existing artboards and `contentHash.tokens` equal the baseline. Then `finish_working_on_nodes` with the run's artboard IDs only (never without IDs).
+- **Stops:** on any tool error, timeout or unclear result, stop writing, reconcile read only against the ledger and report. Deleting the run's nodes is its own approved step, only on roots the ledger proves are the run's. A stopped run restarts at step 1 with a new approval.
+- **Never** edit or delete a node the run did not create, write to another page or file, or replay an old plan.
 
 ## Component conventions
 
@@ -234,4 +251,4 @@ Paper mirrors the tokens of the default brand and theme ([spec 0001](docs/specs/
 
 - **Always:** use semantic tokens, add stories and tests with components, keep light and dark in parity, and run the verification commands.
 - **Ask first:** adding a runtime dependency, changing the token naming scheme or hierarchy, changing the public API of an existing component, or changing CI or release workflows.
-- **Never:** edit `packages/react/src/styles/generated/` or any `dist/`, commit secrets or `.env` files, publish manually (`npm publish`) outside the Changesets workflow, update visual snapshots to hide an unexplained diff, or disable a11y rules.
+- **Never:** edit `packages/react/src/styles/generated/` or any `dist/`, commit secrets or `.env` files, publish manually (`npm publish`) outside the Changesets workflow, update visual snapshots to hide an unexplained diff, disable a11y rules, or write to the Paper file outside the token sync and an approved Paper artboards run.

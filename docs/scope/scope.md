@@ -80,7 +80,7 @@ Spec [0001](../specs/0001-token-contract-paper-parity/index.md) · code in `pack
 
 ### 2. Paper artboards for Checkbox, Switch, Select, Tabs · in-progress
 
-Paper is the source of component design, but these four shipped without artboards. Drawing them is design work done in Paper by you or by an explicit design task (build skills never write to Paper); then the code is checked against them.
+Paper is the source of component design, but these four shipped without artboards. An agent draws them from the code under spec 0002 (only an approved artboard run writes to Paper); then the code is checked against them.
 **Done when:** each of the four has a Paper artboard with every variant and state its stories cover, in light and dark, and any difference from the shipped component is either fixed in code (with a changeset) or recorded as a design change.
 
 - [x] Design it (spec): `/architect Paper parity for Checkbox, Switch, Select, Tabs`
