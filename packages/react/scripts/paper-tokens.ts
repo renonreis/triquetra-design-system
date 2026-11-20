@@ -3,7 +3,7 @@
  *
  * The token source in `tokens/` is the source of truth. Paper receives a generated mirror of the
  * default brand and theme: brand roles, base semantics, light colors, and dark colors under the
- * same names plus `--dark` (Paper has no modes). Shadow and motion have no Paper type and stay in
+ * same names plus `-dark` (Paper has no modes; it collapses `--` in names, so one hyphen). Shadow and motion have no Paper type and stay in
  * code only.
  */
 import { parse } from 'culori';
@@ -41,7 +41,7 @@ export interface SourceToken {
   layer: Layer;
   /** Token path, e.g. `['color', 'bg', 'surface']` or `['brand', 'color', 'neutral', '0']`. */
   path: string[];
-  /** CSS variable name in code, e.g. `--tq-color-bg-surface` (never with `--dark`). */
+  /** CSS variable name in code, e.g. `--tq-color-bg-surface` (never with `-dark`). */
   cssName: string;
   description?: string;
   /** Immediate target when it is a brand role or a semantic token (it is in the payload too). */
@@ -80,7 +80,7 @@ export function paperType(path: string[]): PaperType | null {
 }
 
 export const paperName = (cssName: string, layer: Layer) =>
-  layer === 'dark' ? `${cssName}--dark` : cssName;
+  layer === 'dark' ? `${cssName}-dark` : cssName;
 
 /** Formats a number with at most `decimals` decimals and no trailing zeros. */
 const num = (n: number, decimals: number) => String(Number(n.toFixed(decimals)));

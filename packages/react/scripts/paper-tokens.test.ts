@@ -42,7 +42,7 @@ describe('Paper payload (spec 0001)', () => {
         .map(css),
       ...theme('dark')
         .filter((p) => p[0] === 'color')
-        .map((p) => `${css(p)}--dark`),
+        .map((p) => `${css(p)}-dark`),
     ];
     expect(payload).toHaveLength(204);
     expect(new Set(payload.map((t) => t.name)).size).toBe(payload.length);
@@ -52,11 +52,11 @@ describe('Paper payload (spec 0001)', () => {
   it('keeps aliases to brand roles and semantics, and converts literals', () => {
     const value = (name: string) => byName.get(name)?.value;
     expect(value('--tq-color-bg-surface')).toBe('var(--tq-brand-color-neutral-0)');
-    expect(value('--tq-color-bg-surface--dark')).toBe('var(--tq-brand-color-neutral-800)');
+    expect(value('--tq-color-bg-surface-dark')).toBe('var(--tq-brand-color-neutral-800)');
     expect(value('--tq-color-bg-overlay')).toBe('oklch(23% 0.009 260 / 50%)');
     expect(value('--tq-color-action-primary-bg')).toBe('var(--tq-brand-color-primary-900)');
     expect(value('--tq-color-action-primary-fg')).toBe('var(--tq-brand-color-neutral-0)');
-    expect(value('--tq-color-action-primary-bg--dark')).toBe('var(--tq-brand-color-primary-0)');
+    expect(value('--tq-color-action-primary-bg-dark')).toBe('var(--tq-brand-color-primary-0)');
     expect(value('--tq-font-family-heading')).toBe('var(--tq-brand-font-family-sans)');
     expect(value('--tq-brand-font-family-sans')).toBe('"Geist"');
     expect(value('--tq-radius-control')).toBe('var(--tq-brand-radius-control)');
@@ -109,7 +109,19 @@ describe('Paper payload (spec 0001)', () => {
     ).toThrow(/longer than 1024/);
     expect(() => buildPaperPayload([src('--tq-opacity-1', { path: ['opacity', '1'] })])).toThrow(
       /no Paper type/,
-    );
+    ); // Paper collapses `--` in names, so the dark suffix is `-dark`: a code path ending in a `dark`
+    // segment collides with a dark name and must fail the build.
+    const color = { colorSpace: 'oklch', components: [0.5, 0, 0] };
+    expect(() =>
+      buildPaperPayload([
+        src('--tq-color-bg-dark', {
+          layer: 'light',
+          path: ['color', 'bg', 'dark'],
+          literal: color,
+        }),
+        src('--tq-color-bg', { layer: 'dark', path: ['color', 'bg'], literal: color }),
+      ]),
+    ).toThrow(/--tq-color-bg-dark: duplicate name/);
   });
 });
 

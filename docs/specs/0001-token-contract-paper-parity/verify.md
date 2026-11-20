@@ -8,7 +8,7 @@ _Steps derived from spec 0001 acceptance criteria. `/check verify` runs these; `
 - [ ] Add `"$foo": true` to any token in a scratch copy and validate it → the contract test reports `unknown key "$foo"` → AC-1
 - [ ] `git diff main -- packages/react/scripts/build-tokens.ts` → the `validate()` function is unchanged → AC-2
 - [ ] `pnpm --filter @renonreis/triquetra tokens:build` → `src/styles/generated/paper-tokens.json` exists with 204 unique names; no `--tq-shadow-*` or `--tq-motion-*` → AC-3
-- [ ] In the payload: `--tq-color-bg-surface--dark` is `var(--tq-brand-color-neutral-800)`; `--tq-font-family-heading` is `var(--tq-brand-font-family-sans)`; `--tq-space-4` is `16px`; `--tq-font-line-height-tight` is `125%` → AC-4
+- [ ] In the payload: `--tq-color-bg-surface-dark` is `var(--tq-brand-color-neutral-800)`; `--tq-font-family-heading` is `var(--tq-brand-font-family-sans)`; `--tq-space-4` is `16px`; `--tq-font-line-height-tight` is `125%` → AC-4
 - [ ] Change one brand primitive's value in a scratch branch and rebuild → the brand literal in the payload changes, the semantic aliases do not → AC-4 (value source: terminal primitive vs immediate alias)
 - [ ] `tokens:paper:diff packages/react/scripts/__fixtures__/paper-export.json` → exit 1, groups printed, `--untitled` under ignored → AC-5
 - [ ] `tokens:paper:diff` on a file containing `{ "tokens": <payload> }` → exit 0; on `{ "tokens": "nope" }` → exit 2 → AC-5

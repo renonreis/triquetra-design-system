@@ -176,7 +176,7 @@ Rules:
 
 ## Paper token sync
 
-Paper mirrors the tokens of the default brand and theme ([spec 0001](docs/specs/0001-token-contract-paper-parity/index.md)): brand roles, base semantics and light colors under their CSS names, dark colors under the same names plus `--dark` (Paper has no modes). `shadow.*` and `motion.*` stay in code only until Paper supports those types. `tokens:build` writes the payload to `src/styles/generated/paper-tokens.json`.
+Paper mirrors the tokens of the default brand and theme ([spec 0001](docs/specs/0001-token-contract-paper-parity/index.md)): brand roles, base semantics and light colors under their CSS names, dark colors under the same names plus `-dark` (Paper has no modes). `shadow.*` and `motion.*` stay in code only until Paper supports those types. `tokens:build` writes the payload to `src/styles/generated/paper-tokens.json`.
 
 - **When:** after a PR that changes `packages/react/tokens/` is merged to `main`. Paper follows `main`, never a branch.
 - **How** (agent, with the Paper MCP, file `01M7R4TP595GEKCEE8SHQCTJMX`):

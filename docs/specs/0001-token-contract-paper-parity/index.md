@@ -5,7 +5,7 @@
 
 ## Summary
 
-The token source files in `packages/react/tokens/` are the single source of truth, and this spec writes down their contract (the format and rules a future token manager will read and write). Paper gets a generated copy of the default brand and theme: brand roles plus semantic tokens, with dark mode as a parallel `--dark` set because Paper has no modes. A local diff script compares the code with Paper, and after each merge that touches tokens an agent applies the difference to Paper with your ok, writing tokens only, never artboards.
+The token source files in `packages/react/tokens/` are the single source of truth, and this spec writes down their contract (the format and rules a future token manager will read and write). Paper gets a generated copy of the default brand and theme: brand roles plus semantic tokens, with dark mode as a parallel `-dark` set because Paper has no modes. A local diff script compares the code with Paper, and after each merge that touches tokens an agent applies the difference to Paper with your ok, writing tokens only, never artboards.
 
 ## Requirements
 
@@ -19,10 +19,10 @@ The token source files in `packages/react/tokens/` are the single source of trut
 
 - **AC-1**: `packages/react/tokens/contract.schema.json` (JSON Schema 2020-12) describes the per file grammar in _Token contract_ below, and `packages/react/tokens/contract.test.ts` validates every `*.tokens.json` against it with a small checker driven by the schema (no new dependency). The checker supports only the schema keywords the schema uses and fails on any other keyword. One negative fixture per rule fails (unknown `$type`, bad value shape per type, malformed alias, unknown `$` key, bad segment name); every real token file passes.
 - **AC-2**: `validate()` in `scripts/build-tokens.ts` stays unchanged and the contract section lists exactly what it enforces, separate from conventions it does not enforce.
-- **AC-3**: `tokens:build` also writes `packages/react/src/styles/generated/paper-tokens.json` (git ignored, not shipped): a JSON array of `{ name, type, value, description? }` for brand `triquetra`, theme `default`. The set is exactly 204 entries with unique names: 75 brand roles, 41 base semantics (every base path except `motion.*`), 44 light semantic colors and 44 dark semantic colors (same paths, names suffixed `--dark`). No primitive, `shadow.*` or `motion.*` entry. A test asserts the exact name set and uniqueness.
-- **AC-4**: Values follow the alias rule (immediate target): when a token's `$value` aliases a brand role or a semantic token that is in the payload, the value is `var(--tq-…)` of that target (dark semantics alias the `--dark` name when they target another semantic color, else the brand role); when it aliases a primitive or is a literal, the value is the literal converted per the mapping table. The payload has no duplicate names, no alias to a name missing from the payload, and no alias cycle; the build fails otherwise.
+- **AC-3**: `tokens:build` also writes `packages/react/src/styles/generated/paper-tokens.json` (git ignored, not shipped): a JSON array of `{ name, type, value, description? }` for brand `triquetra`, theme `default`. The set is exactly 204 entries with unique names: 75 brand roles, 41 base semantics (every base path except `motion.*`), 44 light semantic colors and 44 dark semantic colors (same paths, names suffixed `-dark`). No primitive, `shadow.*` or `motion.*` entry. A test asserts the exact name set and uniqueness.
+- **AC-4**: Values follow the alias rule (immediate target): when a token's `$value` aliases a brand role or a semantic token that is in the payload, the value is `var(--tq-…)` of that target (dark semantics alias the `-dark` name when they target another semantic color, else the brand role); when it aliases a primitive or is a literal, the value is the literal converted per the mapping table. The payload has no duplicate names, no alias to a name missing from the payload, and no alias cycle; the build fails otherwise.
 - **AC-5**: `pnpm --filter @renonreis/triquetra tokens:paper:diff <paper-export.json>` compares the payload with a Paper `get_tokens` JSON export and prints, sorted by name, with old and new fields: missing (to create), changed (value, alias target or description differs), type drift (blocked, needs a manual decision), extra `--tq-` tokens (delete candidates), and rename suggestions (advisory). Tokens without the `--tq-` prefix are listed as ignored. Exit code 0 when there is no drift, 1 when there is drift, 2 on an input or build error (unreadable file, unknown shape, duplicate names in the export).
-- **AC-6**: After the first sync, a fresh export shows: the diff reports no drift; `--untitled` is absent (a one time delete the engineer approved); the dark set and the missing tokens exist (`brand.color.primary.*`, `brand.color.informative.*`, `font.family.heading`, `space.0`, `radius.none`, `size.container.*`); `--tq-color-action-primary-{bg,bg-hover,bg-active}` alias primary 900/800/700 (light) and primary 0/100/200 (`--dark`), while `action-primary-fg` keeps aliasing neutral; informative status aliases the informative role in both modes.
+- **AC-6**: After the first sync, a fresh export shows: the diff reports no drift; `--untitled` is absent (a one time delete the engineer approved); the dark set and the missing tokens exist (`brand.color.primary.*`, `brand.color.informative.*`, `font.family.heading`, `space.0`, `radius.none`, `size.container.*`); `--tq-color-action-primary-{bg,bg-hover,bg-active}` alias primary 900/800/700 (light) and primary 0/100/200 (`-dark`), while `action-primary-fg` keeps aliasing neutral; informative status aliases the informative role in both modes.
 - **AC-7**: The sync writes to Paper only through `create_tokens` and `set_tokens`, never through a tool that edits nodes or artboards. The agent writes only after the engineer approves a plan pinned to a `main` commit SHA and a before export, and stops on any change since approval or any per entry error.
 - **AC-8**: A rename is applied only for an old and new pair the engineer selected, and only with `set_tokens` `newName` (which keeps artboard layers bound to the token), never with a delete plus create. The approved plan shows each rename as a `newName` call.
 - **AC-9**: Root `AGENTS.md` records the contract pointer, the Paper token exception to the read only rule, the sync procedure and its timing (after merge to `main`), and the code only tokens owed to Paper (shadow, motion).
@@ -59,7 +59,7 @@ The DTCG files stay the only place tokens are defined; Paper receives a generate
 
 **Conventions it does not enforce** (kept by review): primitives are referenced only by brands and base semantics; non default themes hold overrides only; literal semantic colors are rare (today only `color.bg.overlay`); token types stay equal across modes.
 
-**Naming**: the CSS name is `--tq-` plus the path with dots as dashes; brand roles become `--tq-brand-…`. In CSS, dark semantics reuse the light names (scoped by `[data-mode]`); only Paper adds `--dark`.
+**Naming**: the CSS name is `--tq-` plus the path with dots as dashes; brand roles become `--tq-brand-…`. In CSS, dark semantics reuse the light names (scoped by `[data-mode]`); only Paper adds `-dark`. The suffix has a single hyphen because Paper collapses `--` inside a token name to `-` (found in the first sync pilot on 2026-11-20); a code path ending in a `dark` segment would collide with a dark name, and the build's duplicate name check fails on it.
 
 **Breaking changes**: renaming or removing a semantic path is a `major` changeset (public CSS); adding one is `minor`.
 
@@ -73,7 +73,7 @@ Generated inside `scripts/build-tokens.ts` (or a module it imports) from the Sty
 | `brand.font.family.*`  | `fontFamily` | `--tq-brand-font-family-…` | first family, literal              |
 | `brand.radius.*`       | `radius`     | `--tq-brand-radius-…`      | px literal                         |
 | `color.*` light        | `color`      | `--tq-color-…`             | alias, or OKLCH literal            |
-| `color.*` dark         | `color`      | `--tq-color-…--dark`       | alias, or OKLCH literal            |
+| `color.*` dark         | `color`      | `--tq-color-…-dark`        | alias, or OKLCH literal            |
 | `space.*`              | `spacing`    | `--tq-space-…`             | px literal                         |
 | `radius.*`             | `radius`     | `--tq-radius-…`            | alias to brand role, or px literal |
 | `size.container.*`     | `container`  | `--tq-size-container-…`    | px literal                         |
@@ -131,7 +131,7 @@ Generated inside `scripts/build-tokens.ts` (or a module it imports) from the Sty
 **Critical test scenarios**:
 
 - Contract test passes on every real token file and fails on one fixture per rule (unknown `$type`, `dimension` with unit `em`, alias `{brand.color}x`, `$foo` key, segment `Bg`, unsupported schema keyword), verifies **AC-1**.
-- Payload test: exact name set (204, unique); `--tq-color-bg-surface` is `var(--tq-brand-color-neutral-0)`; `--tq-color-bg-surface--dark` is `var(--tq-brand-color-neutral-800)`; `--tq-color-bg-overlay` is a literal with alpha; `--tq-font-family-heading` is `var(--tq-brand-font-family-sans)`; `--tq-brand-font-family-sans` is `"Geist"`; `--tq-space-0` is `0px`; `--tq-space-4` is `16px`; `--tq-font-line-height-tight` is `125%`; no `--tq-shadow-*` or `--tq-motion-*`; every alias target is earlier in write order, verifies **AC-3**, **AC-4**.
+- Payload test: exact name set (204, unique); `--tq-color-bg-surface` is `var(--tq-brand-color-neutral-0)`; `--tq-color-bg-surface-dark` is `var(--tq-brand-color-neutral-800)`; `--tq-color-bg-overlay` is a literal with alpha; `--tq-font-family-heading` is `var(--tq-brand-font-family-sans)`; `--tq-brand-font-family-sans` is `"Geist"`; `--tq-space-0` is `0px`; `--tq-space-4` is `16px`; `--tq-font-line-height-tight` is `125%`; no `--tq-shadow-*` or `--tq-motion-*`; every alias target is earlier in write order, verifies **AC-3**, **AC-4**.
 - Diff test on fixtures: `--untitled` listed as ignored; a stale alias as changed; a dropped token as missing; an extra `--tq-` token; a renamed pair as a suggestion; a type change as blocked; a chroma difference of 0.0005 and a hue difference of 0.2 degrees as equal; exit 1, then 0 on a matching export, then 2 on a malformed file, verifies **AC-5**.
 - Live (sync): the pilot batch round trips; the approved plan lists renames as `newName` calls; the final diff exits 0 and `--untitled` is absent, verifies **AC-6**, **AC-7**, **AC-8**.
 
@@ -155,7 +155,7 @@ Tracer Bullet: first a thin thread from source to a real diff against the live P
 
 **Negative / tradeoffs**:
 
-- Paper's dark tokens are a naming convention (`--dark`), not real modes: a designer switches an artboard to dark by swapping variables, not by a toggle.
+- Paper's dark tokens are a naming convention (`-dark`), not real modes: a designer switches an artboard to dark by swapping variables, not by a toggle.
 - Shadow and motion tokens do not exist in Paper until it supports those types; designers use the values documented in Storybook.
 - The sync is manual (agent plus approval after each token merge), so Paper can lag `main` until someone runs it.
 - Agents gain write access to Paper tokens, a narrow exception to the read only rule that the procedure must keep narrow.
