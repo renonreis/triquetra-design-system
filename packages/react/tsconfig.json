@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "allowImportingTsExtensions": true,
     "types": ["node", "vite/client", "@testing-library/jest-dom/vitest"]
   },
   "include": ["src", "tokens", "scripts", "*.ts"]

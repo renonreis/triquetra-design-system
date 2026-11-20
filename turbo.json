@@ -3,7 +3,13 @@
   "ui": "stream",
   "tasks": {
     "tokens:build": {
-      "inputs": ["tokens/**", "scripts/build-tokens.ts", "scripts/build-fonts.ts", "package.json"],
+      "inputs": [
+        "tokens/**",
+        "scripts/build-tokens.ts",
+        "scripts/paper-tokens.ts",
+        "scripts/build-fonts.ts",
+        "package.json"
+      ],
       "outputs": ["src/styles/generated/**"]
     },
     "build": {

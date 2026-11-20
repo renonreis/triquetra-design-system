@@ -36,6 +36,7 @@
   "scripts": {
     "prepare": "node scripts/build-tokens.ts && node scripts/build-fonts.ts",
     "tokens:build": "node scripts/build-tokens.ts && node scripts/build-fonts.ts",
+    "tokens:paper:diff": "node scripts/paper-tokens-diff.ts",
     "build": "pnpm tokens:build && pnpm build:lib && pnpm build:css",
     "build:lib": "vite build && tsc -p tsconfig.build.json",
     "build:css": "tailwindcss -i src/styles/index.css -o dist/styles.css --minify && cp -R src/styles/generated/tokens.css src/styles/generated/theme.css src/styles/generated/tokens.json src/styles/generated/fonts.css src/styles/generated/fonts dist/",

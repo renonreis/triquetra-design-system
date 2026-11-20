@@ -1,0 +1,67 @@
+{
+  "tokens": [
+    {
+      "name": "--untitled",
+      "type": "color",
+      "value": "#DDDDDD"
+    },
+    {
+      "name": "--tq-brand-color-neutral-0",
+      "type": "color",
+      "value": "oklch(100% 0 0)"
+    },
+    {
+      "name": "--tq-brand-color-neutral-100",
+      "type": "color",
+      "value": "oklch(96% 0.005 260)"
+    },
+    {
+      "name": "--tq-brand-color-neutral-900",
+      "type": "color",
+      "value": "oklch(23% 0.009 260)"
+    },
+    {
+      "name": "--tq-color-bg-surface",
+      "type": "color",
+      "value": "var(--tq-brand-color-neutral-0)",
+      "description": "Cards, inputs, panels."
+    },
+    {
+      "name": "--tq-color-bg-overlay",
+      "type": "color",
+      "value": "oklch(23% 0.009 260 / 50%)",
+      "description": "Backdrop behind modal dialogs."
+    },
+    {
+      "name": "--tq-color-action-primary-bg",
+      "type": "color",
+      "value": "var(--tq-brand-color-neutral-900)"
+    },
+    {
+      "name": "--tq-font-family-body",
+      "type": "fontFamily",
+      "value": "\"Geist\""
+    },
+    {
+      "name": "--tq-font-weight-bold",
+      "type": "fontWeight",
+      "value": "700"
+    },
+    {
+      "name": "--tq-font-line-height-snug",
+      "type": "lineHeight",
+      "value": "137.5%"
+    },
+    {
+      "name": "--tq-space-4",
+      "type": "spacing",
+      "value": "16px"
+    },
+    {
+      "name": "--tq-radius-control",
+      "type": "radius",
+      "value": "6px",
+      "description": "Buttons, inputs, small controls."
+    }
+  ]
+}
