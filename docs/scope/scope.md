@@ -67,12 +67,12 @@ Write down that `packages/react/tokens/` is the source of truth for tokens and P
 **Done when:** a spec records the token source of truth, the token contract (paths, naming, brand and theme axes, what the build validates) and how tokens reach Paper until the manager exists; every semantic token in the code has a matching Paper variable in both modes (or a recorded reason why not); a repeatable parity check reports drift between the code and Paper.
 
 - [x] Design it (spec): `/architect UI foundation`
-- [ ] Build it: `/develop UI foundation`
+- [x] Build it: `/develop UI foundation`
   - [x] Thin thread: color payload and diff against the live Paper export, read only (AC-3, AC-4, AC-5)
   - [x] Full payload for every mapped type, with payload and diff tests (AC-3, AC-4, AC-5)
   - [x] Token contract: schema, checker and contract test (AC-1, AC-2)
   - [x] AGENTS.md: contract, Paper token exception, sync procedure (AC-2, AC-7, AC-9)
-  - [ ] First Paper sync after merge, diff clean (AC-6, AC-7, AC-8)
+  - [x] First Paper sync after merge, diff clean (AC-6, AC-7, AC-8): `main` 8c38be0 synced 2026-11-20, before export in the spec folder
 - [ ] Verify it: `/check verify UI foundation`
 - [ ] Test it: `/test UI foundation`
 

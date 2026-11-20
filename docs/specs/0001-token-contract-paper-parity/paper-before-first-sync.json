@@ -1,0 +1,339 @@
+{
+  "tokens": [
+    { "name": "--untitled", "type": "color", "value": "#DDDDDD" },
+    { "name": "--tq-brand-color-neutral-0", "type": "color", "value": "oklch(100% 0 0)" },
+    { "name": "--tq-brand-color-neutral-100", "type": "color", "value": "oklch(96% 0.005 260)" },
+    { "name": "--tq-brand-color-neutral-200", "type": "color", "value": "oklch(91% 0.009 260)" },
+    { "name": "--tq-brand-color-neutral-300", "type": "color", "value": "oklch(84% 0.014 260)" },
+    { "name": "--tq-brand-color-neutral-400", "type": "color", "value": "oklch(73% 0.017 260)" },
+    { "name": "--tq-brand-color-neutral-500", "type": "color", "value": "oklch(63% 0.018 260)" },
+    { "name": "--tq-brand-color-neutral-600", "type": "color", "value": "oklch(53% 0.017 260)" },
+    { "name": "--tq-brand-color-neutral-700", "type": "color", "value": "oklch(44% 0.015 260)" },
+    { "name": "--tq-brand-color-neutral-800", "type": "color", "value": "oklch(33% 0.013 260)" },
+    { "name": "--tq-brand-color-neutral-900", "type": "color", "value": "oklch(23% 0.009 260)" },
+    { "name": "--tq-brand-color-secondary-0", "type": "color", "value": "oklch(98.5% 0.007 258)" },
+    { "name": "--tq-brand-color-secondary-100", "type": "color", "value": "oklch(95% 0.024 258)" },
+    { "name": "--tq-brand-color-secondary-200", "type": "color", "value": "oklch(90% 0.049 258)" },
+    { "name": "--tq-brand-color-secondary-300", "type": "color", "value": "oklch(83% 0.085 258)" },
+    { "name": "--tq-brand-color-secondary-400", "type": "color", "value": "oklch(73% 0.141 258)" },
+    { "name": "--tq-brand-color-secondary-500", "type": "color", "value": "oklch(63% 0.200 258)" },
+    { "name": "--tq-brand-color-secondary-600", "type": "color", "value": "oklch(53% 0.190 258)" },
+    { "name": "--tq-brand-color-secondary-700", "type": "color", "value": "oklch(44% 0.163 258)" },
+    { "name": "--tq-brand-color-secondary-800", "type": "color", "value": "oklch(33% 0.122 258)" },
+    { "name": "--tq-brand-color-secondary-900", "type": "color", "value": "oklch(23% 0.085 258)" },
+    { "name": "--tq-brand-color-positive-0", "type": "color", "value": "oklch(98.5% 0.014 152)" },
+    { "name": "--tq-brand-color-positive-100", "type": "color", "value": "oklch(95% 0.043 152)" },
+    { "name": "--tq-brand-color-positive-200", "type": "color", "value": "oklch(90% 0.085 152)" },
+    { "name": "--tq-brand-color-positive-300", "type": "color", "value": "oklch(83% 0.128 152)" },
+    { "name": "--tq-brand-color-positive-400", "type": "color", "value": "oklch(73% 0.162 152)" },
+    { "name": "--tq-brand-color-positive-500", "type": "color", "value": "oklch(63% 0.166 152)" },
+    { "name": "--tq-brand-color-positive-600", "type": "color", "value": "oklch(53% 0.139 152)" },
+    { "name": "--tq-brand-color-positive-700", "type": "color", "value": "oklch(44% 0.116 152)" },
+    { "name": "--tq-brand-color-positive-800", "type": "color", "value": "oklch(33% 0.087 152)" },
+    { "name": "--tq-brand-color-positive-900", "type": "color", "value": "oklch(23% 0.061 152)" },
+    { "name": "--tq-brand-color-warning-0", "type": "color", "value": "oklch(99% 0.014 92)" },
+    { "name": "--tq-brand-color-warning-100", "type": "color", "value": "oklch(97% 0.041 92)" },
+    { "name": "--tq-brand-color-warning-200", "type": "color", "value": "oklch(94% 0.083 92)" },
+    { "name": "--tq-brand-color-warning-300", "type": "color", "value": "oklch(90% 0.135 92)" },
+    { "name": "--tq-brand-color-warning-400", "type": "color", "value": "oklch(85% 0.171 92)" },
+    { "name": "--tq-brand-color-warning-500", "type": "color", "value": "oklch(79% 0.162 92)" },
+    { "name": "--tq-brand-color-warning-600", "type": "color", "value": "oklch(68% 0.139 92)" },
+    { "name": "--tq-brand-color-warning-700", "type": "color", "value": "oklch(55% 0.113 92)" },
+    { "name": "--tq-brand-color-warning-800", "type": "color", "value": "oklch(43% 0.088 92)" },
+    { "name": "--tq-brand-color-warning-900", "type": "color", "value": "oklch(30% 0.061 92)" },
+    { "name": "--tq-brand-color-negative-0", "type": "color", "value": "oklch(98.5% 0.007 25)" },
+    { "name": "--tq-brand-color-negative-100", "type": "color", "value": "oklch(95% 0.025 25)" },
+    { "name": "--tq-brand-color-negative-200", "type": "color", "value": "oklch(90% 0.052 25)" },
+    { "name": "--tq-brand-color-negative-300", "type": "color", "value": "oklch(83% 0.094 25)" },
+    { "name": "--tq-brand-color-negative-400", "type": "color", "value": "oklch(73% 0.166 25)" },
+    { "name": "--tq-brand-color-negative-500", "type": "color", "value": "oklch(63% 0.210 25)" },
+    { "name": "--tq-brand-color-negative-600", "type": "color", "value": "oklch(53% 0.200 25)" },
+    { "name": "--tq-brand-color-negative-700", "type": "color", "value": "oklch(44% 0.178 25)" },
+    { "name": "--tq-brand-color-negative-800", "type": "color", "value": "oklch(33% 0.134 25)" },
+    { "name": "--tq-brand-color-negative-900", "type": "color", "value": "oklch(23% 0.093 25)" },
+    {
+      "name": "--tq-color-bg-canvas",
+      "type": "color",
+      "value": "var(--tq-brand-color-neutral-0)",
+      "description": "Page background."
+    },
+    {
+      "name": "--tq-color-bg-surface",
+      "type": "color",
+      "value": "var(--tq-brand-color-neutral-0)",
+      "description": "Cards, inputs, panels."
+    },
+    {
+      "name": "--tq-color-bg-subtle",
+      "type": "color",
+      "value": "var(--tq-brand-color-neutral-100)",
+      "description": "Hover rows, subtle fills."
+    },
+    {
+      "name": "--tq-color-bg-muted",
+      "type": "color",
+      "value": "var(--tq-brand-color-neutral-200)",
+      "description": "Stronger fills, pressed states."
+    },
+    {
+      "name": "--tq-color-bg-inverse",
+      "type": "color",
+      "value": "var(--tq-brand-color-neutral-900)",
+      "description": "Inverted surfaces, such as tooltips."
+    },
+    {
+      "name": "--tq-color-bg-disabled",
+      "type": "color",
+      "value": "var(--tq-brand-color-neutral-100)",
+      "description": "Disabled controls."
+    },
+    {
+      "name": "--tq-color-bg-overlay",
+      "type": "color",
+      "value": "oklch(23% 0.009 260 / 50%)",
+      "description": "Backdrop behind modal dialogs."
+    },
+    {
+      "name": "--tq-color-fg-default",
+      "type": "color",
+      "value": "var(--tq-brand-color-neutral-900)",
+      "description": "Primary text and icons."
+    },
+    {
+      "name": "--tq-color-fg-muted",
+      "type": "color",
+      "value": "var(--tq-brand-color-neutral-600)",
+      "description": "Secondary text, placeholders, helper text."
+    },
+    {
+      "name": "--tq-color-fg-inverse",
+      "type": "color",
+      "value": "var(--tq-brand-color-neutral-0)",
+      "description": "Text on bg.inverse."
+    },
+    {
+      "name": "--tq-color-fg-disabled",
+      "type": "color",
+      "value": "var(--tq-brand-color-neutral-400)",
+      "description": "Disabled text (exempt from contrast rules)."
+    },
+    {
+      "name": "--tq-color-fg-link",
+      "type": "color",
+      "value": "var(--tq-brand-color-secondary-600)",
+      "description": "Links."
+    },
+    {
+      "name": "--tq-color-border-default",
+      "type": "color",
+      "value": "var(--tq-brand-color-neutral-200)",
+      "description": "Decorative dividers and card borders."
+    },
+    {
+      "name": "--tq-color-border-strong",
+      "type": "color",
+      "value": "var(--tq-brand-color-neutral-500)",
+      "description": "Control borders (3:1 non-text contrast)."
+    },
+    {
+      "name": "--tq-color-border-focus",
+      "type": "color",
+      "value": "var(--tq-brand-color-secondary-500)",
+      "description": "Focus rings."
+    },
+    {
+      "name": "--tq-color-border-negative",
+      "type": "color",
+      "value": "var(--tq-brand-color-negative-600)",
+      "description": "Invalid control borders."
+    },
+    {
+      "name": "--tq-color-action-primary-bg",
+      "type": "color",
+      "value": "var(--tq-brand-color-neutral-900)"
+    },
+    {
+      "name": "--tq-color-action-primary-bg-hover",
+      "type": "color",
+      "value": "var(--tq-brand-color-neutral-800)"
+    },
+    {
+      "name": "--tq-color-action-primary-bg-active",
+      "type": "color",
+      "value": "var(--tq-brand-color-neutral-700)"
+    },
+    {
+      "name": "--tq-color-action-primary-fg",
+      "type": "color",
+      "value": "var(--tq-brand-color-neutral-0)"
+    },
+    {
+      "name": "--tq-color-action-secondary-bg",
+      "type": "color",
+      "value": "var(--tq-brand-color-secondary-600)"
+    },
+    {
+      "name": "--tq-color-action-secondary-bg-hover",
+      "type": "color",
+      "value": "var(--tq-brand-color-secondary-700)"
+    },
+    {
+      "name": "--tq-color-action-secondary-bg-active",
+      "type": "color",
+      "value": "var(--tq-brand-color-secondary-800)"
+    },
+    {
+      "name": "--tq-color-action-secondary-fg",
+      "type": "color",
+      "value": "var(--tq-brand-color-neutral-0)"
+    },
+    {
+      "name": "--tq-color-action-neutral-bg",
+      "type": "color",
+      "value": "var(--tq-brand-color-neutral-100)"
+    },
+    {
+      "name": "--tq-color-action-neutral-bg-hover",
+      "type": "color",
+      "value": "var(--tq-brand-color-neutral-200)"
+    },
+    {
+      "name": "--tq-color-action-neutral-bg-active",
+      "type": "color",
+      "value": "var(--tq-brand-color-neutral-300)"
+    },
+    {
+      "name": "--tq-color-action-neutral-fg",
+      "type": "color",
+      "value": "var(--tq-brand-color-neutral-900)"
+    },
+    {
+      "name": "--tq-color-action-negative-bg",
+      "type": "color",
+      "value": "var(--tq-brand-color-negative-600)"
+    },
+    {
+      "name": "--tq-color-action-negative-bg-hover",
+      "type": "color",
+      "value": "var(--tq-brand-color-negative-700)"
+    },
+    {
+      "name": "--tq-color-action-negative-bg-active",
+      "type": "color",
+      "value": "var(--tq-brand-color-negative-800)"
+    },
+    {
+      "name": "--tq-color-action-negative-fg",
+      "type": "color",
+      "value": "var(--tq-brand-color-neutral-0)"
+    },
+    {
+      "name": "--tq-color-status-positive-bg",
+      "type": "color",
+      "value": "var(--tq-brand-color-positive-100)"
+    },
+    {
+      "name": "--tq-color-status-positive-fg",
+      "type": "color",
+      "value": "var(--tq-brand-color-positive-700)"
+    },
+    {
+      "name": "--tq-color-status-positive-border",
+      "type": "color",
+      "value": "var(--tq-brand-color-positive-300)"
+    },
+    {
+      "name": "--tq-color-status-warning-bg",
+      "type": "color",
+      "value": "var(--tq-brand-color-warning-100)"
+    },
+    {
+      "name": "--tq-color-status-warning-fg",
+      "type": "color",
+      "value": "var(--tq-brand-color-warning-800)"
+    },
+    {
+      "name": "--tq-color-status-warning-border",
+      "type": "color",
+      "value": "var(--tq-brand-color-warning-300)"
+    },
+    {
+      "name": "--tq-color-status-negative-bg",
+      "type": "color",
+      "value": "var(--tq-brand-color-negative-100)"
+    },
+    {
+      "name": "--tq-color-status-negative-fg",
+      "type": "color",
+      "value": "var(--tq-brand-color-negative-700)"
+    },
+    {
+      "name": "--tq-color-status-negative-border",
+      "type": "color",
+      "value": "var(--tq-brand-color-negative-300)"
+    },
+    {
+      "name": "--tq-color-status-informative-bg",
+      "type": "color",
+      "value": "var(--tq-brand-color-secondary-100)"
+    },
+    {
+      "name": "--tq-color-status-informative-fg",
+      "type": "color",
+      "value": "var(--tq-brand-color-secondary-700)"
+    },
+    {
+      "name": "--tq-color-status-informative-border",
+      "type": "color",
+      "value": "var(--tq-brand-color-secondary-300)"
+    },
+    { "name": "--tq-font-family-body", "type": "fontFamily", "value": "\"Geist\"" },
+    { "name": "--tq-font-family-mono", "type": "fontFamily", "value": "\"JetBrains Mono\"" },
+    { "name": "--tq-font-size-xs", "type": "fontSize", "value": "12px" },
+    { "name": "--tq-font-size-sm", "type": "fontSize", "value": "14px" },
+    { "name": "--tq-font-size-md", "type": "fontSize", "value": "16px" },
+    { "name": "--tq-font-size-lg", "type": "fontSize", "value": "18px" },
+    { "name": "--tq-font-size-xl", "type": "fontSize", "value": "20px" },
+    { "name": "--tq-font-size-2xl", "type": "fontSize", "value": "24px" },
+    { "name": "--tq-font-size-3xl", "type": "fontSize", "value": "30px" },
+    { "name": "--tq-font-size-4xl", "type": "fontSize", "value": "36px" },
+    { "name": "--tq-font-weight-regular", "type": "fontWeight", "value": "400" },
+    { "name": "--tq-font-weight-medium", "type": "fontWeight", "value": "500" },
+    { "name": "--tq-font-weight-semibold", "type": "fontWeight", "value": "600" },
+    { "name": "--tq-font-weight-bold", "type": "fontWeight", "value": "700" },
+    { "name": "--tq-font-line-height-tight", "type": "lineHeight", "value": "125%" },
+    { "name": "--tq-font-line-height-snug", "type": "lineHeight", "value": "137.5%" },
+    { "name": "--tq-font-line-height-normal", "type": "lineHeight", "value": "150%" },
+    { "name": "--tq-space-1", "type": "spacing", "value": "4px" },
+    { "name": "--tq-space-2", "type": "spacing", "value": "8px" },
+    { "name": "--tq-space-3", "type": "spacing", "value": "12px" },
+    { "name": "--tq-space-4", "type": "spacing", "value": "16px" },
+    { "name": "--tq-space-5", "type": "spacing", "value": "20px" },
+    { "name": "--tq-space-6", "type": "spacing", "value": "24px" },
+    { "name": "--tq-space-8", "type": "spacing", "value": "32px" },
+    { "name": "--tq-space-10", "type": "spacing", "value": "40px" },
+    { "name": "--tq-space-12", "type": "spacing", "value": "48px" },
+    { "name": "--tq-space-16", "type": "spacing", "value": "64px" },
+    { "name": "--tq-space-20", "type": "spacing", "value": "80px" },
+    { "name": "--tq-space-24", "type": "spacing", "value": "96px" },
+    {
+      "name": "--tq-radius-control",
+      "type": "radius",
+      "value": "6px",
+      "description": "Buttons, inputs, small controls."
+    },
+    {
+      "name": "--tq-radius-surface",
+      "type": "radius",
+      "value": "8px",
+      "description": "Cards and panels."
+    },
+    {
+      "name": "--tq-radius-overlay",
+      "type": "radius",
+      "value": "12px",
+      "description": "Dialogs, popovers, menus."
+    },
+    { "name": "--tq-radius-full", "type": "radius", "value": "9999px" }
+  ]
+}
