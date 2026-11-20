@@ -11,19 +11,19 @@ One scope for the whole monorepo: `apps/storybook` and `apps/sample` exist only 
 
 ## At a glance
 
-| #   | Feature                                                         | Phase    | Status   |
-| --- | --------------------------------------------------------------- | -------- | -------- |
-| A   | Token pipeline (Brand × Theme × Mode)                           | Existing | existing |
-| B   | Base components (Button, Input, Card, Field, Dialog)            | Existing | existing |
-| C   | Form and navigation components (Checkbox, Switch, Select, Tabs) | Existing | existing |
-| D   | Storybook docs and PR previews                                  | Existing | existing |
-| E   | Next.js sample app                                              | Existing | existing |
-| F   | Quality gates (CI, a11y, contrast, visual, packed tarball)      | Existing | existing |
-| G   | Release pipeline (Changesets, GitHub Packages)                  | Existing | existing |
-| H   | AI review gate (Pullfrog)                                       | Existing | existing |
-| 1   | UI foundation: token contract and Paper parity                  | Slice 1  | planned  |
-| 2   | Paper artboards for Checkbox, Switch, Select, Tabs              | Slice 1  | planned  |
-| 3   | Next components                                                 | Slice 2  | planned  |
+| #   | Feature                                                         | Phase    | Status      |
+| --- | --------------------------------------------------------------- | -------- | ----------- |
+| A   | Token pipeline (Brand × Theme × Mode)                           | Existing | existing    |
+| B   | Base components (Button, Input, Card, Field, Dialog)            | Existing | existing    |
+| C   | Form and navigation components (Checkbox, Switch, Select, Tabs) | Existing | existing    |
+| D   | Storybook docs and PR previews                                  | Existing | existing    |
+| E   | Next.js sample app                                              | Existing | existing    |
+| F   | Quality gates (CI, a11y, contrast, visual, packed tarball)      | Existing | existing    |
+| G   | Release pipeline (Changesets, GitHub Packages)                  | Existing | existing    |
+| H   | AI review gate (Pullfrog)                                       | Existing | existing    |
+| 1   | UI foundation: token contract and Paper parity                  | Slice 1  | in-progress |
+| 2   | Paper artboards for Checkbox, Switch, Select, Tabs              | Slice 1  | planned     |
+| 3   | Next components                                                 | Slice 2  | planned     |
 
 ## Already built
 
@@ -61,12 +61,22 @@ Pullfrog (Claude Opus) reviews PRs against `.github/pullfrog/review.md`. Paused 
 
 ## Slice 1: UI foundation
 
-### 1. UI foundation: token contract and Paper parity · needs a decision
+### 1. UI foundation: token contract and Paper parity · in-progress
 
 Write down that `packages/react/tokens/` is the source of truth for tokens and Paper is a consumer, and fix the contract a future token manager (a separate product) will read and write. Then bring the Paper file in line with it, since Paper today mirrors only part of the code: light mode only, no `brand.color.primary` or `brand.color.informative` roles (informative status points at secondary), no shadow, motion or container tokens, no `font.family.heading`, `space.0` or `radius.none`, and a stray `--untitled` token.
 **Done when:** a spec records the token source of truth, the token contract (paths, naming, brand and theme axes, what the build validates) and how tokens reach Paper until the manager exists; every semantic token in the code has a matching Paper variable in both modes (or a recorded reason why not); a repeatable parity check reports drift between the code and Paper.
 
-- [ ] Design it (spec): `/architect UI foundation`
+- [x] Design it (spec): `/architect UI foundation`
+- [ ] Build it: `/develop UI foundation`
+  - [ ] Thin thread: color payload and diff against the live Paper export, read only (AC-3, AC-4, AC-5)
+  - [ ] Full payload for every mapped type, with payload and diff tests (AC-3, AC-4, AC-5)
+  - [ ] Token contract: schema, checker and contract test (AC-1, AC-2)
+  - [ ] AGENTS.md: contract, Paper token exception, sync procedure (AC-2, AC-7, AC-9)
+  - [ ] First Paper sync after merge, diff clean (AC-6, AC-7, AC-8)
+- [ ] Verify it: `/check verify UI foundation`
+- [ ] Test it: `/test UI foundation`
+
+Spec [0001](../specs/0001-token-contract-paper-parity/index.md)
 
 ### 2. Paper artboards for Checkbox, Switch, Select, Tabs
 
@@ -90,6 +100,7 @@ Out of scope for the current build pass, kept so the plan stays honest.
 
 - **Second theme** (e.g. `black-friday`, overrides only): proves the theme axis · needs a decision
 - **Second brand**: proves the brand axis and the token manager's multi brand model · needs a decision
+- **Shadow and motion tokens in Paper** (from spec 0001): technical debt, revisit when Paper supports those token types
 - **Token manager**: a separate product in the portfolio, not this repo; Triquetra only keeps the contract it consumes (feature 1)
 
 ## Legend
