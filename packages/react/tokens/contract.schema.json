@@ -1,0 +1,310 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/renonreis/triquetra-design-system/packages/react/tokens/contract.schema.json",
+  "title": "Triquetra token contract",
+  "description": "Per file grammar of the DTCG 2025.10 token source (spec 0001). Validate primitives, brand and theme files with $defs.files.<kind>, then each token's $value with $defs.value.<type> for its effective $type (the token's own, else the nearest ancestor group's). Rules across files are enforced by validate() in scripts/build-tokens.ts.",
+  "$defs": {
+    "segment": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "typeName": {
+      "enum": [
+        "color",
+        "dimension",
+        "duration",
+        "fontFamily",
+        "fontWeight",
+        "number",
+        "cubicBezier",
+        "shadow"
+      ]
+    },
+    "group": {
+      "type": "object",
+      "properties": {
+        "$type": {
+          "$ref": "#/$defs/typeName"
+        },
+        "$description": {
+          "type": "string"
+        },
+        "$extensions": {
+          "type": "object"
+        }
+      },
+      "patternProperties": {
+        "^[a-z0-9]+(-[a-z0-9]+)*$": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/token"
+            },
+            {
+              "$ref": "#/$defs/group"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "token": {
+      "type": "object",
+      "required": ["$value"],
+      "properties": {
+        "$value": {},
+        "$type": {
+          "$ref": "#/$defs/typeName"
+        },
+        "$description": {
+          "type": "string"
+        },
+        "$extensions": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
+    },
+    "files": {
+      "primitive": {
+        "type": "object",
+        "required": ["primitive"],
+        "properties": {
+          "$description": {
+            "type": "string"
+          },
+          "primitive": {
+            "$ref": "#/$defs/group"
+          }
+        },
+        "additionalProperties": false
+      },
+      "brand": {
+        "type": "object",
+        "required": ["brand"],
+        "properties": {
+          "$description": {
+            "type": "string"
+          },
+          "brand": {
+            "$ref": "#/$defs/group"
+          }
+        },
+        "additionalProperties": false
+      },
+      "theme": {
+        "type": "object",
+        "properties": {
+          "$description": {
+            "type": "string"
+          }
+        },
+        "patternProperties": {
+          "^(color|shadow|space|radius|font|motion|size)$": {
+            "$ref": "#/$defs/group"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "alias": {
+      "type": "string",
+      "pattern": "^\\{[a-z0-9]+(-[a-z0-9]+)*(\\.[a-z0-9]+(-[a-z0-9]+)*)*\\}$"
+    },
+    "colorValue": {
+      "type": "object",
+      "required": ["colorSpace", "components"],
+      "properties": {
+        "colorSpace": {
+          "const": "oklch"
+        },
+        "components": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "prefixItems": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 360
+            }
+          ]
+        },
+        "alpha": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "hex": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "dimensionValue": {
+      "type": "object",
+      "required": ["value", "unit"],
+      "properties": {
+        "value": {
+          "type": "number"
+        },
+        "unit": {
+          "enum": ["px", "rem"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "value": {
+      "color": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/alias"
+          },
+          {
+            "$ref": "#/$defs/colorValue"
+          }
+        ]
+      },
+      "dimension": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/alias"
+          },
+          {
+            "$ref": "#/$defs/dimensionValue"
+          }
+        ]
+      },
+      "duration": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/alias"
+          },
+          {
+            "type": "object",
+            "required": ["value", "unit"],
+            "properties": {
+              "value": {
+                "type": "number",
+                "minimum": 0
+              },
+              "unit": {
+                "const": "ms"
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
+      "fontFamily": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/alias"
+          },
+          {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ]
+      },
+      "fontWeight": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/alias"
+          },
+          {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        ]
+      },
+      "number": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/alias"
+          },
+          {
+            "type": "number"
+          }
+        ]
+      },
+      "cubicBezier": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/alias"
+          },
+          {
+            "type": "array",
+            "minItems": 4,
+            "maxItems": 4,
+            "prefixItems": [
+              {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              {
+                "type": "number"
+              }
+            ]
+          }
+        ]
+      },
+      "shadow": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/alias"
+          },
+          {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["color", "offsetX", "offsetY", "blur", "spread"],
+              "properties": {
+                "color": {
+                  "$ref": "#/$defs/value/color"
+                },
+                "offsetX": {
+                  "$ref": "#/$defs/value/dimension"
+                },
+                "offsetY": {
+                  "$ref": "#/$defs/value/dimension"
+                },
+                "blur": {
+                  "$ref": "#/$defs/value/dimension"
+                },
+                "spread": {
+                  "$ref": "#/$defs/value/dimension"
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        ]
+      }
+    }
+  }
+}
