@@ -1,5 +1,5 @@
 import { spawnSync } from 'node:child_process';
-import { mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
+import { cpSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
@@ -78,6 +78,47 @@ describe('Paper payload (spec 0001)', () => {
     for (const [i, t] of payload.entries()) {
       const target = /^var\((--[\w-]+)\)$/.exec(String(t.value))?.[1];
       if (target) expect(index.get(target), `${t.name} → ${target}`).toBeLessThan(i);
+    }
+  });
+
+  // covers: AC-4 (value source: terminal primitive for literals, immediate target for aliases)
+  it('follows a primitive change into brand literals only, never into semantic aliases', () => {
+    // A copy of the build inside the package, so it resolves the same node_modules.
+    const dir = mkdtempSync(join(ROOT, '.paper-build-'));
+    try {
+      for (const f of ['build-tokens.ts', 'paper-tokens.ts'])
+        cpSync(join(ROOT, 'scripts', f), join(dir, 'scripts', f));
+      cpSync(join(ROOT, 'tokens'), join(dir, 'tokens'), {
+        recursive: true,
+        filter: (path) => !path.endsWith('.test.ts'),
+      });
+      const colors = join(dir, 'tokens/primitives/color.tokens.json');
+      const tree = JSON.parse(readFileSync(colors, 'utf8')) as {
+        primitive: { color: { grey: Record<string, { $value: { components: number[] } }> } };
+      };
+      const grey800 = tree.primitive.color.grey['800'];
+      if (!grey800) throw new Error('primitive.color.grey.800 is missing');
+      grey800.$value.components[0] = 0.4;
+      writeFileSync(colors, JSON.stringify(tree));
+
+      const run = spawnSync(process.execPath, [join(dir, 'scripts/build-tokens.ts')], {
+        encoding: 'utf8',
+      });
+      expect(run.status, run.stderr).toBe(0);
+      const changed = (
+        JSON.parse(
+          readFileSync(join(dir, 'src/styles/generated/paper-tokens.json'), 'utf8'),
+        ) as PaperToken[]
+      ).filter((t) => byName.get(t.name)?.value !== t.value);
+
+      expect(changed.map((t) => t.name)).toContain('--tq-brand-color-neutral-800');
+      expect(changed.find((t) => t.name === '--tq-brand-color-neutral-800')?.value).toBe(
+        'oklch(40% 0.013 260)',
+      );
+      // Only brand role literals move; semantics keep aliasing the role.
+      for (const t of changed) expect(t.name).toMatch(/^--tq-brand-color-/);
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
     }
   });
 

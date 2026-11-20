@@ -74,7 +74,7 @@ Write down that `packages/react/tokens/` is the source of truth for tokens and P
   - [x] AGENTS.md: contract, Paper token exception, sync procedure (AC-2, AC-7, AC-9)
   - [x] First Paper sync after merge, diff clean (AC-6, AC-7, AC-8): `main` 8c38be0 synced 2026-11-20, before export in the spec folder
 - [x] Verify it: `/check verify UI foundation`
-- [ ] Test it: `/test UI foundation`
+- [x] Test it: `/test UI foundation`
 
 Spec [0001](../specs/0001-token-contract-paper-parity/index.md) · code in `packages/react/scripts/`, `packages/react/tokens/`
 
