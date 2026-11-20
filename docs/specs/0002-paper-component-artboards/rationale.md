@@ -62,13 +62,19 @@ The full tables are long (6,808 rows), so each component has its own file under 
 | Select    | [parity/select.md](parity/select.md)     | 1,065      | 1,065     | all `match` | 4 of 4 caught light, 2 of 2 dark  |
 | Tabs      | [parity/tabs.md](parity/tabs.md)         | 1,507      | 1,507     | all `match` | 77 DIFF light, 46 DIFF dark       |
 
-No row needed `artboard fixed`, `code fix`, `design change` or `deviation`, so AC-7 closes with no follow up. A negative control (a value changed on purpose) was run on every table to prove the comparison catches a difference.
+Every measured row is `match`. The `/check verify` literal audit (2026-11-20) found one `deviation`, outside the tables because it is layout, not a measured style:
+
+| Story and checkpoint            | Mode        | Part                                 | Paper node   | Property             | Code value                                                               | Paper value                                                                          | Result      | Notes (SHA, approval, follow up)                                                                                                                                             |
+| ------------------------------- | ----------- | ------------------------------------ | ------------ | -------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Select, value with clear button | light, dark | end group (clear button + indicator) | 1S2-0, 1SI-0 | `gap`, `paddingLeft` | clear button and indicator absolutely placed (`end-8`, `end-3`, `pe-16`) | flex group with `gap: 3px`, `paddingLeft: 9px` (literals, not in _Allowed literals_) | `deviation` | `4bea3f2`; the boxes land where the code puts them (parity rows "x in trigger" match); approved by the maintainer on 2026-11-20; follow up in [index.md](index.md#follow-up) |
+
+A negative control (a value changed on purpose) was run on every table to prove the comparison catches a difference.
 
 Findings worth keeping for the next run:
 
 - Token bindings survive the `get_jsx` round trip for colors, font family, size and weight, padding, gap, radius, outline, SVG stroke, and also width and height with `--tq-space-*`.
 - Paper turns box shadows into hex with alpha and drops a zero spread (light `sm` `#1A1D210F 0px 1px 2px`, dark `#0000004D`), and "no paint" into `#00000000`. Both are compared after normalization and count as the allowed literals.
-- Binding audit: the only raw values left are the allowed literals (border widths, `leading-*` line heights, the D1 chrome, layout widths, the 1 px Tabs rule, shadows). No color, font or radius is literal.
+- Binding audit: the only raw values left are the allowed literals (border widths, `leading-*` line heights, the D1 chrome, layout widths, the 1 px Tabs rule, shadows), plus the Select end group `deviation` above. No color, font or radius is literal.
 - `create_artboard` drops `fontSize` and `lineHeight`; set them with `update_styles` after.
 - Changing `color` on a text node with `update_styles` clears its inline span colors; rewrite them with `set_text_content` and its `html` parameter.
 - Dark siblings were made with `duplicate_nodes` plus one `update_styles` batch that swaps every color to its `-dark` token, mapped by the `descendantIdMap`.

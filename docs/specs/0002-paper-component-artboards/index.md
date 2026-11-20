@@ -235,6 +235,7 @@ Tracer Bullet: the exception first (nothing can be written without it), then one
 - [ ] Automate parity (Paper export against Storybook computed styles) if manual tables prove too costly
 - [ ] Bind shadows to tokens once Paper supports shadow tokens (spec 0001 follow up)
 - [ ] Feature 3 (Next components): each new component uses this procedure for its artboard first
+- [ ] Select end group (1S2-0, 1SI-0): replace `gap: 3px` and `paddingLeft: 9px` with absolute placement or allow the geometry under _Allowed literals_ (deviation approved 2026-11-20, see rationale)
 
 ## Rationale
 
