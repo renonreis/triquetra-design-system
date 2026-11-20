@@ -18,6 +18,27 @@ Triquetra is a React design system: design tokens, accessible components, and th
 - **Monorepo:** pnpm workspaces (`pnpm-workspace.yaml`) + Turborepo (`turbo.json`). Run tasks from the root; Turborepo builds dependencies first (`^build`) and caches results.
 - **Packages:** `@renonreis/triquetra` (`packages/react`), published to GitHub Packages (`.npmrc` maps the `@renonreis` scope). Consumers import components from `@renonreis/triquetra` and styles from `@renonreis/triquetra/styles.css`.
 
+## Build approach
+
+**Tracer Bullet** (each slice goes through every layer, working: tokens → component → stories and tests → visual baselines → changeset). Set in `docs/scope/scope.md`.
+
+## Design sources
+
+- **Tokens:** `packages/react/tokens/` (DTCG JSON) is the source of truth. Paper consumes them; it never defines them. A separate token manager product (not in this repo) will later distribute these tokens to Paper and to each DS or brand.
+- **Component design:** the [Paper file](https://app.paper.design/file/01M7R4TP595GEKCEE8SHQCTJMX/p-2-0) is the source for layout, anatomy and states. Read exact values with the Paper MCP (`get_computed_styles`, `get_jsx`), never from screenshots. Agents never write to the Paper file.
+
+## Workflow (Zero Dawn)
+
+- Scope: `docs/scope/scope.md`. Specs: `docs/specs/NNNN-title.md` (owned by `/architect`). Read both before building a feature.
+- Default tier: **Beta** (after `/develop`: `/check verify`, then `/test`).
+
+## Git
+
+- integration: on
+- branch prefix: feat/
+- commit: per-milestone
+- autonomy: full
+
 ## Setup commands
 
 ```bash
@@ -187,7 +208,7 @@ Rules:
 - Each PR from this repository gets a Storybook preview on Cloudflare Pages at `https://pr-<number>.triquetra-storybook.pages.dev`, posted as a PR comment. `main` deploys to [triquetra.renon.dev](https://triquetra.renon.dev). Link the relevant stories in the PR description.
 - Releases (`.github/workflows/release.yml`): when changesets are pending on `main`, Changesets opens or updates a `chore: release` PR. Merging it publishes to GitHub Packages. The workflow opens that PR with a GitHub App token (`RELEASE_APP_CLIENT_ID` variable + `RELEASE_APP_PRIVATE_KEY` secret), so CI runs on it like on any other PR.
 - Keep PRs scoped: one component or one token concern per PR when possible.
-- **Review gate: [Pullfrog](https://pullfrog.com) (Claude Opus).** It reviews every PR on open and on each push, and approves or requests changes; `pullfrog-approval` is a required check. Its checklist is `.github/pullfrog/review.md` (keep it in sync with this file; after editing it, run `pnpm dlx pullfrog config set prompts.review --file .github/pullfrog/review.md`). Address its requested changes and resolve its threads until it approves. Mention `@pullfrog` in a PR comment to ask for a re-review. The workflow (`.github/workflows/pullfrog.yml`) is dispatched by the Pullfrog GitHub App; don't add `pull_request` triggers to it.
+- **Review gate: [Pullfrog](https://pullfrog.com) (Claude Opus). Paused since 2026-11-19 to save tokens:** reviews are off (`review.mode=none`) and `pullfrog-approval` is not a required check on `main`, so PRs don't wait for it. Only the maintainer turns it back on. When it is on, it reviews every PR on open and on each push, and approves or requests changes; `pullfrog-approval` is a required check. Its checklist is `.github/pullfrog/review.md` (keep it in sync with this file; after editing it, run `pnpm dlx pullfrog config set prompts.review --file .github/pullfrog/review.md`). Address its requested changes and resolve its threads until it approves. Mention `@pullfrog` in a PR comment to ask for a re-review. The workflow (`.github/workflows/pullfrog.yml`) is dispatched by the Pullfrog GitHub App; don't add `pull_request` triggers to it.
 - The maintainer is involved only for decisions: anything under **Ask first** below, or a Pullfrog review that starts with "Needs maintainer decision:". Don't wait for or request a human review otherwise.
 
 ## Boundaries
