@@ -11,3 +11,5 @@ pnpm-lock.yaml
 apps/storybook/tests/visual/__screenshots__
 **/.next
 **/next-env.d.ts
+# Generated parity tables (spec 0002), kept compact
+docs/specs/*/parity

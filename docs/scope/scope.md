@@ -84,12 +84,12 @@ Paper is the source of component design, but these four shipped without artboard
 **Done when:** each of the four has a Paper artboard with every variant and state its stories cover, in light and dark, and any difference from the shipped component is either fixed in code (with a changeset) or recorded as a design change.
 
 - [x] Design it (spec): `/architect Paper parity for Checkbox, Switch, Select, Tabs`
-- [ ] Build it: `/develop Paper artboards for Checkbox, Switch, Select, Tabs`
-  - [ ] Docs PR: Paper artboards exception in AGENTS.md, spec 0001 invariant and this feature's text reconciled (AC-1)
-  - [ ] Baseline, Storybook measurement and write plan approval (AC-5, AC-8)
-  - [ ] Pilot: Checkbox light, then Checkbox dark, with parity table (AC-2 to AC-6)
-  - [ ] Switch, Select, Tabs in light and dark, with parity tables (AC-2 to AC-6)
-  - [ ] Every difference resolved, then scope audit (AC-7, AC-8)
+- [x] Build it: `/develop Paper artboards for Checkbox, Switch, Select, Tabs`
+  - [x] Docs PR: Paper artboards exception in AGENTS.md, spec 0001 invariant and this feature's text reconciled (AC-1)
+  - [x] Baseline, Storybook measurement and write plan approval (AC-5, AC-8)
+  - [x] Pilot: Checkbox light, then Checkbox dark, with parity table (AC-2 to AC-6)
+  - [x] Switch, Select, Tabs in light and dark, with parity tables (AC-2 to AC-6)
+  - [x] Every difference resolved, then scope audit (AC-7, AC-8)
 - [ ] Verify it: `/check verify Paper artboards for Checkbox, Switch, Select, Tabs`
 - [ ] Test it: `/test Paper artboards for Checkbox, Switch, Select, Tabs`
 
