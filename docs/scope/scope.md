@@ -90,7 +90,7 @@ Paper is the source of component design, but these four shipped without artboard
   - [x] Pilot: Checkbox light, then Checkbox dark, with parity table (AC-2 to AC-6)
   - [x] Switch, Select, Tabs in light and dark, with parity tables (AC-2 to AC-6)
   - [x] Every difference resolved, then scope audit (AC-7, AC-8)
-- [ ] Verify it: `/check verify Paper artboards for Checkbox, Switch, Select, Tabs`
+- [x] Verify it: `/check verify Paper artboards for Checkbox, Switch, Select, Tabs`
 - [ ] Test it: `/test Paper artboards for Checkbox, Switch, Select, Tabs`
 
 Spec [0002](../specs/0002-paper-component-artboards/index.md)
