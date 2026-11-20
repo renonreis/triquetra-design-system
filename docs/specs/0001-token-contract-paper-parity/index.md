@@ -1,7 +1,7 @@
 # 0001. Token contract and Paper parity
 
 **Date**: 2026-11-20
-**Status**: Proposed
+**Status**: In Progress
 
 ## Summary
 
