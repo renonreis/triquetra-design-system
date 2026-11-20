@@ -6,5 +6,6 @@ export {
   type FieldLabelProps,
   type FieldRequiredIndicatorProps,
   type FieldRootProps,
+  type FieldTextareaProps,
 } from './field.js';
 export { fieldVariants } from './field.variants.js';
