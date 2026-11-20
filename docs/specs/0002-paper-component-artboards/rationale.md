@@ -53,6 +53,40 @@ Filled during the build, one table per component (AC-6), with these columns:
 | Story and checkpoint | Mode | Part | Paper node | Property | Code value | Paper value | Result | Notes (SHA, approval, follow up) |
 | -------------------- | ---- | ---- | ---------- | -------- | ---------- | ----------- | ------ | -------------------------------- |
 
+The full tables are long (6,808 rows), so each component has its own file under [`parity/`](parity/), with a light and a dark section. Summary:
+
+| Component | Table                                    | Light rows | Dark rows | Result      | Negative control                  |
+| --------- | ---------------------------------------- | ---------- | --------- | ----------- | --------------------------------- |
+| Checkbox  | [parity/checkbox.md](parity/checkbox.md) | 452        | 452       | all `match` | 1 DIFF caught (one token swapped) |
+| Switch    | [parity/switch.md](parity/switch.md)     | 380        | 380       | all `match` | 20 DIFF light, 1 DIFF dark        |
+| Select    | [parity/select.md](parity/select.md)     | 1,065      | 1,065     | all `match` | 4 of 4 caught light, 2 of 2 dark  |
+| Tabs      | [parity/tabs.md](parity/tabs.md)         | 1,507      | 1,507     | all `match` | 77 DIFF light, 46 DIFF dark       |
+
+No row needed `artboard fixed`, `code fix`, `design change` or `deviation`, so AC-7 closes with no follow up. A negative control (a value changed on purpose) was run on every table to prove the comparison catches a difference.
+
+Findings worth keeping for the next run:
+
+- Token bindings survive the `get_jsx` round trip for colors, font family, size and weight, padding, gap, radius, outline, SVG stroke, and also width and height with `--tq-space-*`.
+- Paper turns box shadows into hex with alpha and drops a zero spread (light `sm` `#1A1D210F 0px 1px 2px`, dark `#0000004D`), and "no paint" into `#00000000`. Both are compared after normalization and count as the allowed literals.
+- Binding audit: the only raw values left are the allowed literals (border widths, `leading-*` line heights, the D1 chrome, layout widths, the 1 px Tabs rule, shadows). No color, font or radius is literal.
+- `create_artboard` drops `fontSize` and `lineHeight`; set them with `update_styles` after.
+- Changing `color` on a text node with `update_styles` clears its inline span colors; rewrite them with `set_text_content` and its `html` parameter.
+- Dark siblings were made with `duplicate_nodes` plus one `update_styles` batch that swaps every color to its `-dark` token, mapped by the `descendantIdMap`.
+
 ## Run ledger summary
 
 Filled at the end of the run: code SHA, baseline token hash, and the eight artboard IDs.
+
+| Item                          | Value                                                                                                                                                                      |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Code SHA                      | `e7dce45` (`main`, merge of #48); Storybook measured at `5b402ec`, same `packages/react`                                                                                   |
+| Paper file and page           | `01M7R4TP595GEKCEE8SHQCTJMX`, `p-4-0` (Components)                                                                                                                         |
+| Baseline `contentHash.tokens` | `8c490a95` before and after the run; `tokens:paper:diff` exit 0                                                                                                            |
+| Write plan                    | approved 2026-11-20 with decisions D1 to D4; pilot (Checkbox light) approved before the rest                                                                               |
+| Ledger                        | 76 calls, every target a node the run created or the page `p-4-0`                                                                                                          |
+| Light artboards (y 0)         | `TK-0` Checkbox (x 4560), `190-0` Switch (6080), `1KQ-0` Select (7600), `2EE-0` Tabs (9120)                                                                                |
+| Dark artboards (y 3990)       | `11J-0` Checkbox · Dark, `1EX-0` Switch · Dark, `1ZP-0` Select · Dark, `2NZ-0` Tabs · Dark, each under its light one; y is the tallest light (Select, about 3830) plus 160 |
+| Scope audit                   | page holds the 3 existing artboards plus these 8; `get_jsx` of `IB-0`, `O0-0`, `R7-0` byte equal to the baseline, positions unchanged, token hash unchanged                |
+| Close                         | `finish_working_on_nodes` with the eight IDs above                                                                                                                         |
+
+One ledger call needed a fix: a `set_text_content` on `2X9-0` (Tabs · Dark header) used the wrong parameter and wrote span markup as text; the next call rewrote it with `html`. Both are on the run's own node.
