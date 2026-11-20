@@ -114,9 +114,9 @@ A multi line text field that matches Input and works inside Field (label, helper
 
 - [x] Design it (spec): `/architect Textarea`
 - [ ] Build it: `/develop Textarea`
-  - [ ] Docs PR: design first variant of the Paper artboards rule in AGENTS.md (AC-1)
-  - [ ] Paper run: baseline, write plan approval, pilot light, then dark (AC-1 to AC-4)
-  - [ ] Design review of both artboards, scope audit, close and ledger summary (AC-5)
+  - [x] Docs PR: design first variant of the Paper artboards rule in AGENTS.md (AC-1)
+  - [x] Paper run: baseline, write plan approval, pilot light, then dark (AC-1 to AC-4)
+  - [x] Design review of both artboards, scope audit, close and ledger summary (AC-5)
   - [ ] Code PR: component, Field.Textarea, stories, tests, baselines, parity and changeset (AC-6 to AC-13)
 - [ ] Verify it: `/check verify Textarea`
 - [ ] Test it: `/test Textarea`
