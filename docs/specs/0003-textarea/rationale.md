@@ -73,3 +73,25 @@ Filled during the build (AC-12): [`parity/textarea.md`](parity/textarea.md), lig
 ## Run ledger summary
 
 Filled at the end of the Paper run: design SHA, approvals with dates (write plan, pilot, design review), baseline token hash, the two artboard IDs, ledger call count, scope audit result. The measurement SHA of the code PR goes in the parity table.
+
+| Item                          | Value                                                                                                                                                     |
+| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Design SHA                    | `ce59915` (`main`, merge of #54), unchanged from baseline to close                                                                                        |
+| Paper file and page           | `01M7R4TP595GEKCEE8SHQCTJMX`, `p-4-0` (Components)                                                                                                        |
+| Baseline `contentHash.tokens` | `8c490a95` before and after the run; `tokens:paper:diff` exit 0                                                                                           |
+| Approvals                     | write plan 2026-11-20; pilot (light) 2026-11-20; design review of both artboards 2026-11-20, no changes asked                                             |
+| Ledger                        | 22 calls, every target a node the run created or the page `p-4-0`                                                                                         |
+| Light artboard                | `2XD-0` Textarea at x 10640, y 0                                                                                                                          |
+| Dark artboard                 | `32V-0` Textarea · Dark at x 10640, y 3990; `duplicate_nodes` of the light one plus one `update_styles` batch (166 color references, all `-dark`)         |
+| Binding audit                 | light: no `-dark` token, no literal color; dark: every color a `-dark` token, no literal color, JSX equal to the light copy apart from the `-dark` suffix |
+| Scope audit                   | page holds the 11 baseline artboards plus these 2; ids, sizes and positions unchanged; `get_jsx` of the 8 spec 0002 artboards byte equal to the baseline  |
+| Close                         | `finish_working_on_nodes` with `2XD-0` and `32V-0`                                                                                                        |
+
+For `IB-0`, `O0-0` and `R7-0` the tool returned the JSX inline, so the audit compared their structure (node count and last node) instead of bytes; no ledger call targets them.
+
+Differences from the write plan, all in the chrome and approved with the pilot:
+
+- The states grid keeps the caption inside each cell (7 rows by 2 columns: placeholder, value), not a third column.
+- The Props table's default column is 340 px, not `TK-0`'s 150 px, so the `Field.Textarea` row fits on one line.
+- An empty default reads `none`, not a dash.
+- Parallel `write_html` calls landed the state rows out of order; one `move_nodes` on the run's own nodes fixed it.
