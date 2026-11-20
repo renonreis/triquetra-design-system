@@ -11,19 +11,19 @@ One scope for the whole monorepo: `apps/storybook` and `apps/sample` exist only 
 
 ## At a glance
 
-| #   | Feature                                                         | Phase    | Status   |
-| --- | --------------------------------------------------------------- | -------- | -------- |
-| A   | Token pipeline (Brand × Theme × Mode)                           | Existing | existing |
-| B   | Base components (Button, Input, Card, Field, Dialog)            | Existing | existing |
-| C   | Form and navigation components (Checkbox, Switch, Select, Tabs) | Existing | existing |
-| D   | Storybook docs and PR previews                                  | Existing | existing |
-| E   | Next.js sample app                                              | Existing | existing |
-| F   | Quality gates (CI, a11y, contrast, visual, packed tarball)      | Existing | existing |
-| G   | Release pipeline (Changesets, GitHub Packages)                  | Existing | existing |
-| H   | AI review gate (Pullfrog)                                       | Existing | existing |
-| 1   | UI foundation: token contract and Paper parity                  | Slice 1  | done     |
-| 2   | Paper artboards for Checkbox, Switch, Select, Tabs              | Slice 1  | planned  |
-| 3   | Next components                                                 | Slice 2  | planned  |
+| #   | Feature                                                         | Phase    | Status      |
+| --- | --------------------------------------------------------------- | -------- | ----------- |
+| A   | Token pipeline (Brand × Theme × Mode)                           | Existing | existing    |
+| B   | Base components (Button, Input, Card, Field, Dialog)            | Existing | existing    |
+| C   | Form and navigation components (Checkbox, Switch, Select, Tabs) | Existing | existing    |
+| D   | Storybook docs and PR previews                                  | Existing | existing    |
+| E   | Next.js sample app                                              | Existing | existing    |
+| F   | Quality gates (CI, a11y, contrast, visual, packed tarball)      | Existing | existing    |
+| G   | Release pipeline (Changesets, GitHub Packages)                  | Existing | existing    |
+| H   | AI review gate (Pullfrog)                                       | Existing | existing    |
+| 1   | UI foundation: token contract and Paper parity                  | Slice 1  | done        |
+| 2   | Paper artboards for Checkbox, Switch, Select, Tabs              | Slice 1  | in-progress |
+| 3   | Next components                                                 | Slice 2  | planned     |
 
 ## Already built
 
@@ -78,12 +78,22 @@ Write down that `packages/react/tokens/` is the source of truth for tokens and P
 
 Spec [0001](../specs/0001-token-contract-paper-parity/index.md) · code in `packages/react/scripts/`, `packages/react/tokens/`
 
-### 2. Paper artboards for Checkbox, Switch, Select, Tabs
+### 2. Paper artboards for Checkbox, Switch, Select, Tabs · in-progress
 
 Paper is the source of component design, but these four shipped without artboards. Drawing them is design work done in Paper by you or by an explicit design task (build skills never write to Paper); then the code is checked against them.
 **Done when:** each of the four has a Paper artboard with every variant and state its stories cover, in light and dark, and any difference from the shipped component is either fixed in code (with a changeset) or recorded as a design change.
 
-- [ ] Design it (spec): `/architect Paper parity for Checkbox, Switch, Select, Tabs`
+- [x] Design it (spec): `/architect Paper parity for Checkbox, Switch, Select, Tabs`
+- [ ] Build it: `/develop Paper artboards for Checkbox, Switch, Select, Tabs`
+  - [ ] Docs PR: Paper artboards exception in AGENTS.md, spec 0001 invariant and this feature's text reconciled (AC-1)
+  - [ ] Baseline, Storybook measurement and write plan approval (AC-5, AC-8)
+  - [ ] Pilot: Checkbox light, then Checkbox dark, with parity table (AC-2 to AC-6)
+  - [ ] Switch, Select, Tabs in light and dark, with parity tables (AC-2 to AC-6)
+  - [ ] Every difference resolved, then scope audit (AC-7, AC-8)
+- [ ] Verify it: `/check verify Paper artboards for Checkbox, Switch, Select, Tabs`
+- [ ] Test it: `/test Paper artboards for Checkbox, Switch, Select, Tabs`
+
+Spec [0002](../specs/0002-paper-component-artboards/index.md)
 
 ## Slice 2: Catalog growth
 
@@ -101,6 +111,7 @@ Out of scope for the current build pass, kept so the plan stays honest.
 - **Second theme** (e.g. `black-friday`, overrides only): proves the theme axis · needs a decision
 - **Second brand**: proves the brand axis and the token manager's multi brand model · needs a decision
 - **Shadow and motion tokens in Paper** (from spec 0001): technical debt, revisit when Paper supports those token types
+- **Retrofit Button, Input & Field, Card & Dialog artboards** (from spec 0002): `· Dark` siblings and token bound radius and spacing
 - **Token manager**: a separate product in the portfolio, not this repo; Triquetra only keeps the contract it consumes (feature 1)
 
 ## Legend
