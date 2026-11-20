@@ -97,12 +97,45 @@ Spec [0002](../specs/0002-paper-component-artboards/index.md)
 
 ## Slice 2: Catalog growth
 
-### 3. Next components · needs a decision
+### 3. Next components · done
 
-Grow the catalog one component per PR, each designed in Paper first, then built end to end (Tracer Bullet). Which components, and in what order, is decided when this slice starts.
-**Done when:** each new component has a Paper artboard, the component, stories in light and dark, axe tests, visual baselines and a `minor` changeset.
+Grow the catalog one component per PR, each designed in Paper first, then built end to end (Tracer Bullet). Picked on 2026-11-20: finish forms and feedback first, simplest first, and Tooltip last because it sets the floating pattern (positioning, portal). Slice 2 starts after feature 2 is `done`, so the Paper artboard procedure from spec 0002 is proven first.
+**Done when:** features 4 to 8 are enrolled and ordered.
 
-- [ ] Pick and order the components: `/scope next components`
+- [x] Pick and order the components: `/scope next components`
+
+Each component below is designed in Paper first: an agent drafts its artboard with tokens under the spec 0002 rules, you approve it, and the code follows it. Each adds a public export (`minor` changeset).
+**Done when** (for each): the component has a Paper artboard in light and dark, the component, stories in light and dark, axe tests, visual baselines and a `minor` changeset.
+
+### 4. Textarea · needs a decision
+
+A multi line text field that matches Input and works inside Field (label, helper, error).
+
+- [ ] Design it (spec): `/architect Textarea`
+
+### 5. Radio Group · needs a decision
+
+A single choice group on Ark's Radio Group, the counterpart of the Checkbox group, inside Field or a fieldset.
+
+- [ ] Design it (spec): `/architect Radio Group`
+
+### 6. Badge · needs a decision
+
+A small static label for status and counts, using the status color roles.
+
+- [ ] Design it (spec): `/architect Badge`
+
+### 7. Alert · needs a decision
+
+An inline message with a status (info, success, warning, error), title, description and optional icon.
+
+- [ ] Design it (spec): `/architect Alert`
+
+### 8. Tooltip · needs a decision
+
+A short hint on hover and focus, on Ark's Tooltip. The first floating component, so its spec also sets the positioning and portal pattern later overlays reuse.
+
+- [ ] Design it (spec): `/architect Tooltip`
 
 ## Deferred
 
