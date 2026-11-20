@@ -1,6 +1,7 @@
 import { Field as ArkField } from '@ark-ui/react';
 import { forwardRef } from 'react';
 import { Input, type InputProps } from '../input/index.js';
+import { Textarea, type TextareaProps } from '../textarea/index.js';
 import { fieldVariants } from './field.variants.js';
 
 const styles = fieldVariants();
@@ -42,6 +43,10 @@ export type FieldInputProps = InputProps;
 /** The Triquetra `Input`, connected to the field. */
 const FieldInput = Input;
 
+export type FieldTextareaProps = TextareaProps;
+/** The Triquetra `Textarea`, connected to the field. */
+const FieldTextarea = Textarea;
+
 export type FieldHelperTextProps = ArkField.HelperTextProps;
 const HelperText = forwardRef<HTMLSpanElement, FieldHelperTextProps>(function FieldHelperText(
   { className, ...props },
@@ -65,6 +70,7 @@ export const Field = {
   Label,
   RequiredIndicator,
   Input: FieldInput,
+  Textarea: FieldTextarea,
   HelperText,
   ErrorText,
 };
