@@ -123,7 +123,7 @@ Generated inside `scripts/build-tokens.ts` (or a module it imports) from the Sty
 
 - No token is defined only in Paper; any `--tq-` token Paper has that the code lacks is drift.
 - The payload is a pure function of the token source (same input, same output, same order).
-- Agents never call a Paper tool that changes nodes; only `create_tokens` and `set_tokens`, after approval.
+- Agents never call a Paper tool that changes nodes, except under spec 0002 (new component artboards, after approval); the token sync uses only `create_tokens` and `set_tokens`, after approval.
 - Paper matches the synced `main` commit, which may be ahead of the last published release.
 
 **Security model**: the Paper MCP runs with the engineer's account. Writes are limited by procedure (AC-7) and by approval each run. No secrets are added to the repo.
