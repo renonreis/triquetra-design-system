@@ -25,7 +25,7 @@ Triquetra is a React design system: design tokens, accessible components, and th
 ## Design sources
 
 - **Tokens:** `packages/react/tokens/` (DTCG JSON) is the source of truth. Paper consumes them; it never defines them. A separate token manager product (not in this repo) will later distribute these tokens to Paper and to each DS or brand.
-- **Component design:** the [Paper file](https://app.paper.design/file/01M7R4TP595GEKCEE8SHQCTJMX/p-2-0) is the source for layout, anatomy and states. Read exact values with the Paper MCP (`get_computed_styles`, `get_jsx`), never from screenshots. Agents never write to the Paper file.
+- **Component design:** the [Paper file](https://app.paper.design/file/01M7R4TP595GEKCEE8SHQCTJMX/p-2-0) is the source for layout, anatomy and states. Read exact values with the Paper MCP (`get_computed_styles`, `get_jsx`), never from screenshots. Agents never write to the Paper file, with one exception: the token sync below (tokens only, after approval).
 
 ## Workflow (Zero Dawn)
 
@@ -48,6 +48,7 @@ pnpm dev:sample         # Next.js sample app on http://localhost:3000
 pnpm build              # every package: tokens + JS (Vite) + types (tsc) + CSS (Tailwind CLI) → packages/*/dist/
 pnpm build-storybook    # static Storybook → apps/storybook/storybook-static/
 pnpm --filter @renonreis/triquetra tokens:build   # compile tokens/ → src/styles/generated/
+pnpm --filter @renonreis/triquetra tokens:paper:diff <export.json>   # compare tokens with a Paper export (0 ok, 1 drift, 2 error)
 ```
 
 ## Verification commands (run before every commit)
@@ -88,7 +89,10 @@ packages/
         light.tokens.json         # semantic colors + shadows, light mode
         dark.tokens.json          # semantic colors + shadows, dark mode (same paths as light)
       contrast.test.ts            # WCAG contrast checks on semantic pairs
+      contract.schema.json        # token contract: per file grammar (spec 0001)
+      contract.test.ts            # checks every token file against the contract
     scripts/build-tokens.ts       # Style Dictionary build + validation (Brand × Theme × Mode)
+    scripts/paper-tokens.ts       # Paper payload and diff (pure); paper-tokens-diff.ts is the CLI
     scripts/build-fonts.ts        # copies Geist Sans (@fontsource-variable/geist) and writes fonts.css
     src/
       components/<name>/
@@ -162,12 +166,27 @@ Rules:
   | `font.line-height.tight`  | `leading-tight`        |
 
 - After editing tokens, run `pnpm --filter @renonreis/triquetra tokens:build` (`dev`, `test`, `build` and `prepare` already run it). Commit only the source JSON. Generated files are git-ignored.
+- **Contract** ([spec 0001](docs/specs/0001-token-contract-paper-parity/index.md)): the token files are the contract a future token manager reads and writes. `tokens/contract.schema.json` holds the per file grammar and `contract.test.ts` checks every file against it; the rules across files stay in `validate()`. Change the schema and the spec together.
 - Published entry points:
   - `styles.css`: everything compiled (includes the font)
   - `fonts.css`: `@font-face` for Geist Sans, the brand sans font (files in `dist/fonts/`, SIL OFL 1.1)
   - `tokens.css`: CSS variables only
   - `theme.css`: the Tailwind v4 `@theme`, for apps that use Tailwind themselves
   - `tokens.json`: resolved values
+
+## Paper token sync
+
+Paper mirrors the tokens of the default brand and theme ([spec 0001](docs/specs/0001-token-contract-paper-parity/index.md)): brand roles, base semantics and light colors under their CSS names, dark colors under the same names plus `--dark` (Paper has no modes). `shadow.*` and `motion.*` stay in code only until Paper supports those types. `tokens:build` writes the payload to `src/styles/generated/paper-tokens.json`.
+
+- **When:** after a PR that changes `packages/react/tokens/` is merged to `main`. Paper follows `main`, never a branch.
+- **How** (agent, with the Paper MCP, file `01M7R4TP595GEKCEE8SHQCTJMX`):
+  1. On `main` at a known SHA, `get_tokens` (JSON) and save it as the before export.
+  2. Run `tokens:paper:diff` on it. Exit 0: done.
+  3. Show the maintainer the diff and the planned calls; they pick renames (old → new), deletes, and what to do with type drift.
+  4. Pilot batch first (an alias, a color, a font family, a line height), export again and check the diff treats them as equal.
+  5. Export again; if Paper changed since approval, start over. Then apply: renames (`set_tokens` `newName`, which keeps artboard bindings), creates (`create_tokens`, payload order), updates (`set_tokens`), approved deletes last. Stop on any error.
+  6. Export again: the diff must exit 0. A stopped run restarts from step 1 with a new approval.
+- **Never** call a Paper tool that edits nodes or artboards, and never replay an old plan.
 
 ## Component conventions
 

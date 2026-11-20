@@ -68,15 +68,15 @@ Write down that `packages/react/tokens/` is the source of truth for tokens and P
 
 - [x] Design it (spec): `/architect UI foundation`
 - [ ] Build it: `/develop UI foundation`
-  - [ ] Thin thread: color payload and diff against the live Paper export, read only (AC-3, AC-4, AC-5)
-  - [ ] Full payload for every mapped type, with payload and diff tests (AC-3, AC-4, AC-5)
-  - [ ] Token contract: schema, checker and contract test (AC-1, AC-2)
-  - [ ] AGENTS.md: contract, Paper token exception, sync procedure (AC-2, AC-7, AC-9)
+  - [x] Thin thread: color payload and diff against the live Paper export, read only (AC-3, AC-4, AC-5)
+  - [x] Full payload for every mapped type, with payload and diff tests (AC-3, AC-4, AC-5)
+  - [x] Token contract: schema, checker and contract test (AC-1, AC-2)
+  - [x] AGENTS.md: contract, Paper token exception, sync procedure (AC-2, AC-7, AC-9)
   - [ ] First Paper sync after merge, diff clean (AC-6, AC-7, AC-8)
 - [ ] Verify it: `/check verify UI foundation`
 - [ ] Test it: `/test UI foundation`
 
-Spec [0001](../specs/0001-token-contract-paper-parity/index.md)
+Spec [0001](../specs/0001-token-contract-paper-parity/index.md) · code in `packages/react/scripts/`, `packages/react/tokens/`
 
 ### 2. Paper artboards for Checkbox, Switch, Select, Tabs
 
