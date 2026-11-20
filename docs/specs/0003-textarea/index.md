@@ -1,7 +1,7 @@
 # 0003. Textarea
 
 **Date**: 2026-11-20
-**Status**: Proposed
+**Status**: In Progress
 
 ## Summary
 

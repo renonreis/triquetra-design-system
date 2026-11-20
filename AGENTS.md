@@ -190,7 +190,7 @@ Paper mirrors the tokens of the default brand and theme ([spec 0001](docs/specs/
 
 ## Paper artboards
 
-Agents may create **new** component artboards in Paper ([spec 0002](docs/specs/0002-paper-component-artboards/index.md)), drawn from the shipped code and bound to the Paper tokens, with a light artboard and a `<Component> · Dark` sibling (dark colors use the `-dark` tokens).
+Agents may create **new** component artboards in Paper ([spec 0002](docs/specs/0002-paper-component-artboards/index.md)), drawn from the shipped code (or from a spec, design first) and bound to the Paper tokens, with a light artboard and a `<Component> · Dark` sibling (dark colors use the `-dark` tokens).
 
 - **Scope:** only the Components page (`p-4-0`) of file `01M7R4TP595GEKCEE8SHQCTJMX`, only for a component listed in an accepted spec, and only nodes the run itself created (the run ledger). Existing artboards, other pages and tokens stay off limits; tokens change only through the token sync.
 - **Gates, in order:** the spec is accepted, the docs that allow the run are merged, then the maintainer approves a write plan pinned to a `main` SHA and a Paper baseline. No write before all three.
@@ -203,6 +203,11 @@ Agents may create **new** component artboards in Paper ([spec 0002](docs/specs/0
   5. Draw the rest, fill a parity table per component (`rationale.md` of the spec) and resolve every difference: artboard fixed, `code fix` (own PR with a `patch` changeset), or `design change` / `deviation` (maintainer approval plus a follow up).
   6. Scope audit: inventory, `get_jsx` and positions of the existing artboards and `contentHash.tokens` equal the baseline. Then `finish_working_on_nodes` with the run's artboard IDs only (never without IDs).
 - **Stops:** on any tool error, timeout or unclear result, stop writing, reconcile read only against the ledger and report. Deleting the run's nodes is its own approved step, only on roots the ledger proves are the run's. A stopped run restarts at step 1 with a new approval.
+- **Design first** ([spec 0003](docs/specs/0003-textarea/index.md)): a run may also draw a component before its code exists. Then the rules above change in four places, and only there:
+  - Scope and gates: a spec the maintainer confirmed and merged is enough (status `Proposed`), in place of an accepted spec.
+  - Step 1: the values come from the spec's design values; states shared with an existing component are measured on that component's stories in Storybook, light and dark.
+  - Steps 4 and 5: no parity table yet. Before the scope audit in step 6, the maintainer reviews both artboards; any change is drawn, read back and written into the spec.
+  - Parity is measured on the code PR. After the run closes, a difference is fixed in code, or in Paper only under a new approved write plan.
 - **Never** edit or delete a node the run did not create, write to another page or file, or replay an old plan.
 
 ## Component conventions
