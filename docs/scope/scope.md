@@ -175,7 +175,7 @@ A short hint on hover and focus, on Ark's Tooltip. The first floating component,
 
 - [x] Design it (spec): `/architect Tooltip`
 - [ ] Build it: `/develop Tooltip`
-  - [ ] Paper run: baseline with JSX and PNG hashes, Button and line count measurement, write plan approval, pilot light, then dark (AC-1 to AC-4)
+  - [x] Paper run: baseline with JSX and PNG hashes, Button and line count measurement, write plan approval, pilot light, then dark (AC-1 to AC-4)
   - [ ] Design review of both artboards, scope audit, close and ledger summary (AC-5)
   - [ ] Code PR: component, stories, tests, baselines, parity and changeset (AC-6 to AC-12)
 - [ ] Verify it: `/check verify Tooltip`
