@@ -31,7 +31,7 @@ function Example({
 const radio = (name: string) => screen.getByRole('radio', { name });
 
 describe('RadioGroup', () => {
-  it('names the group with its label and each radio with its text', () => {
+  it('names the group with its label and each radio with its text (AC-6, AC-7)', () => {
     render(<Example />);
     const group = screen.getByRole('radiogroup', { name: 'Contact method' });
     expect(group).toHaveAttribute('aria-orientation', 'vertical');
@@ -39,7 +39,7 @@ describe('RadioGroup', () => {
     expect(radio('Text message')).toHaveAttribute('type', 'radio');
   });
 
-  it('selects one option on click and reports it', async () => {
+  it('selects one option on click and reports it (AC-7)', async () => {
     const user = userEvent.setup();
     const onValueChange = vi.fn();
     render(<Example onValueChange={onValueChange} />);
@@ -54,7 +54,7 @@ describe('RadioGroup', () => {
     expect(radio('Phone')).not.toBeChecked();
   });
 
-  it('follows a controlled value', () => {
+  it('follows a controlled value (AC-7)', () => {
     const { rerender } = render(<Example value="email" />);
     expect(radio('Email')).toBeChecked();
     rerender(<Example value="sms" />);
@@ -62,19 +62,19 @@ describe('RadioGroup', () => {
     expect(radio('Email')).not.toBeChecked();
   });
 
-  it('starts from defaultValue', () => {
+  it('starts from defaultValue (AC-7)', () => {
     render(<Example defaultValue="phone" />);
     expect(radio('Phone')).toBeChecked();
   });
 
-  it('enters the group with Tab on the checked radio', async () => {
+  it('enters the group with Tab on the checked radio (AC-7)', async () => {
     const user = userEvent.setup();
     render(<Example defaultValue="phone" />);
     await user.tab();
     expect(radio('Phone')).toHaveFocus();
   });
 
-  it('marks every radio invalid from the root, or one radio from its item', () => {
+  it('marks every radio invalid from the root, or one radio from its item (AC-7)', () => {
     const { rerender } = render(<Example invalid />);
     for (const [, label] of OPTIONS) expect(radio(label)).toHaveAttribute('aria-invalid', 'true');
 
@@ -83,13 +83,13 @@ describe('RadioGroup', () => {
     expect(radio('Email')).not.toHaveAttribute('aria-invalid');
   });
 
-  it('marks the group and every radio required', () => {
+  it('marks the group and every radio required (AC-7)', () => {
     render(<Example required />);
     expect(screen.getByRole('radiogroup')).toHaveAttribute('aria-required', 'true');
     for (const [, label] of OPTIONS) expect(radio(label)).toBeRequired();
   });
 
-  it('disables the whole group or one item', async () => {
+  it('disables the whole group or one item (AC-7)', async () => {
     const user = userEvent.setup();
     const { rerender } = render(<Example disabled />);
     for (const [, label] of OPTIONS) expect(radio(label)).toBeDisabled();
@@ -101,7 +101,7 @@ describe('RadioGroup', () => {
     expect(radio('Email')).toBeEnabled();
   });
 
-  it('keeps the value when read only (Ark disables the radios)', async () => {
+  it('keeps the value when read only (Ark disables the radios) (AC-7)', async () => {
     const user = userEvent.setup();
     render(<Example readOnly defaultValue="email" />);
     expect(screen.getByRole('radiogroup')).toHaveAttribute('aria-readonly', 'true');
@@ -112,7 +112,7 @@ describe('RadioGroup', () => {
     expect(radio('Email')).toBeDisabled();
   });
 
-  it('submits the selected value under name', async () => {
+  it('submits the selected value under name (AC-7)', async () => {
     const user = userEvent.setup();
     const { container } = render(
       <form>
@@ -125,7 +125,40 @@ describe('RadioGroup', () => {
     expect(new FormData(form).get('contact')).toBe('sms');
   });
 
-  it('shares the size with every item and draws the dot only when checked', () => {
+  it('submits under the group id when no name is given (AC-7)', async () => {
+    const user = userEvent.setup();
+    const { container } = render(
+      <form>
+        <RadioGroup.Root>
+          <RadioGroup.Label>Contact method</RadioGroup.Label>
+          <RadioGroup.Item value="email">
+            <RadioGroup.ItemControl />
+            <RadioGroup.ItemText>Email</RadioGroup.ItemText>
+          </RadioGroup.Item>
+        </RadioGroup.Root>
+      </form>,
+    );
+    await user.click(screen.getByText('Email'));
+    const name = radio('Email').getAttribute('name');
+    expect(name).toBeTruthy();
+    const form = container.querySelector('form');
+    if (!form) throw new Error('form not rendered');
+    expect(new FormData(form).get(name ?? '')).toBe('email');
+  });
+
+  it('leaves a read only value out of the submitted form (AC-7)', () => {
+    const { container } = render(
+      <form>
+        <Example readOnly defaultValue="email" />
+      </form>,
+    );
+    const form = container.querySelector('form');
+    if (!form) throw new Error('form not rendered');
+    // Ark disables read only radios, and disabled inputs are not submitted.
+    expect(new FormData(form).get('contact')).toBeNull();
+  });
+
+  it('shares the size with every item and draws the dot only when checked (AC-6, AC-8)', () => {
     const { container } = render(<Example size="lg" defaultValue="email" />);
     const controls = container.querySelectorAll('[data-part="item-control"]');
     expect(controls).toHaveLength(3);
@@ -136,13 +169,13 @@ describe('RadioGroup', () => {
     expect(screen.getByText('Email')).toHaveClass('text-md', 'leading-6');
   });
 
-  it('lays the label on its own line when horizontal', () => {
+  it('lays the label on its own line when horizontal (AC-8)', () => {
     render(<Example orientation="horizontal" />);
     expect(screen.getByRole('radiogroup')).toHaveAttribute('aria-orientation', 'horizontal');
     expect(screen.getByText('Contact method')).toHaveAttribute('data-orientation', 'horizontal');
   });
 
-  it('forwards refs to every part and spreads extra props', () => {
+  it('forwards refs to every part and spreads extra props (AC-6)', () => {
     const root = createRef<HTMLDivElement>();
     const label = createRef<HTMLSpanElement>();
     const item = createRef<HTMLLabelElement>();
@@ -167,7 +200,7 @@ describe('RadioGroup', () => {
     expect(text.current).toHaveTextContent('Email');
   });
 
-  it('lets a custom child replace the dot', () => {
+  it('lets a custom child replace the dot (AC-6)', () => {
     render(
       <RadioGroup.Root>
         <RadioGroup.Label>Plan</RadioGroup.Label>
@@ -182,7 +215,7 @@ describe('RadioGroup', () => {
     expect(screen.getByTestId('custom')).toBeInTheDocument();
   });
 
-  describe('has no axe violations', () => {
+  describe('has no axe violations (AC-9)', () => {
     it.each([
       ['default', {}],
       ['checked', { defaultValue: 'email' }],

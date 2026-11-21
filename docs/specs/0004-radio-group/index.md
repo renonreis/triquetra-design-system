@@ -1,7 +1,7 @@
 # 0004. Radio Group
 
 **Date**: 2026-11-21
-**Status**: In Progress
+**Status**: Accepted
 
 ## Summary
 
