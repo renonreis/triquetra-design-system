@@ -9,3 +9,4 @@ export * from './components/checkbox/index.js';
 export * from './components/tabs/index.js';
 export * from './components/switch/index.js';
 export * from './components/select/index.js';
+export * from './components/radio-group/index.js';
