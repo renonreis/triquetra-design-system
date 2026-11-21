@@ -118,15 +118,15 @@ Each icon component carries `data-icon="<shape>"` (`info`, `check`, `warning`, `
 
 Meta: `title: 'Components/Alert'`, `component: Alert.Root`, `tags: ['autodocs', 'visual']`, args `tone: 'informative'`, an `argTypes` radio for `tone`, and one decorator: `<div className="max-w-md">` (448 px, `size.container.md`). A shared render draws `Indicator`, then `Content` with `Title` and `Description`, from a copy table keyed by tone. Every story renders at first paint; no story has a `play` that changes state.
 
-| Story              | Args and render                                                                                                                       |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `Default`          | informative: "New version available" / "Version 2.4 adds dark mode to every report. Reload the page to start using it."               |
-| `Neutral`          | neutral: "Scheduled maintenance" / "The dashboard will be read only on Sunday from 02:00 to 04:00 UTC while we upgrade the database." |
-| `Positive`         | positive: "Payment received" / "We sent the receipt to your email. It can take a few minutes to show up in your inbox."               |
-| `Warning`          | warning: "Your trial ends in 3 days" / "Add a payment method before it ends to keep access to your projects and reports."             |
-| `Negative`         | negative: "Payment failed" / "Your card was declined. Check the card details or try another card to finish the order."                |
-| `TitleOnly`        | positive, indicator and title "Your changes were saved.", no description                                                              |
-| `WithoutIndicator` | warning, no indicator, title "Some rows were skipped" / "12 rows had an empty email address and were not imported."                   |
+| Story              | Args and render                                                                                                            |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| `Default`          | informative: "New version available" / "Version 2.4 adds dark mode to every report. Reload the page to start using it."    |
+| `Neutral`          | neutral: "Scheduled maintenance" / "The dashboard will be read only on Sunday from 02:00 to 04:00 UTC during the upgrade." |
+| `Positive`         | positive: "Payment received" / "We sent the receipt to your email. It can take a few minutes to show up in your inbox."    |
+| `Warning`          | warning: "Your trial ends in 3 days" / "Add a payment method before it ends to keep access to your projects and reports."  |
+| `Negative`         | negative: "Payment failed" / "Your card was declined. Check the card details or try another card to finish the order."     |
+| `TitleOnly`        | positive, indicator and title "Your changes were saved.", no description                                                   |
+| `WithoutIndicator` | warning, no indicator, title "Some rows were skipped" / "12 rows had no email address."                                    |
 
 Every description is written to take two lines in the 448 px frame (about 384 px of text width), and the `WithoutIndicator` description one line, with margin on both sides of the wrap point, so a small text width difference between Paper and the browser does not change the line count. `Default` also asserts in its `play` that the root (`[data-scope="alert"][data-part="root"]` inside `canvasElement`) has no `role` attribute (read only).
 
