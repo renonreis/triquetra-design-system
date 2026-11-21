@@ -28,7 +28,7 @@ One scope for the whole monorepo: `apps/storybook` and `apps/sample` exist only 
 | 5   | Radio Group                                                     | Slice 2  | done        |
 | 6   | Badge                                                           | Slice 2  | in-progress |
 | 7   | Alert                                                           | Slice 2  | in-progress |
-| 8   | Tooltip                                                         | Slice 2  | planned     |
+| 8   | Tooltip                                                         | Slice 2  | in-progress |
 
 ## Already built
 
@@ -169,11 +169,19 @@ An inline message with a status, title, description and optional icon. Compound 
 
 Spec [0006](../specs/0006-alert/index.md) · code in `packages/react/src/components/alert/`
 
-### 8. Tooltip · needs a decision
+### 8. Tooltip · in-progress
 
-A short hint on hover and focus, on Ark's Tooltip. The first floating component, so its spec also sets the positioning and portal pattern later overlays reuse.
+A short hint on hover and focus, on Ark's Tooltip. The first floating component, so its spec also sets the positioning and portal pattern later overlays reuse. Compound parts (`Root`, `Trigger`, `Content`), inverse surface, top placement, Ark's delays, hoverable content, no arrow, shadow or animation. The spec's _Overlay pattern_ (portal in `Content`, mount only while open, default positioning merged under the caller's, one `z-50` layer) is the rule later overlays follow. Arrow, overlay motion and a z index scale are follow ups in the spec.
 
-- [ ] Design it (spec): `/architect Tooltip`
+- [x] Design it (spec): `/architect Tooltip`
+- [ ] Build it: `/develop Tooltip`
+  - [ ] Paper run: baseline with JSX and PNG hashes, Button and line count measurement, write plan approval, pilot light, then dark (AC-1 to AC-4)
+  - [ ] Design review of both artboards, scope audit, close and ledger summary (AC-5)
+  - [ ] Code PR: component, stories, tests, baselines, parity and changeset (AC-6 to AC-12)
+- [ ] Verify it: `/check verify Tooltip`
+- [ ] Test it: `/test Tooltip`
+
+Spec [0007](../specs/0007-tooltip/index.md) · code in `packages/react/src/components/tooltip/`
 
 ## Deferred
 

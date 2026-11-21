@@ -60,9 +60,22 @@ Option 1 solves the job (a consistent, accessible hint) with only what Ark and t
 
 No item needed the engineer's own call: there is no new runtime dependency, no token naming or hierarchy change, no public API change of an existing component, and no CI or release change.
 
-## Cross check
+## Cross check (2026-11-21)
 
-Filled after the cross check runs.
+A read only review by another model (Gemini 3.8 Flash) found 6 decision gaps and 4 soundness points. Following the engineer's instruction to take the recommended picks, every recommended fix was applied:
+
+- **Stage height in Paper**: fixed at 136 px (the tallest content plus padding), so every cell has the same height and centering is defined.
+- **Text alignment**: `text-start` on the content and left aligned text in Paper.
+- **Props table**: `lazyMount` and `unmountOnExit` added.
+- **Part outside `Root`**: Ark's own context error, as Dialog and Select; no custom error (the draft never required one; now said explicitly).
+- **Tooltip frame sizing in Paper**: one line frames hug their text; `LongText` is a fixed 320 px frame with a 304 px wrapping text node.
+- **Gap and offset formula**: `getBoundingClientRect` deltas between the content and trigger parts, rounded to the nearest whole px (a Storybook measurement before drawing showed gaps of 8 to 8.4 px, so 0.5 px rounding would fail).
+- **Screenshot race**: the visual `play` also waits until the tooltip sits 7 to 9 px from the trigger, not only for `data-placement`.
+- **Keyboard focus in tests**: always `userEvent.tab()`, since Ark ignores focus without a keyboard event first.
+- **Timers**: real timers with a short test `openDelay`; no fake timers.
+- **Hover across the 8 px gap**: recorded as a tradeoff; the JSDoc tells callers they can raise `closeDelay`.
+
+Not applied: removing the duplicate focus ring classes under `asChild` (harmless, and the bare trigger needs them).
 
 ## Parity tables
 
