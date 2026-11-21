@@ -151,7 +151,7 @@ A small static label for status and counts, using the status color roles. Five t
   - [ ] Design review of both artboards, scope audit, close and ledger summary (AC-5)
   - [x] Code PR: component, stories, tests, baselines, parity and changeset (AC-6 to AC-12)
 - [ ] Verify it: `/check verify Badge`
-- [ ] Test it: `/test Badge`
+- [x] Test it: `/test Badge`
 
 Spec [0005](../specs/0005-badge/index.md) · code in `packages/react/src/components/badge/`
 
