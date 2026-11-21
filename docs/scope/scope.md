@@ -119,7 +119,7 @@ A multi line text field that matches Input and works inside Field (label, helper
   - [x] Design review of both artboards, scope audit, close and ledger summary (AC-5)
   - [x] Code PR: component, Field.Textarea, stories, tests, baselines, parity and changeset (AC-6 to AC-13)
 - [x] Verify it: `/check verify Textarea`
-- [ ] Test it: `/test Textarea`
+- [x] Test it: `/test Textarea`
 
 Spec [0003](../specs/0003-textarea/index.md) · code in `packages/react/src/components/textarea/`
 
