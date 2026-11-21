@@ -132,14 +132,14 @@ Spec [0003](../specs/0003-textarea/index.md) · code in `packages/react/src/comp
 A single choice group on Ark's Radio Group, the counterpart of the Checkbox group. It is named by its own label (Ark's radio group reads Fieldset, not Field); group helper and error text wait for the Fieldset item in Deferred.
 
 - [x] Design it (spec): `/architect Radio Group`
-- [ ] Build it: `/develop Radio Group`
+- [x] Build it: `/develop Radio Group`
   - [x] Paper run: baseline with JSX hashes, write plan approval, pilot light, then dark (AC-1 to AC-4)
   - [x] Design review of both artboards, scope audit, close and ledger summary (AC-5)
-  - [ ] Code PR: component, stories, tests, baselines, parity and changeset (AC-6 to AC-12)
+  - [x] Code PR: component, stories, tests, baselines, parity and changeset (AC-6 to AC-12)
 - [ ] Verify it: `/check verify Radio Group`
 - [ ] Test it: `/test Radio Group`
 
-Spec [0004](../specs/0004-radio-group/index.md)
+Spec [0004](../specs/0004-radio-group/index.md) · code in `packages/react/src/components/radio-group/`
 
 ### 6. Badge · needs a decision
 
