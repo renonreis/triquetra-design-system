@@ -11,20 +11,24 @@ One scope for the whole monorepo: `apps/storybook` and `apps/sample` exist only 
 
 ## At a glance
 
-| #   | Feature                                                         | Phase    | Status   |
-| --- | --------------------------------------------------------------- | -------- | -------- |
-| A   | Token pipeline (Brand × Theme × Mode)                           | Existing | existing |
-| B   | Base components (Button, Input, Card, Field, Dialog)            | Existing | existing |
-| C   | Form and navigation components (Checkbox, Switch, Select, Tabs) | Existing | existing |
-| D   | Storybook docs and PR previews                                  | Existing | existing |
-| E   | Next.js sample app                                              | Existing | existing |
-| F   | Quality gates (CI, a11y, contrast, visual, packed tarball)      | Existing | existing |
-| G   | Release pipeline (Changesets, GitHub Packages)                  | Existing | existing |
-| H   | AI review gate (Pullfrog)                                       | Existing | existing |
-| 1   | UI foundation: token contract and Paper parity                  | Slice 1  | done     |
-| 2   | Paper artboards for Checkbox, Switch, Select, Tabs              | Slice 1  | done     |
-| 3   | Next components                                                 | Slice 2  | done     |
-| 4   | Textarea                                                        | Slice 2  | done     |
+| #   | Feature                                                         | Phase    | Status      |
+| --- | --------------------------------------------------------------- | -------- | ----------- |
+| A   | Token pipeline (Brand × Theme × Mode)                           | Existing | existing    |
+| B   | Base components (Button, Input, Card, Field, Dialog)            | Existing | existing    |
+| C   | Form and navigation components (Checkbox, Switch, Select, Tabs) | Existing | existing    |
+| D   | Storybook docs and PR previews                                  | Existing | existing    |
+| E   | Next.js sample app                                              | Existing | existing    |
+| F   | Quality gates (CI, a11y, contrast, visual, packed tarball)      | Existing | existing    |
+| G   | Release pipeline (Changesets, GitHub Packages)                  | Existing | existing    |
+| H   | AI review gate (Pullfrog)                                       | Existing | existing    |
+| 1   | UI foundation: token contract and Paper parity                  | Slice 1  | done        |
+| 2   | Paper artboards for Checkbox, Switch, Select, Tabs              | Slice 1  | done        |
+| 3   | Next components                                                 | Slice 2  | done        |
+| 4   | Textarea                                                        | Slice 2  | done        |
+| 5   | Radio Group                                                     | Slice 2  | in-progress |
+| 6   | Badge                                                           | Slice 2  | planned     |
+| 7   | Alert                                                           | Slice 2  | planned     |
+| 8   | Tooltip                                                         | Slice 2  | planned     |
 
 ## Already built
 
@@ -123,11 +127,19 @@ A multi line text field that matches Input and works inside Field (label, helper
 
 Spec [0003](../specs/0003-textarea/index.md) · code in `packages/react/src/components/textarea/`
 
-### 5. Radio Group · needs a decision
+### 5. Radio Group · in-progress
 
-A single choice group on Ark's Radio Group, the counterpart of the Checkbox group, inside Field or a fieldset.
+A single choice group on Ark's Radio Group, the counterpart of the Checkbox group. It is named by its own label (Ark's radio group reads Fieldset, not Field); group helper and error text wait for the Fieldset item in Deferred.
 
-- [ ] Design it (spec): `/architect Radio Group`
+- [x] Design it (spec): `/architect Radio Group`
+- [ ] Build it: `/develop Radio Group`
+  - [ ] Paper run: baseline with JSX hashes, write plan approval, pilot light, then dark (AC-1 to AC-4)
+  - [ ] Design review of both artboards, scope audit, close and ledger summary (AC-5)
+  - [ ] Code PR: component, stories, tests, baselines, parity and changeset (AC-6 to AC-12)
+- [ ] Verify it: `/check verify Radio Group`
+- [ ] Test it: `/test Radio Group`
+
+Spec [0004](../specs/0004-radio-group/index.md)
 
 ### 6. Badge · needs a decision
 
@@ -155,6 +167,7 @@ Out of scope for the current build pass, kept so the plan stays honest.
 - **Second brand**: proves the brand axis and the token manager's multi brand model · needs a decision
 - **Shadow and motion tokens in Paper** (from spec 0001): technical debt, revisit when Paper supports those token types
 - **Retrofit Button, Input & Field, Card & Dialog artboards** (from spec 0002): `· Dark` siblings and token bound radius and spacing
+- **Fieldset component** (from spec 0004): Fieldset on Ark Fieldset for `Checkbox.Group` and `RadioGroup` (legend, helper, error, required marker) · needs a decision
 - **Token manager**: a separate product in the portfolio, not this repo; Triquetra only keeps the contract it consumes (feature 1)
 
 ## Legend
