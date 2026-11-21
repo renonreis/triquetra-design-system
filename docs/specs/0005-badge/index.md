@@ -94,7 +94,7 @@ defaultVariants: { tone: 'neutral', size: 'md' },
 
 The border is 1 px and counts inside the height (Tailwind's `border-box`), so the text line sits centered in 18 or 22 px. The border is decorative: the text identifies the badge, so WCAG 1.4.11 asks no 3:1 for it. Contrast pairs used, all already tested in every brand, theme and mode: `fg.muted` on `bg.subtle`, and `status.<tone>.fg` on `status.<tone>.bg` for the four status tones.
 
-**Allowed literals added to spec 0002's list**: the artboard layout widths in _Artboard content and placement_ (240 and 640 px cells). No other new literal: height, padding, gap, radius, size and color are tokens; the 1 px border and the `leading-4` / `leading-5` line heights are already allowed.
+**Allowed literals added to spec 0002's list**: the artboard layout widths in _Artboard content and placement_ (224 and 640 px cells). No other new literal: height, padding, gap, radius, size and color are tokens; the 1 px border and the `leading-4` / `leading-5` line heights are already allowed.
 
 ### Stories
 
@@ -120,8 +120,8 @@ Meta: `title: 'Components/Badge'`, `component: Badge`, `tags: ['autodocs', 'visu
 - **Header**: eyebrow `Components / 12`, title `Badge`, description "A small static label for status and counts. The text carries the meaning; the tone only reinforces it.", snippet `import { Badge } from '@renonreis/triquetra';`.
 - **Sections**, in order, each with a section title in `380-0`'s section title style: `Tones`, `Sizes and count`, `Props`. Layer names follow `380-0`'s pattern (section frame named by its title, each cell named by its story).
 - **Cells**: width fixed as below, height `fit-content`, the badge or badge rows at the cell's top left, then the story name as a caption under them. Caption style, the gap between content and caption, and the cell padding are `380-0`'s cell values.
-- **Tones**: one row of 5 cells, 240 px each, in the inventory order. Column gap as `380-0`'s grid. Cells align top.
-- **Sizes and count**: one row, top aligned, same column gap as Tones: `Sizes` 640 px (the five badges per row fit without wrapping), `Count` 240 px. The `sr-only` text is not drawn.
+- **Tones**: one row of 5 cells, 224 px each (5 × 224 plus 4 gaps of 32 fill the 1248 px content width), in the inventory order. Column gap as `380-0`'s grid. Cells align top.
+- **Sizes and count**: one row, top aligned, same column gap as Tones: `Sizes` 640 px (the five badges per row fit without wrapping), `Count` 224 px. The `sr-only` text is not drawn.
 - **Props** rows (name, type, default): `tone` · `'neutral' | 'positive' | 'warning' | 'negative' | 'informative'` · `neutral`; `size` · `'sm' | 'md'` · `md`; `children` · `ReactNode` · none. A note under the table: "A static label: not focusable and no role. Add hidden context to counts."
 - **Placement**: light at world y 0, 80 px right of the rightmost artboard whose y is 0 (Radio Group `380-0` today at x 12160, 1440 wide, so x 13680). Dark directly under it, at y = the larger of the current dark row y (3990 today) and the bottom of the tallest light artboard plus 160. If either slot overlaps any artboard, shift right in 80 px steps until it does not. Existing artboards never move.
 - **Dark**: `duplicate_nodes` of the finished light artboard, then one `update_styles` batch that swaps every color to its `-dark` token, built from the dark artboard's own `get_jsx` (not from the `descendantIdMap`). After duplicating, check sibling order with `get_children` at every level that holds more than one cell or badge, and fix any out of order sibling with `move_nodes` on the run's own nodes. Spec 0002's lessons apply: set `fontSize` and `lineHeight` with `update_styles` after `create_artboard`; after a color change on text, rewrite span colors with `set_text_content` (`html`). Write rows one at a time: never two `write_html` calls into the same parent in parallel, so the order is the call order.
