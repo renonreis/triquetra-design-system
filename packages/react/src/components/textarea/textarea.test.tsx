@@ -26,7 +26,7 @@ const InField = ({
 );
 
 describe('Textarea', () => {
-  it('accepts multi line typing', async () => {
+  it('accepts multi line typing (AC-6)', async () => {
     const user = userEvent.setup();
     const onChange = vi.fn();
     render(<Textarea aria-label="Message" onChange={onChange} />);
@@ -36,14 +36,14 @@ describe('Textarea', () => {
     expect(onChange).toHaveBeenCalledTimes(6);
   });
 
-  it('defaults rows to 3 and follows the prop', () => {
+  it('defaults rows to 3 and follows the prop (AC-6)', () => {
     const { rerender } = render(<Textarea aria-label="Message" />);
     expect(screen.getByRole('textbox')).toHaveAttribute('rows', '3');
     rerender(<Textarea aria-label="Message" rows={5} />);
     expect(screen.getByRole('textbox')).toHaveAttribute('rows', '5');
   });
 
-  it('forwards the ref, spreads props and merges className', () => {
+  it('forwards the ref, spreads props and merges className (AC-6)', () => {
     const ref = createRef<HTMLTextAreaElement>();
     render(<Textarea ref={ref} aria-label="Message" maxLength={10} className="mt-2" />);
     const textarea = screen.getByRole('textbox', { name: 'Message' });
@@ -53,18 +53,18 @@ describe('Textarea', () => {
     expect(textarea).toHaveClass('mt-2', 'resize-y');
   });
 
-  it('does not accept asChild', () => {
+  it('does not accept asChild (AC-6)', () => {
     // @ts-expect-error asChild is not part of TextareaProps
     const props: TextareaProps = { asChild: true };
     expect(props).toBeDefined();
   });
 
-  it('turns manual resize off with autoresize', () => {
+  it('turns manual resize off with autoresize (AC-9)', () => {
     render(<Textarea aria-label="Message" autoresize />);
     expect(screen.getByRole('textbox')).toHaveStyle({ resize: 'none' });
   });
 
-  it('cannot be edited when disabled or read only', async () => {
+  it('cannot be edited when disabled or read only (AC-6)', async () => {
     const user = userEvent.setup();
     render(
       <>
@@ -78,8 +78,39 @@ describe('Textarea', () => {
     expect(screen.getByRole('textbox', { name: 'Read only' })).toHaveValue('b');
   });
 
+  it('keeps manual vertical resize when autoresize is off (AC-9)', () => {
+    render(<Textarea aria-label="Message" />);
+    expect(screen.getByRole('textbox').style.resize).toBe('');
+  });
+
+  it('keeps the caller style next to the autoresize lock (AC-9)', () => {
+    render(<Textarea aria-label="Message" autoresize style={{ maxHeight: '200px' }} />);
+    expect(screen.getByRole('textbox')).toHaveStyle({ resize: 'none', maxHeight: '200px' });
+  });
+
+  it('works as a controlled field (AC-6)', async () => {
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+    const { rerender } = render(<Textarea aria-label="Message" value="Hi" onChange={onChange} />);
+    const textarea = screen.getByRole('textbox');
+    await user.type(textarea, '!');
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(textarea).toHaveValue('Hi');
+    rerender(<Textarea aria-label="Message" value="Hi!" onChange={onChange} />);
+    expect(textarea).toHaveValue('Hi!');
+  });
+
   describe('inside Field', () => {
-    it('is named by the label and described by the helper', async () => {
+    it('is the same component as Textarea (AC-7)', () => {
+      expect(Field.Textarea).toBe(Textarea);
+    });
+
+    it('lets a raw aria-invalid from the caller win over an invalid root (AC-7)', () => {
+      render(<InField root={{ invalid: true }} textarea={{ 'aria-invalid': false }} />);
+      expect(screen.getByRole('textbox')).toHaveAttribute('aria-invalid', 'false');
+    });
+
+    it('is named by the label and described by the helper (AC-7)', async () => {
       const user = userEvent.setup();
       render(<InField root={{ required: true }} />);
       const textarea = screen.getByRole('textbox', { name: 'Message' });
@@ -89,7 +120,7 @@ describe('Textarea', () => {
       expect(textarea).toHaveFocus();
     });
 
-    it('takes disabled and read only from the root', () => {
+    it('takes disabled and read only from the root (AC-7)', () => {
       const { rerender } = render(<InField root={{ disabled: true }} />);
       expect(screen.getByRole('textbox')).toBeDisabled();
       rerender(<InField root={{ readOnly: true }} />);
@@ -106,7 +137,7 @@ describe('Textarea', () => {
       ['invalid root, invalid absent', { invalid: true }, undefined, true, true],
       ['invalid root, invalid false', { invalid: true }, false, true, true],
       ['invalid root, invalid true', { invalid: true }, true, true, true],
-    ])('invalid truth table: %s', async (_case, root, invalid, ariaInvalid, errorShown) => {
+    ])('invalid truth table (AC-7): %s', async (_case, root, invalid, ariaInvalid, errorShown) => {
       if (root === undefined) {
         render(<Textarea aria-label="Message" invalid={invalid} />);
       } else {
@@ -133,7 +164,7 @@ describe('Textarea', () => {
     ['read only', <Textarea key="r" aria-label="Message" readOnly />],
     ['in field', <InField key="f" root={{ required: true }} />],
     ['in field, invalid', <InField key="fi" root={{ required: true, invalid: true }} />],
-  ])('has no axe violations (%s)', async (_state, element) => {
+  ])('has no axe violations (AC-10): %s', async (_state, element) => {
     const { container } = render(element);
     expect(await axe(container)).toHaveNoViolations();
   });
