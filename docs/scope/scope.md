@@ -179,7 +179,7 @@ A short hint on hover and focus, on Ark's Tooltip. The first floating component,
   - [ ] Design review of both artboards, scope audit, close and ledger summary (AC-5)
   - [ ] Code PR: component, stories, tests, baselines, parity and changeset (AC-6 to AC-12)
 - [x] Verify it: `/check verify Tooltip`
-- [ ] Test it: `/test Tooltip`
+- [x] Test it: `/test Tooltip`
 
 Spec [0007](../specs/0007-tooltip/index.md) · code in `packages/react/src/components/tooltip/`
 

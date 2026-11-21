@@ -1,7 +1,7 @@
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createRef } from 'react';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { axe } from '../../test/axe.js';
 import { Button } from '../button/index.js';
 import { Tooltip, type TooltipRootProps } from './tooltip.js';
@@ -19,14 +19,14 @@ const Example = (props: TooltipRootProps) => (
 const trigger = () => screen.getByRole('button', { name: 'Export' });
 
 describe('Tooltip', () => {
-  it('renders nothing of the tooltip while closed', () => {
+  it('renders nothing of the tooltip while closed (AC-6, AC-7)', () => {
     render(<Example />);
     expect(trigger()).toBeInTheDocument();
     expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
     expect(trigger()).not.toHaveAttribute('aria-describedby');
   });
 
-  it('opens on keyboard focus as the description of the trigger', async () => {
+  it('opens on keyboard focus as the description of the trigger (AC-7, AC-9)', async () => {
     const user = userEvent.setup();
     render(<Example />);
     await user.tab();
@@ -38,7 +38,7 @@ describe('Tooltip', () => {
     expect(trigger()).toHaveAccessibleName('Export');
   });
 
-  it('closes on Escape', async () => {
+  it('closes on Escape (AC-7, AC-9)', async () => {
     const user = userEvent.setup();
     render(<Example />);
     await user.tab();
@@ -47,7 +47,7 @@ describe('Tooltip', () => {
     await waitFor(() => expect(screen.queryByRole('tooltip')).not.toBeInTheDocument());
   });
 
-  it('closes on blur', async () => {
+  it('closes on blur (AC-7)', async () => {
     const user = userEvent.setup();
     render(<Example />);
     await user.tab();
@@ -56,7 +56,7 @@ describe('Tooltip', () => {
     await waitFor(() => expect(screen.queryByRole('tooltip')).not.toBeInTheDocument());
   });
 
-  it('opens on hover only after the open delay, and closes when the pointer leaves', async () => {
+  it('opens on hover only after the open delay, and closes when the pointer leaves (AC-7, AC-9)', async () => {
     const user = userEvent.setup();
     render(<Example openDelay={300} />);
     await user.hover(trigger());
@@ -67,7 +67,7 @@ describe('Tooltip', () => {
     await waitFor(() => expect(screen.queryByRole('tooltip')).not.toBeInTheDocument());
   });
 
-  it('never opens while disabled', async () => {
+  it('never opens while disabled (AC-7, AC-9)', async () => {
     const user = userEvent.setup();
     render(<Example disabled openDelay={0} />);
     await user.tab();
@@ -76,14 +76,14 @@ describe('Tooltip', () => {
     expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
   });
 
-  it('ignores touch pointers', async () => {
+  it('ignores touch pointers (AC-7)', async () => {
     render(<Example openDelay={0} />);
     fireEvent.pointerMove(trigger(), { pointerType: 'touch' });
     await act(() => new Promise((resolve) => setTimeout(resolve, 100)));
     expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
   });
 
-  it('renders the content in a portal in document.body, never focusable', () => {
+  it('renders the content in a portal in document.body, never focusable (AC-6, AC-7, AC-9)', () => {
     const { container } = render(<Example open />);
     const tooltip = screen.getByRole('tooltip');
     expect(container).not.toContainElement(tooltip);
@@ -93,7 +93,7 @@ describe('Tooltip', () => {
     expect(tooltip).toHaveAttribute('data-part', 'content');
   });
 
-  it('defaults to the top placement and lets the caller override it', async () => {
+  it('defaults to the top placement and lets the caller override it (AC-6, AC-9)', async () => {
     const { unmount } = render(<Example open />);
     await waitFor(() =>
       expect(screen.getByRole('tooltip')).toHaveAttribute('data-placement', 'top'),
@@ -105,7 +105,7 @@ describe('Tooltip', () => {
     );
   });
 
-  it('keeps the content hoverable by default, and not when interactive is off', () => {
+  it('keeps the content hoverable by default, and not when interactive is off (AC-6, AC-9)', () => {
     const { unmount } = render(<Example open />);
     expect(screen.getByRole('tooltip')).toHaveStyle({ pointerEvents: 'auto' });
     unmount();
@@ -113,7 +113,7 @@ describe('Tooltip', () => {
     expect(screen.getByRole('tooltip')).toHaveStyle({ pointerEvents: 'none' });
   });
 
-  it('stays mounted after closing when unmountOnExit is off', async () => {
+  it('stays mounted after closing when unmountOnExit is off (AC-6, AC-9)', async () => {
     const user = userEvent.setup();
     render(<Example unmountOnExit={false} />);
     await user.tab();
@@ -125,7 +125,7 @@ describe('Tooltip', () => {
     ).toBeInTheDocument();
   });
 
-  it('mounts the content before the first open when lazyMount is off', () => {
+  it('mounts the content before the first open when lazyMount is off (AC-6, AC-9)', () => {
     render(<Example lazyMount={false} />);
     expect(
       document.querySelector('[data-scope="tooltip"][data-part="content"]'),
@@ -133,7 +133,7 @@ describe('Tooltip', () => {
     expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
   });
 
-  it('forwards refs, spreads props and merges className on Trigger and Content', () => {
+  it('forwards refs, spreads props and merges className on Trigger and Content (AC-6, AC-9)', () => {
     const triggerRef = createRef<HTMLButtonElement>();
     const contentRef = createRef<HTMLDivElement>();
     render(
@@ -158,14 +158,14 @@ describe('Tooltip', () => {
     expect(tooltip).not.toHaveClass('max-w-xs');
   });
 
-  it('exposes the three slots in tooltipVariants', () => {
+  it('exposes the three slots in tooltipVariants (AC-6, AC-8)', () => {
     const styles = tooltipVariants();
     expect(styles.positioner()).toBe('z-50');
     expect(styles.content()).toContain('bg-bg-inverse');
     expect(styles.trigger()).toContain('focus-visible:outline-2');
   });
 
-  it('has no axe violations closed and open', async () => {
+  it('has no axe violations closed and open (AC-9)', async () => {
     const { container, unmount } = render(<Example />);
     expect(await axe(container)).toHaveNoViolations();
     unmount();
@@ -174,5 +174,42 @@ describe('Tooltip', () => {
     // Like Select's listbox: the trigger and the portalled content are checked where they live.
     expect(await axe(open.container)).toHaveNoViolations();
     expect(await axe(tooltip)).toHaveNoViolations();
+  });
+
+  it('waits the default 400 ms before opening on hover (AC-7)', async () => {
+    const user = userEvent.setup();
+    render(<Example />);
+    await user.hover(trigger());
+    await act(() => new Promise((resolve) => setTimeout(resolve, 250)));
+    expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+    expect(await screen.findByRole('tooltip', {}, { timeout: 1500 })).toBeInTheDocument();
+  });
+
+  it('closes when the trigger is clicked and reports each change (AC-7)', async () => {
+    const user = userEvent.setup();
+    const onOpenChange = vi.fn();
+    render(<Example onOpenChange={onOpenChange} />);
+    await user.tab();
+    await screen.findByRole('tooltip');
+    expect(onOpenChange).toHaveBeenLastCalledWith(expect.objectContaining({ open: true }));
+    await user.click(trigger());
+    await waitFor(() => expect(screen.queryByRole('tooltip')).not.toBeInTheDocument());
+    expect(onOpenChange).toHaveBeenLastCalledWith(expect.objectContaining({ open: false }));
+  });
+
+  it('renders its own focusable button when Trigger has no asChild (AC-6, AC-7)', async () => {
+    const user = userEvent.setup();
+    render(
+      <Tooltip.Root>
+        <Tooltip.Trigger aria-label="Help">?</Tooltip.Trigger>
+        <Tooltip.Content>More about exports</Tooltip.Content>
+      </Tooltip.Root>,
+    );
+    const button = screen.getByRole('button', { name: 'Help' });
+    expect(button.tagName).toBe('BUTTON');
+    expect(button).toHaveClass('focus-visible:outline-border-focus');
+    await user.tab();
+    expect(button).toHaveFocus();
+    expect(button).toHaveAccessibleDescription('More about exports');
   });
 });

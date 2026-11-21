@@ -15,7 +15,7 @@ _Steps derived from spec 0007 acceptance criteria. `/check verify` runs these; `
 
 ## Commands
 
-- [x] `pnpm --filter @renonreis/triquetra exec vitest run src/components/tooltip` → 15 tests pass (closed state, keyboard focus, Escape, blur, hover delay, disabled, touch, portal, placement default and override, `interactive` default and off, `unmountOnExit` and `lazyMount` off, refs, props and `className` on Trigger and Content, `tooltipVariants` slots, axe closed and open) → AC-6, AC-7, AC-9
+- [x] `pnpm --filter @renonreis/triquetra exec vitest run src/components/tooltip` → 18 tests pass after `/test` (closed state, default 400 ms delay, click on the trigger closes and `onOpenChange` reports it, own button without `asChild`, keyboard focus, Escape, blur, hover delay, disabled, touch, portal, placement default and override, `interactive` default and off, `unmountOnExit` and `lazyMount` off, refs, props and `className` on Trigger and Content, `tooltipVariants` slots, axe closed and open) → AC-6, AC-7, AC-9
 - [x] `pnpm test` → 324 unit tests and 290 story tests pass, every Tooltip story in light and dark with the a11y addon in `error` → AC-9
 - [x] `pnpm test:visual:docker` (alone, no other Storybook build running) → 284 pass, 10 Tooltip baselines, no other baseline changed → AC-8, AC-10
 - [x] `grep -n tooltip packages/react/src/index.ts` → `export * from './components/tooltip/index.js'`; the component `index.ts` exports `Tooltip`, the three part prop types and `tooltipVariants` → AC-6
