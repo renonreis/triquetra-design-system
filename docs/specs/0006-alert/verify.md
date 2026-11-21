@@ -13,7 +13,7 @@ _Steps derived from spec 0006 acceptance criteria. `/check verify` runs these; `
 
 ## Commands
 
-- [x] `pnpm --filter @renonreis/triquetra exec vitest run src/components/alert` → 31 tests pass (defaults, tone mapping, icon per tone, custom indicator, refs and props on every part, `data-part` kept, `className` merge, title `asChild`, no default role, `role="status"` and `role="alert"` passed through, Tab skips it, error outside `Root`, axe for 7 cases) → AC-6, AC-7, AC-9
+- [x] `pnpm --filter @renonreis/triquetra exec vitest run src/components/alert` → 35 tests pass (defaults, `tone={undefined}`, `alertVariants` slots, block content in the description, tone mapping, icon per tone, custom indicator (stays hidden even with `aria-hidden="false"`), refs and props on every part, `data-part` kept, `className` merge, title `asChild`, no default role, `role="status"` and `role="alert"` passed through, Tab skips it, error outside `Root`, axe for 7 cases) → AC-6, AC-7, AC-9
 - [x] `pnpm --filter @triquetra/storybook test` → 278 story tests pass in light and dark, every Alert story included, a11y addon in `error` → AC-9
 - [x] `pnpm test:visual:docker` (alone, no other Storybook build running) → 274 pass, 14 Alert baselines, no baseline changed → AC-8, AC-10
 - [x] `grep -n "alert" packages/react/src/index.ts` → `export * from './components/alert/index.js'`; `index.ts` of the component exports `Alert`, the five part prop types, `alertVariants` and `AlertVariants` → AC-6

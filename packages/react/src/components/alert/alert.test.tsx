@@ -4,6 +4,7 @@ import { createRef, type ReactNode } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 import { axe } from '../../test/axe.js';
 import { Alert, type AlertRootProps } from './alert.js';
+import { alertVariants } from './alert.variants.js';
 
 const TONES = ['neutral', 'positive', 'warning', 'negative', 'informative'] as const;
 
@@ -184,6 +185,49 @@ describe('Alert', () => {
 
   it.each(cases)('has no axe violations: %s (AC-9)', async (_name, props) => {
     const { container } = render(<Full {...props} />);
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
+  it('falls back to the informative look and icon when tone is undefined (AC-6, AC-7)', () => {
+    const { container } = render(<Full tone={undefined} />);
+    expect(part(container, 'root')).toHaveClass('bg-status-informative-bg');
+    expect(part(container, 'indicator')?.querySelector('svg')).toHaveAttribute('data-icon', 'info');
+  });
+
+  it('keeps the indicator hidden even when the caller passes aria-hidden="false" (AC-7)', () => {
+    const { container } = render(
+      <Alert.Root>
+        <Alert.Indicator aria-hidden="false" />
+      </Alert.Root>,
+    );
+    expect(part(container, 'indicator')).toHaveAttribute('aria-hidden', 'true');
+  });
+
+  it('exports alertVariants with one slot per part (AC-6)', () => {
+    const styles = alertVariants({ tone: 'negative' });
+    expect(styles.root()).toContain('bg-status-negative-bg');
+    expect(styles.indicator()).toContain('size-5');
+    expect(styles.content()).toContain('gap-1');
+    expect(styles.title()).toContain('font-semibold');
+    expect(typeof styles.description()).toBe('string');
+  });
+
+  it('accepts block content in the description without axe violations (AC-6, AC-9)', async () => {
+    const { container } = render(
+      <Alert.Root tone="warning">
+        <Alert.Indicator />
+        <Alert.Content>
+          <Alert.Title>Fix these fields</Alert.Title>
+          <Alert.Description>
+            <ul>
+              <li>Email is required.</li>
+              <li>Password is too short.</li>
+            </ul>
+          </Alert.Description>
+        </Alert.Content>
+      </Alert.Root>,
+    );
+    expect(screen.getAllByRole('listitem')).toHaveLength(2);
     expect(await axe(container)).toHaveNoViolations();
   });
 });

@@ -165,7 +165,7 @@ An inline message with a status, title, description and optional icon. Compound 
   - [ ] Design review of both artboards, scope audit, close and ledger summary (AC-5)
   - [x] Code PR: component, stories, tests, baselines, parity and changeset (AC-6 to AC-12)
 - [x] Verify it: `/check verify Alert`
-- [ ] Test it: `/test Alert`
+- [x] Test it: `/test Alert`
 
 Spec [0006](../specs/0006-alert/index.md) · code in `packages/react/src/components/alert/`
 
