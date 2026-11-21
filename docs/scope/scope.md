@@ -150,7 +150,7 @@ A small static label for status and counts, using the status color roles. Five t
   - [x] Paper run: baseline with JSX and PNG hashes, write plan approval, pilot light, then dark (AC-1 to AC-4)
   - [ ] Design review of both artboards, scope audit, close and ledger summary (AC-5)
   - [x] Code PR: component, stories, tests, baselines, parity and changeset (AC-6 to AC-12)
-- [ ] Verify it: `/check verify Badge`
+- [x] Verify it: `/check verify Badge`
 - [x] Test it: `/test Badge`
 
 Spec [0005](../specs/0005-badge/index.md) · code in `packages/react/src/components/badge/`
@@ -177,7 +177,7 @@ A short hint on hover and focus, on Ark's Tooltip. The first floating component,
 - [ ] Build it: `/develop Tooltip`
   - [x] Paper run: baseline with JSX and PNG hashes, Button and line count measurement, write plan approval, pilot light, then dark (AC-1 to AC-4)
   - [ ] Design review of both artboards, scope audit, close and ledger summary (AC-5)
-  - [ ] Code PR: component, stories, tests, baselines, parity and changeset (AC-6 to AC-12)
+  - [x] Code PR: component, stories, tests, baselines, parity and changeset (AC-6 to AC-12)
 - [x] Verify it: `/check verify Tooltip`
 - [x] Test it: `/test Tooltip`
 
@@ -192,6 +192,10 @@ Out of scope for the current build pass, kept so the plan stays honest.
 - **Shadow and motion tokens in Paper** (from spec 0001): technical debt, revisit when Paper supports those token types
 - **Retrofit Button, Input & Field, Card & Dialog artboards** (from spec 0002): `· Dark` siblings and token bound radius and spacing
 - **Fieldset component** (from spec 0004): Fieldset on Ark Fieldset for `Checkbox.Group` and `RadioGroup` (legend, helper, error, required marker) · needs a decision
+- **Status emphasis and icons** (from specs 0005, 0006): a solid look for Badge and Alert with new `status.<tone>.bg-strong` and `fg-on-strong` tokens, and an icon set that replaces Alert's inline icons and adds a Badge icon or dot · needs a decision
+- **Interactive or removable tag** (from spec 0005): its own component with a focus ring and a remove button · needs a decision
+- **Dismissible alert and actions area** (from spec 0006): `Alert.CloseTrigger` with an `onDismiss` pattern, and `Alert.Actions` for one or two buttons · needs a decision
+- **Overlay follow ups** (from spec 0007): `Tooltip.Arrow` once an arrow size token exists, enter and exit motion for every overlay with `motion-safe:` and the `motion.*` tokens, and a z index token scale when two overlay layers conflict · needs a decision
 - **Token manager**: a separate product in the portfolio, not this repo; Triquetra only keeps the contract it consumes (feature 1)
 
 ## Legend
