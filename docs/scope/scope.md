@@ -11,20 +11,20 @@ One scope for the whole monorepo: `apps/storybook` and `apps/sample` exist only 
 
 ## At a glance
 
-| #   | Feature                                                         | Phase    | Status      |
-| --- | --------------------------------------------------------------- | -------- | ----------- |
-| A   | Token pipeline (Brand × Theme × Mode)                           | Existing | existing    |
-| B   | Base components (Button, Input, Card, Field, Dialog)            | Existing | existing    |
-| C   | Form and navigation components (Checkbox, Switch, Select, Tabs) | Existing | existing    |
-| D   | Storybook docs and PR previews                                  | Existing | existing    |
-| E   | Next.js sample app                                              | Existing | existing    |
-| F   | Quality gates (CI, a11y, contrast, visual, packed tarball)      | Existing | existing    |
-| G   | Release pipeline (Changesets, GitHub Packages)                  | Existing | existing    |
-| H   | AI review gate (Pullfrog)                                       | Existing | existing    |
-| 1   | UI foundation: token contract and Paper parity                  | Slice 1  | done        |
-| 2   | Paper artboards for Checkbox, Switch, Select, Tabs              | Slice 1  | done        |
-| 3   | Next components                                                 | Slice 2  | done        |
-| 4   | Textarea                                                        | Slice 2  | in-progress |
+| #   | Feature                                                         | Phase    | Status   |
+| --- | --------------------------------------------------------------- | -------- | -------- |
+| A   | Token pipeline (Brand × Theme × Mode)                           | Existing | existing |
+| B   | Base components (Button, Input, Card, Field, Dialog)            | Existing | existing |
+| C   | Form and navigation components (Checkbox, Switch, Select, Tabs) | Existing | existing |
+| D   | Storybook docs and PR previews                                  | Existing | existing |
+| E   | Next.js sample app                                              | Existing | existing |
+| F   | Quality gates (CI, a11y, contrast, visual, packed tarball)      | Existing | existing |
+| G   | Release pipeline (Changesets, GitHub Packages)                  | Existing | existing |
+| H   | AI review gate (Pullfrog)                                       | Existing | existing |
+| 1   | UI foundation: token contract and Paper parity                  | Slice 1  | done     |
+| 2   | Paper artboards for Checkbox, Switch, Select, Tabs              | Slice 1  | done     |
+| 3   | Next components                                                 | Slice 2  | done     |
+| 4   | Textarea                                                        | Slice 2  | done     |
 
 ## Already built
 
@@ -108,7 +108,7 @@ Grow the catalog one component per PR, each designed in Paper first, then built 
 Each component below is designed in Paper first: an agent drafts its artboard with tokens under the spec 0002 rules, you approve it, and the code follows it. Each adds a public export (`minor` changeset).
 **Done when** (for each): the component has a Paper artboard in light and dark, the component, stories in light and dark, axe tests, visual baselines and a `minor` changeset.
 
-### 4. Textarea · in-progress
+### 4. Textarea · done
 
 A multi line text field that matches Input and works inside Field (label, helper, error).
 
