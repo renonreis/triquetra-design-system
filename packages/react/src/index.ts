@@ -12,3 +12,4 @@ export * from './components/select/index.js';
 export * from './components/radio-group/index.js';
 export * from './components/badge/index.js';
 export * from './components/alert/index.js';
+export * from './components/tooltip/index.js';
