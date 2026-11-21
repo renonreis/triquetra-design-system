@@ -163,11 +163,11 @@ An inline message with a status, title, description and optional icon. Compound 
 - [ ] Build it: `/develop Alert`
   - [x] Paper run: baseline with JSX and PNG hashes, write plan approval, pilot light, then dark (AC-1 to AC-4)
   - [ ] Design review of both artboards, scope audit, close and ledger summary (AC-5)
-  - [ ] Code PR: component, stories, tests, baselines, parity and changeset (AC-6 to AC-12)
-- [ ] Verify it: `/check verify Alert`
-- [ ] Test it: `/test Alert`
+  - [x] Code PR: component, stories, tests, baselines, parity and changeset (AC-6 to AC-12)
+- [x] Verify it: `/check verify Alert`
+- [x] Test it: `/test Alert`
 
-Spec [0006](../specs/0006-alert/index.md)
+Spec [0006](../specs/0006-alert/index.md) · code in `packages/react/src/components/alert/`
 
 ### 8. Tooltip · needs a decision
 

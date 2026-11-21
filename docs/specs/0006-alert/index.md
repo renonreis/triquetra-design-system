@@ -1,7 +1,7 @@
 # 0006. Alert
 
 **Date**: 2026-11-21
-**Status**: Proposed
+**Status**: In Progress
 
 ## Summary
 
