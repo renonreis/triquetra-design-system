@@ -11,3 +11,4 @@ export * from './components/switch/index.js';
 export * from './components/select/index.js';
 export * from './components/radio-group/index.js';
 export * from './components/badge/index.js';
+export * from './components/alert/index.js';
