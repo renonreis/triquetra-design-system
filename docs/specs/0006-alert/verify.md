@@ -1,4 +1,4 @@
-# Verify: Alert · spec 0006 · updated 2026-11-21 · verified on `873ec84`
+# Verify: Alert · spec 0006 · updated 2026-11-21 · verified on `873ec84` (rebased onto `d9e940e` as `a95b2a9`, no code change)
 
 _Steps derived from spec 0006 acceptance criteria. `/check verify` runs these; `/test` locks the durable ones._
 
