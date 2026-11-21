@@ -27,7 +27,7 @@ One scope for the whole monorepo: `apps/storybook` and `apps/sample` exist only 
 | 4   | Textarea                                                        | Slice 2  | done        |
 | 5   | Radio Group                                                     | Slice 2  | done        |
 | 6   | Badge                                                           | Slice 2  | in-progress |
-| 7   | Alert                                                           | Slice 2  | planned     |
+| 7   | Alert                                                           | Slice 2  | in-progress |
 | 8   | Tooltip                                                         | Slice 2  | planned     |
 
 ## Already built
@@ -155,11 +155,19 @@ A small static label for status and counts, using the status color roles. Five t
 
 Spec [0005](../specs/0005-badge/index.md) · code in `packages/react/src/components/badge/`
 
-### 7. Alert · needs a decision
+### 7. Alert · in-progress
 
-An inline message with a status (info, success, warning, error), title, description and optional icon.
+An inline message with a status, title, description and optional icon. Compound parts (`Root`, `Indicator`, `Content`, `Title`, `Description`), Badge's five tones (default `informative`), soft look with a border, built in tone icons, no default role (the caller passes `status` or `alert` for a message inserted later). A close button and an actions area are follow ups in the spec.
 
-- [ ] Design it (spec): `/architect Alert`
+- [x] Design it (spec): `/architect Alert`
+- [ ] Build it: `/develop Alert`
+  - [ ] Paper run: baseline with JSX and PNG hashes, write plan approval, pilot light, then dark (AC-1 to AC-4)
+  - [ ] Design review of both artboards, scope audit, close and ledger summary (AC-5)
+  - [ ] Code PR: component, stories, tests, baselines, parity and changeset (AC-6 to AC-12)
+- [ ] Verify it: `/check verify Alert`
+- [ ] Test it: `/test Alert`
+
+Spec [0006](../specs/0006-alert/index.md)
 
 ### 8. Tooltip · needs a decision
 
