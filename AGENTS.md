@@ -222,6 +222,7 @@ Agents may create **new** component artboards in Paper ([spec 0002](docs/specs/0
 - The bundle starts with `'use client'` (Vite `banner`), so it can be imported from React Server Components. Server code can't access compound parts with a dot, so consumers use them inside their own client components. When a change affects SSR or RSC, check it with `pnpm test:e2e`.
 - Forward refs, spread remaining props onto the root element, and export prop types (`ButtonProps`).
 - Visible focus is mandatory (`focus-visible:` ring using `color.border.focus`).
+- Overlays (tooltip, popover, menu, select, dialog) follow the _Overlay pattern_ of [spec 0007](docs/specs/0007-tooltip/index.md): `Content` owns `Portal` → `Positioner` → content; `Root` defaults `lazyMount` and `unmountOnExit` to `true`; default positioning merges under the caller's (`{ ...defaults, ...positioning }`); every positioner uses `z-50`; visual stories open with the controlled `open` prop and wait for `data-placement` before the screenshot.
 - Names: files `kebab-case`, components `PascalCase`, variants `camelCase`. Named exports only, no default exports (except Storybook meta).
 - Every public export goes through `packages/react/src/index.ts`. Adding a public export is a `minor` changeset. Removing or renaming one is a `major` changeset.
 

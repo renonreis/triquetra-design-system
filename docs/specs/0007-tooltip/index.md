@@ -1,7 +1,7 @@
 # 0007. Tooltip
 
 **Date**: 2026-11-21
-**Status**: In Progress
+**Status**: Accepted
 
 ## Summary
 
