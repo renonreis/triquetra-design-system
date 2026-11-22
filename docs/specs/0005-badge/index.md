@@ -1,7 +1,7 @@
 # 0005. Badge
 
 **Date**: 2026-11-21
-**Status**: In Progress
+**Status**: Accepted
 
 ## Summary
 

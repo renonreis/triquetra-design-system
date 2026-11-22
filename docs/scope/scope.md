@@ -11,24 +11,24 @@ One scope for the whole monorepo: `apps/storybook` and `apps/sample` exist only 
 
 ## At a glance
 
-| #   | Feature                                                         | Phase    | Status      |
-| --- | --------------------------------------------------------------- | -------- | ----------- |
-| A   | Token pipeline (Brand × Theme × Mode)                           | Existing | existing    |
-| B   | Base components (Button, Input, Card, Field, Dialog)            | Existing | existing    |
-| C   | Form and navigation components (Checkbox, Switch, Select, Tabs) | Existing | existing    |
-| D   | Storybook docs and PR previews                                  | Existing | existing    |
-| E   | Next.js sample app                                              | Existing | existing    |
-| F   | Quality gates (CI, a11y, contrast, visual, packed tarball)      | Existing | existing    |
-| G   | Release pipeline (Changesets, GitHub Packages)                  | Existing | existing    |
-| H   | AI review gate (Pullfrog)                                       | Existing | existing    |
-| 1   | UI foundation: token contract and Paper parity                  | Slice 1  | done        |
-| 2   | Paper artboards for Checkbox, Switch, Select, Tabs              | Slice 1  | done        |
-| 3   | Next components                                                 | Slice 2  | done        |
-| 4   | Textarea                                                        | Slice 2  | done        |
-| 5   | Radio Group                                                     | Slice 2  | done        |
-| 6   | Badge                                                           | Slice 2  | in-progress |
-| 7   | Alert                                                           | Slice 2  | in-progress |
-| 8   | Tooltip                                                         | Slice 2  | in-progress |
+| #   | Feature                                                         | Phase    | Status   |
+| --- | --------------------------------------------------------------- | -------- | -------- |
+| A   | Token pipeline (Brand × Theme × Mode)                           | Existing | existing |
+| B   | Base components (Button, Input, Card, Field, Dialog)            | Existing | existing |
+| C   | Form and navigation components (Checkbox, Switch, Select, Tabs) | Existing | existing |
+| D   | Storybook docs and PR previews                                  | Existing | existing |
+| E   | Next.js sample app                                              | Existing | existing |
+| F   | Quality gates (CI, a11y, contrast, visual, packed tarball)      | Existing | existing |
+| G   | Release pipeline (Changesets, GitHub Packages)                  | Existing | existing |
+| H   | AI review gate (Pullfrog)                                       | Existing | existing |
+| 1   | UI foundation: token contract and Paper parity                  | Slice 1  | done     |
+| 2   | Paper artboards for Checkbox, Switch, Select, Tabs              | Slice 1  | done     |
+| 3   | Next components                                                 | Slice 2  | done     |
+| 4   | Textarea                                                        | Slice 2  | done     |
+| 5   | Radio Group                                                     | Slice 2  | done     |
+| 6   | Badge                                                           | Slice 2  | done     |
+| 7   | Alert                                                           | Slice 2  | done     |
+| 8   | Tooltip                                                         | Slice 2  | done     |
 
 ## Already built
 
@@ -141,7 +141,7 @@ A single choice group on Ark's Radio Group, the counterpart of the Checkbox grou
 
 Spec [0004](../specs/0004-radio-group/index.md) · code in `packages/react/src/components/radio-group/`
 
-### 6. Badge · in-progress
+### 6. Badge · done
 
 A small static label for status and counts, using the status color roles. Five tones (neutral plus the four status roles), soft look with a border, pill shape, sizes `sm` and `md`, static (no focus, no role). Solid look, icons and interactive tags are follow ups in the spec.
 
@@ -155,7 +155,7 @@ A small static label for status and counts, using the status color roles. Five t
 
 Spec [0005](../specs/0005-badge/index.md) · code in `packages/react/src/components/badge/`
 
-### 7. Alert · in-progress
+### 7. Alert · done
 
 An inline message with a status, title, description and optional icon. Compound parts (`Root`, `Indicator`, `Content`, `Title`, `Description`), Badge's five tones (default `informative`), soft look with a border, built in tone icons, no default role (the caller passes `status` or `alert` for a message inserted later). A close button and an actions area are follow ups in the spec.
 
@@ -169,7 +169,7 @@ An inline message with a status, title, description and optional icon. Compound 
 
 Spec [0006](../specs/0006-alert/index.md) · code in `packages/react/src/components/alert/`
 
-### 8. Tooltip · in-progress
+### 8. Tooltip · done
 
 A short hint on hover and focus, on Ark's Tooltip. The first floating component, so its spec also sets the positioning and portal pattern later overlays reuse. Compound parts (`Root`, `Trigger`, `Content`), inverse surface, top placement, Ark's delays, hoverable content, no arrow, shadow or animation. The spec's _Overlay pattern_ (portal in `Content`, mount only while open, default positioning merged under the caller's, one `z-50` layer) is the rule later overlays follow. Arrow, overlay motion and a z index scale are follow ups in the spec.
 
