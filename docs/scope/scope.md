@@ -29,6 +29,8 @@ One scope for the whole monorepo: `apps/storybook` and `apps/sample` exist only 
 | 6   | Badge                                                           | Slice 2  | done     |
 | 7   | Alert                                                           | Slice 2  | done     |
 | 8   | Tooltip                                                         | Slice 2  | done     |
+| 9   | Popover                                                         | Slice 3  | planned  |
+| 10  | Menu                                                            | Slice 3  | planned  |
 
 ## Already built
 
@@ -182,6 +184,25 @@ A short hint on hover and focus, on Ark's Tooltip. The first floating component,
 - [x] Test it: `/test Tooltip`
 
 Spec [0007](../specs/0007-tooltip/index.md) · code in `packages/react/src/components/tooltip/`
+
+## Slice 3: Overlays
+
+Picked on 2026-11-21: the two overlays the catalog misses most, built on the _Overlay pattern_ of spec 0007 so it is proven on interactive surfaces (focus moves into the overlay, keyboard navigation). Popover first because it is the plain interactive surface Menu builds on. Each is designed in Paper first, then built end to end, and adds a public export (`minor` changeset).
+**Done when** (for each): the component has a Paper artboard in light and dark, the component, stories in light and dark, axe tests, visual baselines and a `minor` changeset.
+
+### 9. Popover · needs a decision
+
+A floating panel opened by a trigger click that holds interactive content (text, links, a small form), on Ark's Popover with the Select surface. It settles focus handling, close behavior and sizing that later overlays reuse.
+**Done when:** a click on the trigger opens the panel next to it, focus moves in and returns to the trigger on close, Escape and an outside click close it, and it works in light and dark with axe passing.
+
+- [ ] Design it (spec): `/architect Popover`
+
+### 10. Menu · needs a decision
+
+A list of actions opened from a button, on Ark's Menu: items, separators, groups and disabled items, with full keyboard navigation and typeahead from Ark.
+**Done when:** the trigger opens the menu, arrow keys move between items, Enter runs an item and closes the menu, disabled items are skipped, and it works in light and dark with axe passing.
+
+- [ ] Design it (spec): `/architect Menu`
 
 ## Deferred
 
