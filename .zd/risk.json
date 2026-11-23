@@ -1,8 +1,6 @@
 {
   "version": 1,
-  "approvers": [
-    "Renon Reis"
-  ],
+  "approvers": ["Renon Reis"],
   "areas": [
     {
       "id": "secrets",
@@ -22,12 +20,7 @@
         "*credentials*.json",
         "service-account*.json"
       ],
-      "except": [
-        ".env.example",
-        ".env.sample",
-        ".env.template",
-        "*.pub"
-      ],
+      "except": [".env.example", ".env.sample", ".env.template", "*.pub"],
       "content": [
         {
           "name": "private key block",
@@ -73,14 +66,7 @@
       "name": "Workflow rules",
       "why": "Changing the rules changes what every other check enforces, so it waits for the engineer.",
       "onTouch": "approve",
-      "paths": [
-        "AGENTS.md",
-        "CLAUDE.md",
-        ".claude/",
-        ".zd/",
-        ".github/workflows/",
-        ".githooks/"
-      ]
+      "paths": ["AGENTS.md", "CLAUDE.md", ".claude/", ".zd/", ".github/workflows/", ".githooks/"]
     },
     {
       "id": "auth",
@@ -99,9 +85,7 @@
         "*permission*.*",
         "middleware.*"
       ],
-      "except": [
-        "*.md"
-      ]
+      "except": ["*.md"]
     },
     {
       "id": "billing",
@@ -122,25 +106,15 @@
         "*subscription*.*",
         "*invoice*.*"
       ],
-      "except": [
-        "*.md"
-      ]
+      "except": ["*.md"]
     },
     {
       "id": "prod-db",
       "name": "Production database",
       "why": "Migrations and destructive SQL change customer data, and not every change can be undone.",
       "onTouch": "approve",
-      "paths": [
-        "migrations/",
-        "migrate/",
-        "drizzle/",
-        "schema.prisma",
-        "schema.sql"
-      ],
-      "except": [
-        "*.md"
-      ],
+      "paths": ["migrations/", "migrate/", "drizzle/", "schema.prisma", "schema.sql"],
+      "except": ["*.md"],
       "content": [
         {
           "name": "destructive SQL",
