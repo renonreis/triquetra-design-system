@@ -1,5 +1,15 @@
 # @renonreis/triquetra
 
+## 0.5.0
+
+### Minor Changes
+
+- 4d93c4d: Add `Alert`, an inline status message with `Alert.Root`, `Alert.Indicator`, `Alert.Content`, `Alert.Title` and `Alert.Description`. It takes the same five tones as `Badge` (`informative` by default), shows a built in icon per tone, and sets no live region role unless you pass `role="status"` or `role="alert"`.
+- e847bc5: Add `Badge`: a small static label for status and counts. Five tones (`neutral`, `positive`, `warning`, `negative`, `informative`) on the status color roles, a soft look with a 1 px border, a pill shape and two sizes (`sm`, `md`). Exports `Badge`, `BadgeProps`, `badgeVariants` and `BadgeVariants`.
+- 57c2ce2: Add `RadioGroup`: a single choice group on Ark UI's Radio Group, styled like Checkbox with a round control. Parts `Root`, `Label`, `Item`, `ItemControl` and `ItemText`; `size` (`sm`, `md`, `lg`) on `Root`; vertical by default, or `orientation="horizontal"`. Exports `RadioGroup`, `RadioGroupRootProps`, `RadioGroupLabelProps`, `RadioGroupItemProps`, `RadioGroupItemControlProps`, `RadioGroupItemTextProps`, `radioGroupVariants` and `RadioGroupVariants`.
+- 91ae44c: Add `Textarea` and `Field.Textarea`: a multi line text field that matches Input, with `size`, `rows` (3 by default), vertical resize and opt in `autoresize`. Exports `Textarea`, `TextareaProps`, `textareaVariants`, `TextareaVariants` and `FieldTextareaProps`.
+- eae6f18: Add `Tooltip`, a short hint on pointer hover and keyboard focus, built on Ark UI with `Tooltip.Root`, `Tooltip.Trigger` and `Tooltip.Content`. It opens on top by default, keeps the content hoverable (WCAG 1.4.13), renders the content in a portal, and leaves nothing in the DOM while closed. Every default can be overridden through Ark's props.
+
 ## 0.4.0
 
 ### Minor Changes
