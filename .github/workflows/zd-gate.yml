@@ -1,0 +1,23 @@
+# Managed by zd-gate init (Zero Dawn spec 0003). Changes here are guarded by the workflow area.
+name: zd-gate
+on:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  zd-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+      - uses: actions/checkout@v4
+        with:
+          repository: renonreis/project-zero-dawn
+          ref: 6436b2c110a71b24cc652a3f2c37b4c605cc37cc
+          path: .zd-gate
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: node .zd-gate/scripts/zd-gate.mjs "origin/${{ github.base_ref }}"

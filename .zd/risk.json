@@ -1,0 +1,127 @@
+{
+  "version": 1,
+  "approvers": ["Renon Reis"],
+  "areas": [
+    {
+      "id": "secrets",
+      "name": "Secrets, keys, and tokens",
+      "why": "A secret committed once stays in git history forever, even if a later commit deletes it.",
+      "onTouch": "block",
+      "fix": "Rotate the key at its provider, move the value to an environment variable, then rewrite this branch's history before merging (ask the engineer before any force push).",
+      "paths": [
+        ".env",
+        ".env.*",
+        "*.pem",
+        "*.key",
+        "*.p12",
+        "*.pfx",
+        "id_rsa*",
+        "id_ed25519*",
+        "*credentials*.json",
+        "service-account*.json"
+      ],
+      "except": [".env.example", ".env.sample", ".env.template", "*.pub"],
+      "content": [
+        {
+          "name": "private key block",
+          "pattern": "-----BEGIN (?:RSA |EC |DSA |OPENSSH |PGP |ENCRYPTED )?PRIVATE KEY(?: BLOCK)?-----"
+        },
+        {
+          "name": "cloud access key id",
+          "pattern": "\\b(?:AKIA|ASIA)[0-9A-Z]{16}\\b"
+        },
+        {
+          "name": "git host token",
+          "pattern": "\\b(?:gh[pousr]_[A-Za-z0-9]{36,}|github_pat_[A-Za-z0-9_]{22,}|glpat-[A-Za-z0-9_-]{20,})"
+        },
+        {
+          "name": "payment live secret key",
+          "pattern": "\\b(?:sk|rk)_live_[0-9A-Za-z]{24,}"
+        },
+        {
+          "name": "chat app token",
+          "pattern": "\\bxox[abposr]-[0-9A-Za-z-]{10,}"
+        },
+        {
+          "name": "cloud api key",
+          "pattern": "\\bAIza[0-9A-Za-z_-]{35}\\b"
+        },
+        {
+          "name": "AI provider key",
+          "pattern": "\\bsk-(?:ant|proj|svcacct)-[A-Za-z0-9_-]{20,}"
+        },
+        {
+          "name": "password inside a connection URL",
+          "pattern": "\\b[a-z][a-z0-9+.-]*://[^\\s:/@'\"]+:[^\\s:/@'\"$<{]{3,}@"
+        },
+        {
+          "name": "hard coded credential",
+          "pattern": "\\b(?:password|passwd|secret|api[_-]?key|access[_-]?token|auth[_-]?token|client[_-]?secret)\\b[\"']?\\s*[:=]\\s*[\"'][^\"'\\s]{8,}[\"']",
+          "flags": "i"
+        }
+      ]
+    },
+    {
+      "id": "workflow",
+      "name": "Workflow rules",
+      "why": "Changing the rules changes what every other check enforces, so it waits for the engineer.",
+      "onTouch": "approve",
+      "paths": ["AGENTS.md", "CLAUDE.md", ".claude/", ".zd/", ".github/workflows/", ".githooks/"]
+    },
+    {
+      "id": "auth",
+      "name": "Sign in, sessions, and permissions",
+      "why": "A mistake here lets people in where they should not be, or locks everyone out.",
+      "onTouch": "approve",
+      "paths": [
+        "auth/",
+        "login/",
+        "session/",
+        "sessions/",
+        "permissions/",
+        "*auth*.*",
+        "*login*.*",
+        "*session*.*",
+        "*permission*.*",
+        "middleware.*"
+      ],
+      "except": ["*.md"]
+    },
+    {
+      "id": "billing",
+      "name": "Billing and payments",
+      "why": "A mistake here charges the wrong amount or stops charging at all.",
+      "onTouch": "approve",
+      "paths": [
+        "billing/",
+        "payment/",
+        "payments/",
+        "checkout/",
+        "subscriptions/",
+        "invoices/",
+        "*billing*.*",
+        "*payment*.*",
+        "*checkout*.*",
+        "*stripe*.*",
+        "*subscription*.*",
+        "*invoice*.*"
+      ],
+      "except": ["*.md"]
+    },
+    {
+      "id": "prod-db",
+      "name": "Production database",
+      "why": "Migrations and destructive SQL change customer data, and not every change can be undone.",
+      "onTouch": "approve",
+      "paths": ["migrations/", "migrate/", "drizzle/", "schema.prisma", "schema.sql"],
+      "except": ["*.md"],
+      "content": [
+        {
+          "name": "destructive SQL",
+          "pattern": "\\b(?:DROP\\s+(?:TABLE|DATABASE|SCHEMA|COLUMN)|TRUNCATE\\s+TABLE|DELETE\\s+FROM\\s+[\\w.\"]+\\s*;)",
+          "flags": "i"
+        }
+      ]
+    }
+  ]
+}
