@@ -1,4 +1,4 @@
-# Verify: Badge · spec 0005 · updated 2026-11-21 · verified on `e847bc5`
+# Verify: Badge · spec 0005 · updated 2026-11-24 · verified on `e847bc5`
 
 _Steps derived from spec 0005 acceptance criteria. `/check verify` runs these; `/test` locks the durable ones._
 
@@ -10,7 +10,7 @@ _Steps derived from spec 0005 acceptance criteria. `/check verify` runs these; `
 - [x] `Count` → the badges read "3", "12" and "99+"; their text content is "3 unread messages", "12 failed jobs" and "99+ new comments" (the context is `sr-only`) → AC-7
 - [x] Press Tab on every story → focus stays on the body; no badge has a `role`, a `tabindex` or an `aria-*` attribute → AC-7
 - [x] Switch every story to dark mode → same geometry; colors equal the dark tokens → AC-8, AC-9
-- [ ] Maintainer reviews the Paper artboards `3OS-0` and `3RR-0` (including the dark neutral border, which matches its fill) → AC-5
+- [x] Maintainer reviews the Paper artboards `3OS-0` and `3RR-0` (including the dark neutral border, which matches its fill) → AC-5 (approved as drawn on 2026-11-24; the dark neutral border stays as is)
 
 ## Commands
 
@@ -30,7 +30,7 @@ _Steps derived from spec 0005 acceptance criteria. `/check verify` runs these; `
 ## Acceptance-criteria coverage
 
 - AC-1 to AC-4: Paper run, recorded in `rationale.md` (run ledger summary); not repeated here.
-- AC-5: open. The run closed under the maintainer's advance approval; the maintainer's own review of both artboards is still owed.
+- AC-5: met on 2026-11-24. The maintainer reviewed both artboards after the close and approved them as drawn, with no change asked. Evidence: HADES review of Paper `3OS-0` and `3RR-0` (JSX, token bindings, text pairs 4.70:1 to 12.69:1 all above 4.5:1; the dark neutral border equals its fill, 1.00:1, accepted as decorative).
 - AC-6: Default, exports, unit tests.
 - AC-7: Count, Tab and attribute check, unit tests.
 - AC-8: tone and size checks, dark mode, token diff, Docker suite.
