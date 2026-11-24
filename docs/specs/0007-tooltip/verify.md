@@ -1,4 +1,4 @@
-# Verify: Tooltip · spec 0007 · updated 2026-11-21 · verified on `3c0055d` (Storybook built at `dde7b1b`; the later commit is docs only)
+# Verify: Tooltip · spec 0007 · updated 2026-11-24 · verified on `3c0055d` (Storybook built at `dde7b1b`; the later commit is docs only)
 
 _Steps derived from spec 0007 acceptance criteria. `/check verify` runs these; `/test` locks the durable ones._
 
@@ -11,7 +11,7 @@ _Steps derived from spec 0007 acceptance criteria. `/check verify` runs these; `
 - [x] Move the pointer from the button onto the tooltip → it stays open (`pointer-events: auto`, WCAG 1.4.13); move away → it closes → AC-6, AC-7
 - [x] Repeat all of the above in dark mode → same results; the tooltip turns near white with dark text; no console errors in either mode → AC-8
 - [x] Open `Default`, `Bottom`, `Left`, `Right` and `LongText` in light and dark → the tooltip sits 8 px from the button on the asked side, centered; one line tooltips are 24 px high, `LongText` is 320 × 40 px on two lines; colors equal `bg.inverse` and `fg.inverse` per mode (measured by the parity script) → AC-8, AC-11
-- [ ] Maintainer reviews the Paper artboards `40N-0` and `43F-0` (including how loud the near white tooltip feels in dark) → AC-5
+- [x] Maintainer reviews the Paper artboards `40N-0` and `43F-0` (including how loud the near white tooltip feels in dark) → AC-5 (approved as drawn on 2026-11-24; `bg.inverse` in dark stays neutral 0, no token change)
 
 ## Commands
 
@@ -32,7 +32,7 @@ _Steps derived from spec 0007 acceptance criteria. `/check verify` runs these; `
 ## Acceptance-criteria coverage
 
 - AC-1 to AC-4: Paper run, recorded in `rationale.md` (run ledger summary); not repeated here.
-- AC-5: open. The run closed under the engineer's advance approval; the engineer's own review of both artboards is still owed.
+- AC-5: met on 2026-11-24. The engineer reviewed both artboards after the close and approved them as drawn, with no change asked. Decision on the near white dark tooltip: keep `bg.inverse` as neutral 0. Evidence: HADES review of Paper `40N-0` and `43F-0` (JSX and bindings equal to _Design values_; tooltip against `bg.canvas` 16.89:1 in both modes, against `bg.surface` 16.89:1 light and 12.22:1 dark; the dark primary button is the same white). Changing it would be a token change (Ask first), five dark baselines, the parity rows, spec 0007 (AC-8) and a Paper token sync; not requested.
 - AC-6: Interaction story checks, exports, unit tests.
 - AC-7: keyboard, Escape, blur, hover delay and hoverable content in the browser; disabled and touch in unit tests.
 - AC-8: dark mode, token diff, parity colors, Docker suite.
