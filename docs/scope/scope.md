@@ -197,8 +197,8 @@ A floating panel opened by a trigger click that holds interactive content (text,
 
 - [x] Design it (spec): `/architect Popover`
 - [ ] Build it: `/develop Popover`
-  - [ ] Paper run: baseline with JSX and PNG hashes, Button and Field measurement, write plan approval, pilot light, then dark (AC-1 to AC-4)
-  - [ ] Design review of both artboards, scope audit, close and ledger summary (AC-5)
+  - [x] Paper run: baseline with JSX and PNG hashes, Button and Field measurement, write plan approval, pilot light, then dark (AC-1 to AC-4)
+  - [x] Design review of both artboards, scope audit, close and ledger summary (AC-5)
   - [ ] Code PR: component, stories, tests, baselines, parity and changeset (AC-6 to AC-14)
 - [ ] Verify it: `/check verify Popover`
 - [ ] Test it: `/test Popover`
