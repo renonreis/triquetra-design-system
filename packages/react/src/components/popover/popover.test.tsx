@@ -90,6 +90,7 @@ describe('Popover', () => {
     });
     await user.keyboard('{Escape}');
     await closed();
+    await waitFor(() => expect(content()).not.toBeInTheDocument());
     await waitFor(() => expect(trigger()).toHaveFocus());
   });
 
@@ -320,6 +321,41 @@ describe('Popover', () => {
     expect(styles.positioner()).toContain('z-50');
     expect(styles.content()).toContain('rounded-surface');
     expect(styles.trigger()).toContain('focus-visible:outline-2');
+  });
+
+  it('is modal on request (AC-7)', async () => {
+    render(<Example modal defaultOpen />);
+    expect(await opened()).toHaveAttribute('aria-modal', 'true');
+  });
+
+  it('returns focus to finalFocusEl when given (AC-7)', async () => {
+    const user = userEvent.setup();
+    render(<Example finalFocusEl={() => screen.getByRole('button', { name: 'Elsewhere' })} />);
+    await user.click(trigger());
+    await opened();
+    await frames();
+    await user.keyboard('{Escape}');
+    await closed();
+    await waitFor(() => expect(screen.getByRole('button', { name: 'Elsewhere' })).toHaveFocus());
+  });
+
+  it('lets the caller name the close buttons and pass className and ref with asChild (AC-6, AC-8)', () => {
+    const ref = createRef<HTMLButtonElement>();
+    render(
+      <Popover.Root open>
+        <Popover.Trigger>Open</Popover.Trigger>
+        <Popover.Content aria-label="Panel">
+          <Popover.CloseTrigger asChild ref={ref} aria-label="Discard" className="mt-2">
+            <Button>Cancel</Button>
+          </Popover.CloseTrigger>
+          <Popover.CloseTrigger aria-label="Dismiss" />
+        </Popover.Content>
+      </Popover.Root>,
+    );
+    expect(screen.getByRole('button', { name: 'Discard' })).toBe(ref.current);
+    expect(ref.current).toHaveClass('mt-2', 'rounded-control');
+    expect(ref.current).not.toHaveClass('absolute');
+    expect(screen.getByRole('button', { name: 'Dismiss' })).toHaveClass('absolute');
   });
 
   it('throws outside Popover.Root, as Ark does (AC-6)', () => {

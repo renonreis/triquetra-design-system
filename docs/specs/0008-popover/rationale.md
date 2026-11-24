@@ -50,7 +50,7 @@ Option 1 does the scope's job with what Ark and the tokens already prove. Picks 
 - **`Header` always keeps room** for the corner button, as Dialog. Runner up: reserve it with a `has-` selector.
 - **`asChild` close keeps its name**: Ark's label and id dropped. Runner up: ask callers to repeat `aria-label`, easy to forget.
 - **No arrow, no motion, no `Anchor`**: follow ups.
-- **Stories**: 4 visual, 6 interaction. Runner up: `Left` and `Right` too, already proven by Tooltip and cramped at 320 px wide.
+- **Stories**: 4 visual, 7 interaction. Runner up: `Left` and `Right` too, already proven by Tooltip and cramped at 320 px wide.
 - **Paper**: trigger, buttons and field measured from Storybook; shadow literals as spec 0002.
 
 No Ask first item came up: no dependency, no token naming or hierarchy change, no public API change of an existing component, no CI change.
@@ -71,7 +71,7 @@ Not applied: dropping the style context. Tooltip has no variants either and uses
 
 ## Parity tables
 
-Filled during the build (AC-13): `parity/popover.md`.
+[`parity/popover.md`](parity/popover.md): 538 rows, all `match`, negative control DIFF in both modes (AC-13).
 
 ## Run ledger summary
 

@@ -1,7 +1,7 @@
 # 0008. Popover
 
 **Date**: 2026-11-24
-**Status**: In Progress
+**Status**: Accepted
 
 ## Summary
 
@@ -29,7 +29,7 @@ Popover is a floating panel that opens next to a button when you click it and ho
 - **AC-8**: Accessibility: the panel has `role="dialog"`, is named by `Title` (or by the caller's `aria-label`) and described by `Description` when rendered; the trigger has `aria-haspopup="dialog"`, `aria-expanded` and `aria-controls`. The corner `CloseTrigger` is named "Close"; `CloseTrigger` with `asChild` keeps its child's own name (Ark's forced `aria-label` and its fixed `id` are dropped, so a "Cancel" button is named "Cancel" and no id repeats), and the caller's `onClick` still runs and can cancel the close with `preventDefault`.
 - **AC-9**: Sizing: the panel is 320 px wide (`w-xs`) whatever its content, shrinks when the viewport leaves less (304 px at a 320 px viewport, no horizontal page scroll), and is never taller than the space left on its side; it scrolls inside. The caller can set another width with `className` (for example `w-md`).
 - **AC-10**: Styles follow _Design values_ in light and dark. No token and no contrast pair is added: `fg.default` and `fg.muted` on `bg.surface` are already tested.
-- **AC-11**: `popover.stories.tsx` (meta tagged `visual`) has the 4 visual and 6 interaction stories in _Stories_, run in light and dark with the a11y addon in `error` mode. `popover.test.tsx` covers the scenarios in _Critical test scenarios_, including `axe` closed and open.
+- **AC-11**: `popover.stories.tsx` (meta tagged `visual`) has the 4 visual and 7 interaction stories in _Stories_, run in light and dark with the a11y addon in `error` mode. `popover.test.tsx` covers the scenarios in _Critical test scenarios_, including `axe` closed and open.
 - **AC-12**: 8 new baselines (4 visual stories × light and dark) from the Playwright Docker image, then `pnpm test:visual:docker` passes in compare only mode with no other baseline changed. The Docker suite runs alone.
 - **AC-13**: `rationale.md` links `parity/popover.md` (4 cells per mode, _Parity_), measured on the code PR's Storybook, plus a read only negative control. Every row is `match` or resolved before the merge.
 - **AC-14**: The code PR carries a `minor` changeset.
@@ -115,6 +115,7 @@ Meta: `title: 'Components/Popover'`, `component: Popover.Root`, `tags: ['autodoc
 | `WithForm`     | visual    | `open`                                                    | `Rename`; title "Rename project", body `Field.Root` with label "Name" and `Field.Input` `defaultValue="Website"`, footer `CloseTrigger asChild` ghost `sm` "Cancel" and `sm` "Save"  |
 | `BodyOnly`     | visual    | `open`                                                    | `About quotas`; `aria-label="About quotas"` on `Content`, body "Each workspace can hold 20 projects. Archived projects do not count."                                                |
 | `Interaction`  | `!visual` | none                                                      | click opens, name and description, focus on "Copy link", Escape, `CloseTrigger` and trigger click close, focus returns                                                               |
+| `NoFocusable`  | `!visual` | none                                                      | `BodyOnly`'s content: focus moves to the panel itself and returns on Escape                                                                                                          |
 | `TabOrder`     | `!visual` | none                                                      | plus a button "Next" after it: Tab goes to "Copy link", then "Close", then "Next", and the panel closes                                                                              |
 | `OutsideClick` | `!visual` | none                                                      | plus a button "Elsewhere": pressing it closes the panel and it keeps focus                                                                                                           |
 | `Nested`       | `!visual` | none                                                      | a Dialog with a popover that holds a Select: picking an option keeps the popover, Escape closes only the popover and focus returns to its trigger, a second Escape closes the dialog |
@@ -194,7 +195,7 @@ Spec 0007's _Procedure_ with these changes:
 **Critical test scenarios** (jsdom with `userEvent` unless marked as a story):
 
 - Closed renders nothing; click, Enter and Space open; a second click closes; `onOpenChange` reports each change; controlled `open` is respected, verifies **AC-7**.
-- Focus goes to the first focusable element, to the panel when there is none, to `initialFocusEl` when given, and stays on the trigger with `autoFocus={false}`; Escape and `CloseTrigger` return it to the trigger, verifies **AC-7**.
+- Focus moves into the panel, to `initialFocusEl` when given, and stays on the trigger with `autoFocus={false}`; Escape and `CloseTrigger` return it to the trigger, or to `finalFocusEl`, verifies **AC-7**. Which element takes it (the first focusable one, or the panel) is proven in the `Interaction` and `NoFocusable` stories: jsdom has no layout, so Ark finds no tabbable element there.
 - Outside press closes it and `closeOnInteractOutside={false}` keeps it open; `closeOnEscape={false}` ignores Escape, verifies **AC-7** (Tab order, focus on the pressed element and nesting in stories).
 - Name and description from `Title` and `Description`; `aria-label` without a title and no dangling `aria-labelledby`; trigger ARIA, verifies **AC-8**.
 - "Cancel" under `asChild` keeps its name, closes, has no repeated id, runs the caller's `onClick`, and `preventDefault` keeps the panel open, verifies **AC-8**.
@@ -211,7 +212,7 @@ Tracer Bullet with design first.
 2. Paper run: baseline, Storybook measurement on the draft, write plan approval, pilot light, pilot review, recheck, dark, satisfies **AC-1** to **AC-4**
 3. Design review of both artboards, scope audit, close, ledger summary in `rationale.md` (docs PR), satisfies **AC-4**, **AC-5**
 4. Code PR: `popover/` with the nine parts on the _Overlay pattern_, export, satisfies **AC-6** to **AC-10**
-5. Same PR: 4 visual and 6 interaction stories and the tests, satisfies **AC-7**, **AC-8**, **AC-9**, **AC-11**
+5. Same PR: 4 visual and 7 interaction stories and the tests, satisfies **AC-7**, **AC-8**, **AC-9**, **AC-11**
 6. Same PR: 8 Docker baselines, then compare only, alone, satisfies **AC-10**, **AC-12**
 7. Same PR: parity table with negative control, every row resolved, satisfies **AC-13**
 8. Same PR: `minor` changeset; merge with required checks green, satisfies **AC-14**
