@@ -1,7 +1,7 @@
 # 0008. Popover
 
 **Date**: 2026-11-24
-**Status**: Proposed
+**Status**: In Progress
 
 ## Summary
 
@@ -102,7 +102,7 @@ The JSDoc of `Root` says: name every popover (`Title` or `aria-label` on `Conten
 
 Geometry, border box: 320 px wide; 1 px border, 16 px padding, 16 px between blocks, so the text box is 286 px (254 px inside `Header`). Measured on the local draft before drawing: `Default` and `Top` 148 px high (title 20, gap 4, description 2 lines of 21, gap 16, button 32), `WithForm` 187 px, `BodyOnly` 76 px (2 lines). Gap to the trigger: Ark's `gutter` (8 px), centered on the cross axis. `radius.surface` from the token.
 
-**Allowed literals added to spec 0002's list**: layout widths in _Artboard content and placement_ (608 px cells, the 448 by 288 px stage; 288 is the tallest content, 40 + 8 + 187, plus 24 px padding on each side, rounded up to 4); the close button's 8 px offset from the top and end of the panel's padding box (equal to `space.2`) and its 16 px icon with Dialog's path and stroke width 2. `shadow.md` per mode is already in spec 0002's list (Select).
+**Allowed literals added to spec 0002's list**: layout widths in _Artboard content and placement_ (608 px cells, the 448 by 288 px stage; 288 is the tallest content, 40 + 8 + 187, plus 24 px padding on each side, rounded up to 4); the close button's 8 px offset from the top and end of the panel's padding box (equal to `space.2`) and its 16 px icon with Dialog's path and stroke width 2; the 190 px Props name column. `shadow.md` per mode is already in spec 0002's list (Select).
 
 ### Stories
 
