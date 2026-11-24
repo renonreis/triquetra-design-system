@@ -11,26 +11,26 @@ One scope for the whole monorepo: `apps/storybook` and `apps/sample` exist only 
 
 ## At a glance
 
-| #   | Feature                                                         | Phase    | Status      |
-| --- | --------------------------------------------------------------- | -------- | ----------- |
-| A   | Token pipeline (Brand × Theme × Mode)                           | Existing | existing    |
-| B   | Base components (Button, Input, Card, Field, Dialog)            | Existing | existing    |
-| C   | Form and navigation components (Checkbox, Switch, Select, Tabs) | Existing | existing    |
-| D   | Storybook docs and PR previews                                  | Existing | existing    |
-| E   | Next.js sample app                                              | Existing | existing    |
-| F   | Quality gates (CI, a11y, contrast, visual, packed tarball)      | Existing | existing    |
-| G   | Release pipeline (Changesets, GitHub Packages)                  | Existing | existing    |
-| H   | AI review gate (Pullfrog)                                       | Existing | existing    |
-| 1   | UI foundation: token contract and Paper parity                  | Slice 1  | done        |
-| 2   | Paper artboards for Checkbox, Switch, Select, Tabs              | Slice 1  | done        |
-| 3   | Next components                                                 | Slice 2  | done        |
-| 4   | Textarea                                                        | Slice 2  | done        |
-| 5   | Radio Group                                                     | Slice 2  | done        |
-| 6   | Badge                                                           | Slice 2  | done        |
-| 7   | Alert                                                           | Slice 2  | done        |
-| 8   | Tooltip                                                         | Slice 2  | done        |
-| 9   | Popover                                                         | Slice 3  | in-progress |
-| 10  | Menu                                                            | Slice 3  | planned     |
+| #   | Feature                                                         | Phase    | Status   |
+| --- | --------------------------------------------------------------- | -------- | -------- |
+| A   | Token pipeline (Brand × Theme × Mode)                           | Existing | existing |
+| B   | Base components (Button, Input, Card, Field, Dialog)            | Existing | existing |
+| C   | Form and navigation components (Checkbox, Switch, Select, Tabs) | Existing | existing |
+| D   | Storybook docs and PR previews                                  | Existing | existing |
+| E   | Next.js sample app                                              | Existing | existing |
+| F   | Quality gates (CI, a11y, contrast, visual, packed tarball)      | Existing | existing |
+| G   | Release pipeline (Changesets, GitHub Packages)                  | Existing | existing |
+| H   | AI review gate (Pullfrog)                                       | Existing | existing |
+| 1   | UI foundation: token contract and Paper parity                  | Slice 1  | done     |
+| 2   | Paper artboards for Checkbox, Switch, Select, Tabs              | Slice 1  | done     |
+| 3   | Next components                                                 | Slice 2  | done     |
+| 4   | Textarea                                                        | Slice 2  | done     |
+| 5   | Radio Group                                                     | Slice 2  | done     |
+| 6   | Badge                                                           | Slice 2  | done     |
+| 7   | Alert                                                           | Slice 2  | done     |
+| 8   | Tooltip                                                         | Slice 2  | done     |
+| 9   | Popover                                                         | Slice 3  | done     |
+| 10  | Menu                                                            | Slice 3  | planned  |
 
 ## Already built
 
@@ -190,20 +190,20 @@ Spec [0007](../specs/0007-tooltip/index.md) · code in `packages/react/src/compo
 Picked on 2026-11-21: the two overlays the catalog misses most, built on the _Overlay pattern_ of spec 0007 so it is proven on interactive surfaces (focus moves into the overlay, keyboard navigation). Popover first because it is the plain interactive surface Menu builds on. Each is designed in Paper first, then built end to end, and adds a public export (`minor` changeset).
 **Done when** (for each): the component has a Paper artboard in light and dark, the component, stories in light and dark, axe tests, visual baselines and a `minor` changeset.
 
-### 9. Popover · in-progress
+### 9. Popover · done
 
 A floating panel opened by a trigger click that holds interactive content (text, links, a small form), on Ark's Popover with the Select surface. It settles focus handling, close behavior and sizing that later overlays reuse.
 **Done when:** a click on the trigger opens the panel next to it, focus moves in and returns to the trigger on close, Escape and an outside click close it, and it works in light and dark with axe passing.
 
 - [x] Design it (spec): `/architect Popover`
-- [ ] Build it: `/develop Popover`
+- [x] Build it: `/develop Popover`
   - [x] Paper run: baseline with JSX and PNG hashes, Button and Field measurement, write plan approval, pilot light, then dark (AC-1 to AC-4)
   - [x] Design review of both artboards, scope audit, close and ledger summary (AC-5)
-  - [ ] Code PR: component, stories, tests, baselines, parity and changeset (AC-6 to AC-14)
-- [ ] Verify it: `/check verify Popover`
-- [ ] Test it: `/test Popover`
+  - [x] Code PR: component, stories, tests, baselines, parity and changeset (AC-6 to AC-14)
+- [x] Verify it: `/check verify Popover`
+- [x] Test it: `/test Popover`
 
-Spec [0008](../specs/0008-popover/index.md)
+Spec [0008](../specs/0008-popover/index.md) · code in `packages/react/src/components/popover/`
 
 ### 10. Menu · needs a decision
 
