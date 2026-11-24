@@ -1,4 +1,4 @@
-# Verify: Alert · spec 0006 · updated 2026-11-21 · verified on `873ec84` (rebased onto `d9e940e` as `a95b2a9`, no code change)
+# Verify: Alert · spec 0006 · updated 2026-11-24 · verified on `873ec84` (rebased onto `d9e940e` as `a95b2a9`, no code change)
 
 _Steps derived from spec 0006 acceptance criteria. `/check verify` runs these; `/test` locks the durable ones._
 
@@ -9,7 +9,7 @@ _Steps derived from spec 0006 acceptance criteria. `/check verify` runs these; `
 - [x] `TitleOnly` → 448 × 54 px, indicator and title only; `WithoutIndicator` → 448 × 78 px, no indicator, content starts 17 px from the left edge → AC-6, AC-8
 - [x] Press Tab on every story → focus stays on the body; no alert part has a `tabindex`; the root has no `role` and no `aria-*`; the indicator is `aria-hidden="true"` → AC-7
 - [x] Switch every story to dark mode → same geometry; colors equal the dark tokens (neutral border matches its fill, as recorded in the spec) → AC-8, AC-9
-- [ ] Maintainer reviews the Paper artboards `3UA-0` and `3XM-0` (including the dark neutral border, which matches its fill) → AC-5
+- [x] Maintainer reviews the Paper artboards `3UA-0` and `3XM-0` (including the dark neutral border, which matches its fill) → AC-5 (approved as drawn on 2026-11-24; the dark neutral border stays as is)
 
 ## Commands
 
@@ -30,7 +30,7 @@ _Steps derived from spec 0006 acceptance criteria. `/check verify` runs these; `
 ## Acceptance-criteria coverage
 
 - AC-1 to AC-4: Paper run, recorded in `rationale.md` (run ledger summary); not repeated here.
-- AC-5: open. The run closed under the engineer's advance approval; the engineer's own review of both artboards is still owed.
+- AC-5: met on 2026-11-24. The engineer reviewed both artboards after the close and approved them as drawn, with no change asked. Evidence: HADES review of Paper `3UA-0` and `3XM-0` (JSX, token bindings, icon geometry equal to _Icons_, title and description line counts; neutral text pair 15.04:1 light and 7.76:1 dark; the dark neutral border equals its fill, 1.00:1, accepted as decorative).
 - AC-6: Default, TitleOnly, WithoutIndicator, exports, unit tests.
 - AC-7: tones and icons, Tab and attribute check, unit tests.
 - AC-8: tone checks, dark mode, token diff, Docker suite.
