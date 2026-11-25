@@ -56,7 +56,7 @@
     },
     "overlay": {
       "$value": "{brand.radius.overlay}",
-      "$description": "Dialogs, popovers, menus."
+      "$description": "Dialogs, menus."
     },
     "full": {
       "$value": "{primitive.radius.full}"
