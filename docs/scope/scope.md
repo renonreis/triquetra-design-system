@@ -196,9 +196,9 @@ A floating panel opened by a trigger click that holds interactive content (text,
 **Done when:** a click on the trigger opens the panel next to it, focus moves in and returns to the trigger on close, Escape and an outside click close it, and it works in light and dark with axe passing.
 
 - [x] Design it (spec): `/architect Popover`
-- [x] Build it: `/develop Popover`
+- [ ] Build it: `/develop Popover`
   - [x] Paper run: baseline with JSX and PNG hashes, Button and Field measurement, write plan approval, pilot light, then dark (AC-1 to AC-4)
-  - [x] Design review of both artboards, scope audit, close and ledger summary (AC-5)
+  - [ ] Design review of both artboards, scope audit, close and ledger summary (AC-5)
   - [x] Code PR: component, stories, tests, baselines, parity and changeset (AC-6 to AC-14)
 - [x] Verify it: `/check verify Popover`
 - [x] Test it: `/test Popover`

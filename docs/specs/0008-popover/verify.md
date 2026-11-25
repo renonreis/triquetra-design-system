@@ -13,7 +13,7 @@ _Steps derived from spec 0008 acceptance criteria. `/check verify` runs these; `
 - [x] `WithForm` → "Cancel" keeps its name; no repeated popover id → AC-8
 - [x] `Nested` → the popover is above the dialog and not hidden from assistive tech; picking in the Select keeps it open; Escape closes only the popover → AC-7
 - [x] `Default`, `WithForm`, `Overflow` at 320 × 568 and 320 × 256 → 304 px wide, 8 px from both sides, inside the viewport, no sideways page scroll → AC-9
-- [x] Maintainer approved both Paper artboards on 2026-11-24, before the run closed → AC-5
+- [ ] Maintainer reviews both Paper artboards → AC-5 (the maintainer marks this box)
 
 ## Commands
 
